@@ -61,6 +61,11 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		$this->_loginPostRedirect();
 	}
 
+	public function token_urlAction(){
+		var_dump($this->getRequest()->getParams());
+		exit;
+	}
+
 	/**
      * Create customer account action
      */
