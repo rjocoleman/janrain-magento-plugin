@@ -1,0 +1,18 @@
+<config>
+	<modules>
+		<Janrain_Engage>
+			<version>0.1.0</version>
+		</Janrain_Engage>
+	</modules>
+	<frontend>
+		<routers>
+			<engage>
+				<use>standard</use>
+				<args>
+					<module>Janrain_Engage</module>
+					<frontName>engage</frontName>
+				</args>
+			</engage>
+		</routers>
+	</frontend>
+</config>
