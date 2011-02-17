@@ -1,4 +1,26 @@
+
 <config>
+	<adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <engage>
+                                            <title>Configuration for Janrain Engage</title>
+                                        </engage>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
 	<modules>
 		<Janrain_Engage>
 			<version>0.1.0</version>
@@ -15,4 +37,27 @@
 			</engage>
 		</routers>
 	</frontend>
+	<global>
+		<models>
+			<engage>
+				<class>Janrain_Engage_Model</class>
+			</engage>
+		</models>
+		<helpers>
+			<engage>
+				<class>Janrain_Engage_Helper</class>
+			</engage>
+		</helpers>
+		<events>
+			<controller_front_init_before>
+				<observers>
+					<Janrain_engage_model_observer>
+						<type>singleton</type>
+						<class>Janrain_Engage_Model_Observer</class>
+						<method>checkForAuthInfo</method>
+					</Janrain_engage_model_observer>
+				</observers>
+			</controller_front_init_before>
+		</events>
+	</global>
 </config>

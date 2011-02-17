@@ -4,8 +4,10 @@ require_once("Mage/Customer/controllers/AccountController.php");
 
 class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
+	const SESSION_NAMESPACE = 'Janrain_Engage';
+
 	public function preDispatch(){
-		parent::preDispatch();
+		//parent::preDispatch();
 	}
 
 	/**
@@ -62,7 +64,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	}
 
 	public function token_urlAction(){
-		var_dump($this->getRequest()->getParams());
+		Mage::getModel('engage/customer')->authenticate('brycehamrick@gmail.com');
 		exit;
 	}
 
