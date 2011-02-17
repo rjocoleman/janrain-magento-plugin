@@ -1,6 +1,77 @@
+<?xml version="1.0"?>
 
 <config>
-	<adminhtml>
+    <modules>
+        <Janrain_Engage>
+            <version>1.0.0</version>
+        </Janrain_Engage>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <engage>
+                    <file>janrain_engage.xml</file>
+                </engage>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Janrain_Engage>
+                    <files>
+                        <default>Janrain_Engage.csv</default>
+                    </files>
+                </Janrain_Engage>
+            </modules>
+        </translate>
+    </frontend>
+
+    <global>
+        <blocks>
+            <engage>
+                <class>Janrain_Engage_Block</class>
+            </engage>
+        </blocks>
+        <models>
+            <engage>
+                <class>Janrain_Engage_Model</class>
+            </engage>
+        </models>
+        <helpers>
+            <engage>
+                <class>Janrain_Engage_Helper</class>
+            </engage>
+        </helpers>
+        <resources>
+            <engage_setup>
+                <setup>
+                    <module>Janrain_Engage</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </engage_setup>
+            <engage_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </engage_write>
+            <engage_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </engage_read>
+        </resources>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Janrain_Engage>
+                    <files>
+                        <default>Janrain_Engage.csv</default>
+                    </files>
+                </Janrain_Engage>
+            </modules>
+        </translate>
         <acl>
             <resources>
                 <admin>
@@ -9,8 +80,8 @@
                             <children>
                                 <config>
                                     <children>
-                                        <engage>
-                                            <title>Configuration for Janrain Engage</title>
+                                        <engage translate="title" module="engage">
+                                            <title>engage</title>
                                         </engage>
                                     </children>
                                 </config>
@@ -20,44 +91,33 @@
                 </admin>
             </resources>
         </acl>
+        <menu>
+            <janrain translate="title" module="engage">
+                <title>Janrain</title>
+                <sort_order>65</sort_order>
+                <children>
+                    <engage translate="title" module="engage">
+                        <title>Engage</title>
+                        <sort_order>65</sort_order>
+                        <children>
+                            <slide translate="title" module="engage">
+                                <title>Settings</title>
+                                <action>adminhtml/system_config/edit/section/engage</action>
+                                <sort_order>40</sort_order>
+                            </slide>
+                        </children>
+                    </engage>
+                </children>
+            </janrain>
+        </menu>
     </adminhtml>
-	<modules>
-		<Janrain_Engage>
-			<version>0.1.0</version>
-		</Janrain_Engage>
-	</modules>
-	<frontend>
-		<routers>
-			<engage>
-				<use>standard</use>
-				<args>
-					<module>Janrain_Engage</module>
-					<frontName>engage</frontName>
-				</args>
-			</engage>
-		</routers>
-	</frontend>
-	<global>
-		<models>
-			<engage>
-				<class>Janrain_Engage_Model</class>
-			</engage>
-		</models>
-		<helpers>
-			<engage>
-				<class>Janrain_Engage_Helper</class>
-			</engage>
-		</helpers>
-		<events>
-			<controller_front_init_before>
-				<observers>
-					<Janrain_engage_model_observer>
-						<type>singleton</type>
-						<class>Janrain_Engage_Model_Observer</class>
-						<method>checkForAuthInfo</method>
-					</Janrain_engage_model_observer>
-				</observers>
-			</controller_front_init_before>
-		</events>
-	</global>
+    <default>
+        <engage>
+            <options>
+                <apikey></apikey>
+                <enable>1</enable>
+            </options>
+        </engage>
+    </default>
+
 </config>
