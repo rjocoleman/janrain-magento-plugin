@@ -15,13 +15,13 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
 
-        $identifier = "http://twitter.com/account/profile?user_id=180107268";
-//        $identifier = "http://www.facebook.com/profile.php?id=100001311517499";
-        $activity_message = "test Magento 002";
+//        $identifier = "http://twitter.com/account/profile?user_id=180107268";
+        $identifier = "http://www.facebook.com/profile.php?id=100001311517499";
+        $activity_message = "test Magento 003";
         $url = "http://www.janrain.com";
 
         try {
-            $result = Mage::helper('engage')->rpxActivityCall($identifier, $activity_message, $url);
+            $result = Mage::helper('engage/rpxCall')->rpxActivityCall($identifier, $activity_message, $url);
             echo $result;
 
         }
