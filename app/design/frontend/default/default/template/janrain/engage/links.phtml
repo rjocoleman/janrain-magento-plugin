@@ -1,0 +1,11 @@
+<?php
+if (Mage::helper('engage')->isEngageEnabled()) {
+    $page_title=$this->getLayout()->getBlock('head')->getTitle();
+    $page_url=Mage::helper('core/url')->getCurrentUrl();
+?>
+
+
+<h2>Login Links</h2>
+
+
+<?php } ?>
