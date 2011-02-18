@@ -23,6 +23,15 @@
                 </Janrain_Engage>
             </modules>
         </translate>
+		<routers>
+			<engage>
+				<use>standard</use>
+				<args>
+					<module>Janrain_Engage</module>
+					<frontName>janrain-engage</frontName>
+				</args>
+			</engage>
+		</routers>
     </frontend>
 
     <global>
@@ -91,25 +100,6 @@
                 </admin>
             </resources>
         </acl>
-        <menu>
-            <janrain translate="title" module="engage">
-                <title>Janrain</title>
-                <sort_order>65</sort_order>
-                <children>
-                    <engage translate="title" module="engage">
-                        <title>Engage</title>
-                        <sort_order>65</sort_order>
-                        <children>
-                            <slide translate="title" module="engage">
-                                <title>Settings</title>
-                                <action>adminhtml/system_config/edit/section/engage</action>
-                                <sort_order>40</sort_order>
-                            </slide>
-                        </children>
-                    </engage>
-                </children>
-            </janrain>
-        </menu>
     </adminhtml>
     <default>
         <engage>
