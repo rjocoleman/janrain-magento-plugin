@@ -32,7 +32,7 @@
 		<reference name="content">
             <block type="core/template"
             name="janrain_engage"
-            after="page.title"
+            after="customer_form_login"
             template="janrain/engage/links.phtml"/>
         </reference>
 	</customer_account_login>
