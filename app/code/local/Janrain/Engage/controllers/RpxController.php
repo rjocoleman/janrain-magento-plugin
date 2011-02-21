@@ -12,23 +12,23 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	 * Default customer account page
 	 */
 	public function indexAction() {
-		parent::preDispatch();
-		$this->loadLayout();
-		$this->_initLayoutMessages('customer/session');
-		$this->_initLayoutMessages('catalog/session');
-
-		$this->getLayout()->getBlock('content')->append(
-				$this->getLayout()->createBlock('customer/account_dashboard')
-		);
-		$this->getLayout()->getBlock('head')->setTitle($this->__('My Account'));
-		$this->renderLayout();
 	}
 
 	/**
 	 * RPX Callback
 	 */
 	public function token_urlAction() {
-		$this->loginAction();
+		parent::preDispatch();
+		$session = $this->_getSession();
+
+		if ($this->getRequest()->isPost()) {
+			$token = $this->getRequest()->getPost('token');
+			if(!isset($_SESSION[self::SESSION_NAMESPACE]))
+				$_SESSION[self::SESSION_NAMESPACE] = array();
+			$key = $this->rand_str(12);
+			$_SESSION[self::SESSION_NAMESPACE][$key] = $token;
+			$this->_redirect("janrain-engage/rpx/login/ses/$key");
+		}
 	}
 
 	/**
@@ -36,12 +36,18 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	 */
 	public function loginAction() {
 		parent::preDispatch();
-		
 		$session = $this->_getSession();
 		if ($session->isLoggedIn()) {
 			$this->_redirect('*/*/');
 			return;
 		}
+
+		if(!isset($_SESSION[self::SESSION_NAMESPACE]))
+			$_SESSION[self::SESSION_NAMESPACE] = array();
+
+		$key = $this->getRequest()->getParam('ses');
+		$token = $_SESSION[self::SESSION_NAMESPACE][$key];
+		$auth_info = Mage::helper('engage')->rpxAuthInfoCall($token);
 
 		$username = 'bryce+testuser@janrain.com';
 
