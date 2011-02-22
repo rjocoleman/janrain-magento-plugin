@@ -28,8 +28,6 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
             throw Mage::exception('Mage_Core', $e);
         }
 
-		Mage::getBase
-
         return $result;
 
     }
@@ -95,17 +93,8 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
                 throw Mage::exception('Mage_Core', $e);
             }
 
-//            var_dump($x);
-//            exit;
-
-            $stat = $result->stat;
-
-//            var_dump($stat);
-//            var_dump($err);
-//            exit;
-
-            if ($stat) {
-                return $stat;
+            if ($result) {
+                return $result;
             }
             else {
                 throw Mage::exception('Mage_Core', "something went wrong");

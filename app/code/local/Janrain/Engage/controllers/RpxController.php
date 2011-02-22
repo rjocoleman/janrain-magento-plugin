@@ -5,12 +5,10 @@ require_once("Mage/Customer/controllers/AccountController.php");
 class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	const SESSION_NAMESPACE = 'Janrain_Engage';
 
+	// Override parent preDispatch so we can manually invoke it when needed
 	public function preDispatch() {
 	}
 
-	/**
-	 * Default customer account page
-	 */
 	public function indexAction() {
 	}
 
@@ -18,6 +16,8 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	 * RPX Callback
 	 */
 	public function token_urlAction() {
+		var_dump("foo");
+		exit;
 		parent::preDispatch();
 		$session = $this->_getSession();
 
@@ -27,7 +27,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 				$_SESSION[self::SESSION_NAMESPACE] = array();
 			$key = $this->rand_str(12);
 			$_SESSION[self::SESSION_NAMESPACE][$key] = $token;
-			$this->_redirect("janrain-engage/rpx/login/ses/$key");
+			$this->_redirect("janrain-engage/rpx/create/ses/$key");
 		}
 	}
 
@@ -49,6 +49,9 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		$token = $_SESSION[self::SESSION_NAMESPACE][$key];
 		$auth_info = Mage::helper('engage')->rpxAuthInfoCall($token);
 
+		var_dump($auth_info);
+		exit;
+
 		$username = 'bryce+testuser@janrain.com';
 
 		$customer = Mage::getModel('customer/customer')
@@ -64,11 +67,20 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	 * Create customer account action
 	 */
 	public function createAction() {
+		parent::preDispatch();
 		$session = $this->_getSession();
 		if ($session->isLoggedIn()) {
 			$this->_redirect('*/*/');
 			return;
 		}
+
+		if(!isset($_SESSION[self::SESSION_NAMESPACE]))
+			$_SESSION[self::SESSION_NAMESPACE] = array();
+
+		$key = $this->getRequest()->getParam('ses');
+		$token = $_SESSION[self::SESSION_NAMESPACE][$key];
+		$auth_info = Mage::helper('engage')->rpxAuthInfoCall($token);
+
 		$session->setEscapeMessages(true); // prevent XSS injection in user input
 		$errors = array();
 
@@ -83,9 +95,9 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		// Populate Test Data
 		$customerData = array(
-			"firstname" => "TESTU",
-			"lastname" => "SER",
-			"email" => "bryce+testu_ser@janrain.com",
+			"firstname" => "TESTuse",
+			"lastname" => "R",
+			"email" => "bryce+testuse_r@janrain.com",
 			"password" => $this->rand_str(8)
 		);
 
@@ -99,6 +111,8 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		 * Initialize customer group id
 		 */
 		$customer->getGroupId();
+
+		$customer->setAttribute(array('flavor', ));
 
 		try {
 			$customerErrors = $customerForm->validateData($customerData);
@@ -233,5 +247,15 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		return $string;
 	}
+
+	public function customerAction() {
+		parent::preDispatch();
+		$customer = Mage::getSingleton('customer/session')->getCustomer();
+		//$customer->setAttribute('openididentifier','testidentifier');
+		//$customer->save();
+		//echo "Done!";
+		var_dump($customer->getEmail());
+        var_dump($customer->getAttribute('openididentifier'));
+    }
 
 }

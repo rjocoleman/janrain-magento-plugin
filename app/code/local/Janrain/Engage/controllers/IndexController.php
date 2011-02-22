@@ -15,31 +15,10 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
 
-        $identifier = "http://twitter.com/account/profile?user_id=180107268";
-//        $identifier = "http://www.facebook.com/profile.php?id=100001311517499";
-        $activity_message = "test Magento 002";
-        $url = "http://www.janrain.com";
+		$customer = Mage::getModel("customer/customer")->load(1);
+		
+		var_dump(($customer->getData()));
 
-        try {
-            $result = Mage::helper('engage')->rpxActivityCall($identifier, $activity_message, $url);
-            echo $result;
-
-        }
-        catch (Exception $e) {
-            echo $e;
-        }
-
-    }
-
-    /**
-     * Login Customer
-     *
-     * @param string $email
-     * @param string $password
-     * @return boolean
-     */
-    public function loginAction() {
-        var_dump($this->_session->login('bryce+testuser@janrain.com', 'password1'));
     }
 
 }

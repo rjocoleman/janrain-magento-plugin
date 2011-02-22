@@ -35,6 +35,11 @@
     </frontend>
 
     <global>
+		<fieldsets>
+			<customer_account>
+				<engage_identifier><create>1</create><update>1</update></engage_identifier>
+			</customer_account>
+        </fieldsets>
         <blocks>
             <engage>
                 <class>Janrain_Engage_Block</class>
@@ -44,6 +49,11 @@
             <engage>
                 <class>Janrain_Engage_Model</class>
             </engage>
+			<customer>
+				<rewrite>
+					<customer>Janrain_Engage_Model_Customer</customer>
+				</rewrite>
+			</customer>
         </models>
         <helpers>
             <engage>
@@ -54,6 +64,7 @@
             <engage_setup>
                 <setup>
                     <module>Janrain_Engage</module>
+					<class>Janrain_Engage_Model_Resource_Eav_Mysql4_Setup</class>
                 </setup>
                 <connection>
                     <use>core_setup</use>
