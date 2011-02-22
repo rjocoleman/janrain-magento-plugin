@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
+
+    <cms_page_view>
+        <reference name="content">
+            <block type="core/template"
+            name="janrain_engage"
+            after="-"
+            template="janrain/engage/activity.phtml"/>
+        </reference>
+    </cms_page_view>
+
     <catalog_category_default>
         <reference name="content">
             <block type="core/template"
