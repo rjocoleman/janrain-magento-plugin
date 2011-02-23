@@ -1,5 +1,5 @@
 <?php
-if (Mage::helper('engage')->isEngageEnabled()) {
+if (Mage::helper('engage/rpxCall')->isEngageEnabled()) {
     $page_title=$this->getLayout()->getBlock('head')->getTitle();
     $page_url=Mage::helper('core/url')->getCurrentUrl();
 ?>

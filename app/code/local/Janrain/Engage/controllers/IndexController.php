@@ -31,7 +31,6 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 		//$customer->setEngageIdentifier('this is a test');
 		//$customer->save();
 		//var_dump(($customer->getData()));
-
     }
 
 }
