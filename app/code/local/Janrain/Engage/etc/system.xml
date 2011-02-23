@@ -53,6 +53,26 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </info>
+
+				<!-- Frame global uneditable config variables -->
+				<vars translate="label">
+					<label>Global Variables</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>50</sort_order>
+					<show_in_default>0</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<session_namespace translate="label">
+                            <label>Session Namespace</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>61</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </session_namespace>
+					</fields>
+				</vars>
             </groups>
         </engage>
     </sections>

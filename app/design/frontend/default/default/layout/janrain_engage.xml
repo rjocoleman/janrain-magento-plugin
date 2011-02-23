@@ -1,41 +1,59 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
-    <catalog_category_default>
-        <reference name="content">
-            <block type="core/template"
+	<catalog_category_default>
+		<reference name="content">
+			<block type="core/template"
             name="janrain_engage"
             after="category.products"
             template="janrain/engage/list.phtml"/>
-        </reference>
-    </catalog_category_default>
+		</reference>
+	</catalog_category_default>
 
-    <catalog_category_layered>
-        <reference name="content">
-            <block type="core/template"
+	<catalog_category_layered>
+		<reference name="content">
+			<block type="core/template"
             name="janrain_engage"
             after="category.products"
             template="janrain/engage/list.phtml"/>
-        </reference>
-    </catalog_category_layered>
+		</reference>
+	</catalog_category_layered>
 
     <!-- test: go to /customer/account/login/ -->
-    <catalog_product_view>
-        <reference name="content">
-            <block type="core/template"
+	<catalog_product_view>
+		<reference name="content">
+			<block type="core/template"
             name="janrain_engage"
             after="product.info"
             template="janrain/engage/list.phtml"/>
-        </reference>
-    </catalog_product_view>
+		</reference>
+	</catalog_product_view>
 
     <!-- test: go to /customer/account/login/ -->
 	<customer_account_login>
 		<reference name="content">
-            <block type="core/template"
+			<block type="core/template"
             name="janrain_engage"
             after="customer_form_login"
             template="janrain/engage/links.phtml"/>
-        </reference>
+		</reference>
 	</customer_account_login>
+
+	<engage_rpx_create>
+		<label>Customer Account Registration Form</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="customer/form_register" name="customer_form_register" template="janrain/engage/register.phtml">
+                <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+                    <label>Form Fields Before</label>
+                </block>
+            </block>
+        </reference>
+	</engage_rpx_create>
 </layout>
