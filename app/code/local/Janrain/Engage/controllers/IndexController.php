@@ -27,7 +27,7 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 //
 //		var_dump($item->getData());
 		//$customer = $this->_session->getCustomer();
-		var_dump(Mage::getSingleton('customer/session')->getCustomer()->getData());
+		var_dump(Mage::getSingleton('customer/session')->getCustomer()->getEngageIdentifier());
 		//$customer->setEngageIdentifier('this is a test');
 		//$customer->save();
 		//var_dump(($customer->getData()));
