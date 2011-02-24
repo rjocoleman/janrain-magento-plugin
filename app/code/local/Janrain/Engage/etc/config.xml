@@ -65,6 +65,15 @@
 					</add_engage_identifier>
 				</observers>
 			</customer_save_before>
+			<admin_system_config_changed_section_engage>
+				<observers>
+					<add_engage_identifier>
+						<type>singleton</type>
+						<class>Janrain_Engage_Model_Observer</class>
+						<method>onConfigSave</method>
+					</add_engage_identifier>
+				</observers>
+			</admin_system_config_changed_section_engage>
 		</events>
         <helpers>
             <engage>
@@ -133,6 +142,7 @@
 			<!-- Set values of global config vars -->
 			<vars>
 				<session_namespace>Janrain_Engage</session_namespace>
+				<enabled_providers></enabled_providers>
 			</vars>
         </engage>
     </default>

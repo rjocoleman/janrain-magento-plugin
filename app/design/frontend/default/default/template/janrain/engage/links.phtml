@@ -1,5 +1,5 @@
 <?php
-if (Mage::helper('engage/rpxCall')->isEngageEnabled()) {
+if (Mage::helper('engage/rpxcall')->isEngageEnabled()) {
     $page_title=$this->getLayout()->getBlock('head')->getTitle();
     $page_url=Mage::helper('core/url')->getCurrentUrl();
 ?>
@@ -7,13 +7,4 @@ if (Mage::helper('engage/rpxCall')->isEngageEnabled()) {
 <h2><a class="rpxnow" onclick="return false;"
 href="https://dan-ucx-dev.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2F<?php echo $_SERVER['HTTP_HOST']; ?>%2Fmagento%2Fjanrain-engage%2Frpx%2Ftoken_url%2F"> Sign In </a></h2>
 
-<script type="text/javascript">
-  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
-  document.write(unescape("%3Cscript src='" + rpxJsHost +
-"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-  RPXNOW.overlay = true;
-  RPXNOW.language_preference = 'en';
-</script>
 <?php } ?>

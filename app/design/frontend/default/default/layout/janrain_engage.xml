@@ -29,7 +29,6 @@
 		</reference>
 	</catalog_category_layered>
 
-    <!-- test: go to /customer/account/login/ -->
 	<catalog_product_view>
 		<reference name="content">
 			<block type="core/template"
@@ -39,13 +38,17 @@
 		</reference>
 	</catalog_product_view>
 
-    <!-- test: go to /customer/account/login/ -->
 	<customer_account_login>
 		<reference name="content">
 			<block type="core/template"
             name="janrain_engage"
             after="customer_form_login"
             template="janrain/engage/links.phtml"/>
+		</reference>
+		<reference name="before_body_end">
+		  <block type="core/template"
+            name="janrain_engage_scripts"
+            template="janrain/engage/scripts.phtml"/>
 		</reference>
 	</customer_account_login>
 
