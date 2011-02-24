@@ -21,16 +21,6 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 //        $rp_moredata = "test";
         echo($rp_moredata);
 
-
-        // user stores API key in Admin
-        // on that save, we turn around and call lookup_rp
-        // save additional data (at least, account name)
-        // call more additional data, using realm name and api key
-        // save the list of providers
-
-
-
-        return;
     }
 
 
