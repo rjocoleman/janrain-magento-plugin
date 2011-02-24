@@ -35,6 +35,11 @@
     </frontend>
 
     <global>
+		<fieldsets>
+			<customer_account>
+				<engage_identifier><create>1</create><update>1</update></engage_identifier>
+			</customer_account>
+        </fieldsets>
         <blocks>
             <engage>
                 <class>Janrain_Engage_Block</class>
@@ -44,7 +49,23 @@
             <engage>
                 <class>Janrain_Engage_Model</class>
             </engage>
+			<customer>
+				<rewrite>
+					<customer>Janrain_Engage_Model_Customer</customer>
+				</rewrite>
+			</customer>
         </models>
+		<events>
+			<customer_save_before>
+				<observers>
+					<add_engage_identifier>
+						<type>singleton</type>
+						<class>Janrain_Engage_Model_Observer</class>
+						<method>addIdentifier</method>
+					</add_engage_identifier>
+				</observers>
+			</customer_save_before>
+		</events>
         <helpers>
             <engage>
                 <class>Janrain_Engage_Helper</class>
@@ -54,6 +75,7 @@
             <engage_setup>
                 <setup>
                     <module>Janrain_Engage</module>
+					<class>Janrain_Engage_Model_Resource_Eav_Mysql4_Setup</class>
                 </setup>
                 <connection>
                     <use>core_setup</use>
@@ -107,6 +129,11 @@
                 <apikey></apikey>
                 <enable>1</enable>
             </options>
+
+			<!-- Set values of global config vars -->
+			<vars>
+				<session_namespace>Janrain_Engage</session_namespace>
+			</vars>
         </engage>
     </default>
 

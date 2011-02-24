@@ -93,21 +93,8 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
                 throw Mage::exception('Mage_Core', $e);
             }
 
-//            var_dump($x);
-//            exit;
-
-            $stat = $result->stat;
-            $err = $result->err;
-
-//            var_dump($stat);
-//            var_dump($err);
-//            exit;
-
-            if ($err) {
-                return $err->msg;
-            }
-            else if ($stat) {
-                return $stat;
+            if ($result) {
+                return $result;
             }
             else {
                 throw Mage::exception('Mage_Core', "something went wrong");
