@@ -10,6 +10,45 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
         return Mage::getStoreConfig('engage/options/apikey');
     }
 
+
+    public function rpxLookupRpCall() {
+
+        $postParams = array();
+
+        $postParams["apiKey"] = $this->getEngageApiKey();
+
+        $result = "rpxLookupRpCall: no result";
+        try {
+            $result = $this->rpxCall("lookup_rp", $postParams);
+        }
+        catch (Exception $e) {
+            throw Mage::exception('Mage_Core', $e);
+        }
+
+        return $result;
+
+    }
+
+    public function rpxUiConfigCall() {
+
+        // http://dan-ucx-dev.rpxnow.com/openid/ui_config?abc2a6cb5affd77530eddaed81e7ab43f608a58e
+        
+//        $postParams = array();
+//
+//        $postParams["apiKey"] = $this->getEngageApiKey();
+//
+//        $result = "rpxLookupRpCall: no result";
+//        try {
+//            $result = $this->rpxCall("lookup_rp", $postParams);
+//        }
+//        catch (Exception $e) {
+//            throw Mage::exception('Mage_Core', $e);
+//        }
+//
+//        return $result;
+
+    }
+    
     public function rpxAuthInfoCall($token) {
 
         $postParams = array();
@@ -66,6 +105,9 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
         elseif ($method == "activity") {
             $method_fragment = "api/v2/activity";
         }
+        elseif ($method == "lookup_rp") {
+            $method_fragment = "plugin/lookup_rp";
+        }
         else {
             throw Mage::exception('Mage_Core', "method [$method] not understood");
         }
@@ -81,7 +123,7 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
             $result = $http->request(Varien_Http_Client::POST);
 
 //            var_dump($result);
-//            var_dump($result->getBody());
+            echo($result->getBody());
 //            exit;
 
             $body = $result->getBody();

@@ -13,6 +13,11 @@ class Janrain_Engage_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
 
+        $rpdata = Mage::helper('engage/rpxcall')->rpxLookupRpCall();
+//        var_dump($rpdata);
+//        echo($rpdata);
+        return;
     }
+
 
 }
