@@ -10,7 +10,7 @@ class Janrain_Engage_Model_Customer extends Mage_Customer_Model_Customer {
      */
     public function validatePassword($password)
     {
-		// TODO Make a more secure method of bypassing password
+		// TODO Make a more secure method of bypassing password (PSE-27)
 		if(Mage::helper('engage/session')->getStore('bypass_password')===true)
 			return true;
         return parent::validatePassword($password);

@@ -11,6 +11,8 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
     }
 
 
+
+
     public function rpxLookupRpCall() {
 
         $postParams = array();
@@ -31,21 +33,18 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
     public function rpxUiConfigCall() {
 
-        // http://dan-ucx-dev.rpxnow.com/openid/ui_config?abc2a6cb5affd77530eddaed81e7ab43f608a58e
-        
-//        $postParams = array();
-//
-//        $postParams["apiKey"] = $this->getEngageApiKey();
-//
-//        $result = "rpxLookupRpCall: no result";
-//        try {
-//            $result = $this->rpxCall("lookup_rp", $postParams);
-//        }
-//        catch (Exception $e) {
-//            throw Mage::exception('Mage_Core', $e);
-//        }
-//
-//        return $result;
+            //TODO pull from configs
+            $url = "http://dan-ucx-dev.rpxnow.com/openid/ui_config?abc2a6cb5affd77530eddaed81e7ab43f608a58e";
+
+        $result = "rpxLookupRpCall: no result";
+        try {
+            $result = $this->rpxCallUrl($url);
+        }
+        catch (Exception $e) {
+            throw Mage::exception('Mage_Core', $e);
+        }
+
+        return $result;
 
     }
     
@@ -55,9 +54,6 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
         $postParams["token"] = $token;
         $postParams["apiKey"] = $this->getEngageApiKey();
-
-        // TODO: check level of Engage account
-        $postParams["extended"] = 'true';
 
         $result = "rpxAuthInfoCall: no result";
         try {
@@ -141,6 +137,50 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
             else {
                 throw Mage::exception('Mage_Core', "something went wrong");
             }
+
+        }
+        catch (Exception $e) {
+            throw Mage::exception('Mage_Core', $e);
+        }
+
+    }
+
+
+    // TODO let caller hand in params
+    private function rpxCallUrl($url) {
+
+        $result = "rpxCallUrl: no result yet";
+
+        try {
+
+            $client = new Varien_Http_Client("$url");
+            $response = $client->request('GET');
+
+            $body = $response->getBody();
+
+//            echo($body);
+////            var_dump($body);
+//            exit;
+
+            return $body;
+
+
+//            echo($result->getBody());
+//            exit;
+//
+//            try {
+//                $result = json_decode($body);
+//            }
+//            catch (Exception $e) {
+//                throw Mage::exception('Mage_Core', $e);
+//            }
+//
+//            if ($result) {
+//                return $result;
+//            }
+//            else {
+//                throw Mage::exception('Mage_Core', "something went wrong");
+//            }
 
         }
         catch (Exception $e) {
