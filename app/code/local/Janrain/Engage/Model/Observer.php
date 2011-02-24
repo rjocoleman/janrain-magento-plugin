@@ -11,14 +11,10 @@ class Janrain_Engage_Model_Observer {
 	}
 
 	public function onConfigSave($observer) {
-
-        
-
-//		var_dump($observer->getGroups());
-//        echo("hello");
-//		echo($observer);
-//		exit;
-//        return false;
+		var_dump(Mage::app()
+                ->getStore()
+                ->getGroup());
+		exit;
 	}
 
 }
