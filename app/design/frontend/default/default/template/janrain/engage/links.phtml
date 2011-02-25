@@ -1,10 +1,10 @@
 <?php
-if (Mage::helper('engage/rpxcall')->isEngageEnabled()) {
-    $page_title=$this->getLayout()->getBlock('head')->getTitle();
-    $page_url=Mage::helper('core/url')->getCurrentUrl();
+if (Mage::helper('engage')->isEngageEnabled() && Mage::getStoreConfig('engage/vars/realm')):
+$rpx_callback = Mage::getUrl() . "/janrain-engage/rpx/token_url";
+$rpx_callback = urlencode($rpx_callback);
 ?>
 
 <h2><a class="rpxnow" onclick="return false;"
-href="https://dan-ucx-dev.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2F<?php echo $_SERVER['HTTP_HOST']; ?>%2Fmagento%2Fjanrain-engage%2Frpx%2Ftoken_url%2F"> Sign In </a></h2>
+href="<?php echo (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http'; ?>://<?php echo Mage::getStoreConfig('engage/vars/realm'); ?>/openid/v2/signin?token_url=<?php echo $rpx_callback; ?>"> Sign In </a></h2>
 
-<?php } ?>
+<?php endif; ?>

@@ -63,18 +63,50 @@
 					<show_in_website>0</show_in_website>
 					<show_in_store>0</show_in_store>
 					<fields>
-						<session_namespace translate="label">
-                            <label>Session Namespace</label>
+						<realm translate="label">
+                            <label>Realm</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>61</sort_order>
+                            <sort_order>62</sort_order>
                             <show_in_default>0</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </session_namespace>
+                        </realm>
+						<realmscheme translate="label">
+                            <label>Realm Scheme</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>63</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </realmscheme>
+						<appid translate="label">
+                            <label>App Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>64</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </appid>
+						<adminurl translate="label">
+                            <label>Admin Url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>65</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </adminurl>
+						<socialpub translate="label">
+                            <label>Social Pub</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>66</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </socialpub>
 						<enabled_providers translate="label">
                             <label>Enabled Providers</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>61</sort_order>
+                            <sort_order>67</sort_order>
                             <show_in_default>0</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>

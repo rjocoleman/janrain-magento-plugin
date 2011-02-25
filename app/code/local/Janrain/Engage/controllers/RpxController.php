@@ -4,7 +4,9 @@ require_once("Mage/Customer/controllers/AccountController.php");
 
 class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
-	// Override parent preDispatch so we can manually invoke it when needed
+	// Override parent preDispatch so we can manually invoke it when needed.
+	// If preDispatch runs prior to the action being called the user
+	// tends to be redirected to the login page
 	public function preDispatch() {
 	}
 

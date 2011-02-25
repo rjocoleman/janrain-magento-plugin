@@ -2,29 +2,28 @@
 
 class Janrain_Engage_Helper_Session extends Mage_Core_Helper_Abstract {
 
-	private $_namespace;
 	const ENGAGE_IDENTIFIER = 'identifier';
+	const SESSION_NAMESPACE = 'Janrain_Engage';
 
 	function __construct() {
-		$this->_namespace = Mage::getStoreConfig('engage/vars/session_namespace');
-		if (!isset($_SESSION[$this->_namespace]))
-			$_SESSION[$this->_namespace] = array();
+		if (!isset($_SESSION[self::SESSION_NAMESPACE]))
+			$_SESSION[self::SESSION_NAMESPACE] = array();
 	}
 
 	public function getIdentifier() {
-		return $_SESSION[$this->_namespace][self::ENGAGE_IDENTIFIER];
+		return $_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER];
 	}
 
 	public function setIdentifier($string) {
-		$_SESSION[$this->_namespace][self::ENGAGE_IDENTIFIER] = $string;
+		$_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER] = $string;
 	}
 
 	public function getStore($key) {
-		return $_SESSION[$this->_namespace][self::ENGAGE_IDENTIFIER][$key];
+		return $_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER][$key];
 	}
 
 	public function setStore($key, $string) {
-		$_SESSION[$this->_namespace][self::ENGAGE_IDENTIFIER][$key] = $string;
+		$_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER][$key] = $string;
 	}
 
 }

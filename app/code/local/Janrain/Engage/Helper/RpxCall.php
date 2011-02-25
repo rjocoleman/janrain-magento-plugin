@@ -1,17 +1,10 @@
 <?php
 
-class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
+class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 
-    public function isEngageEnabled() {
-        return Mage::getStoreConfig('engage/options/enable');
-    }
-
-    public function getEngageApiKey() {
-        return Mage::getStoreConfig('engage/options/apikey');
-    }
-
-
-
+	public function getEngageApiKey() {
+		return Mage::getStoreConfig('engage/options/apikey');
+	}
 
     public function rpxLookupRpCall() {
 
@@ -21,7 +14,7 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
         $result = "rpxLookupRpCall: no result";
         try {
-            $result = $this->rpxCall("lookup_rp", $postParams);
+            $result = $this->rpxPost("lookup_rp", $postParams);
         }
         catch (Exception $e) {
             throw Mage::exception('Mage_Core', $e);
@@ -31,20 +24,20 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
     }
 
-    public function rpxUiConfigCall() {
+    public function rpxUiConfigCall($realm=null, $realmScheme=null) {
 
-            //TODO pull from configs
-            $url = "http://dan-ucx-dev.rpxnow.com/openid/ui_config?abc2a6cb5affd77530eddaed81e7ab43f608a58e";
+		if(!$realm)
+			$realm = Mage::getStoreConfig('engage/vars/realm');
+		if(!$realmScheme)
+			$realmScheme = (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http';
+		$apiKey = Mage::getStoreConfig('engage/options/apikey');
 
-        $result = "rpxLookupRpCall: no result";
-        try {
-            $result = $this->rpxCallUrl($url);
-        }
-        catch (Exception $e) {
-            throw Mage::exception('Mage_Core', $e);
-        }
-
-        return $result;
+		if($realm && $apiKey) {
+			$url = "$realmScheme://$realm/openid/ui_config?apiKey=$apiKey";
+			return $this->rpxCall($url);
+		} else {
+			throw Mage::exception('Mage_Core', 'Could not make API call: Missing Url Component');
+		}
 
     }
     
@@ -57,7 +50,7 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
         $result = "rpxAuthInfoCall: no result";
         try {
-            $result = $this->rpxCall("auth_info", $postParams);
+            $result = $this->rpxPost("auth_info", $postParams);
         }
         catch (Exception $e) {
             throw Mage::exception('Mage_Core', $e);
@@ -71,8 +64,12 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
     public function rpxActivityCall($identifier, $activity_message, $url) {
 
         $postParams = array();
+		$activity = new stdClass();
 
-        $activity_json = "{\"action\":\"$activity_message\",\"url\":\"$url\"}";
+		$activity->action = $activity_message;
+		$activity->url = $url;
+        
+		$activity_json = json_encode($activity);
 
         $postParams["activity"] = $activity_json;
         $postParams["identifier"] = $identifier;
@@ -80,7 +77,7 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
 
         $result = "rpxActivityCall: no result";
         try {
-            $result = $this->rpxCall("activity", $postParams);
+            $result = $this->rpxPost("activity", $postParams);
         }
         catch (Exception $e) {
             throw Mage::exception('Mage_Core', $e);
@@ -91,7 +88,7 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
     }
 
 
-    private function rpxCall($method, $postParams) {
+    private function rpxPost($method, $postParams) {
 
         $rpxbase = "https://rpxnow.com";
 
@@ -107,22 +104,27 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
         else {
             throw Mage::exception('Mage_Core', "method [$method] not understood");
         }
-
+		
+		$url = "$rpxbase/$method_fragment";
+		$method = 'POST';
         $postParams["format"] = 'json';
 
-        $result = "rpxCall: no result yet";
+        return $this->rpxCall($url, $method, $postParams);
+		
+    }
+
+    private function rpxCall($url, $method='GET', $postParams=null) {
+
+        $result = "rpxCallUrl: no result yet";
 
         try {
-            $http = new Varien_Http_Client("$rpxbase/$method_fragment");
-            $http->setParameterPost($postParams);
 
-            $result = $http->request(Varien_Http_Client::POST);
+            $http = new Varien_Http_Client($url);
+			if($method=='POST')
+				$http->setParameterPost($postParams);
+            $response = $http->request($method);
 
-//            var_dump($result);
-            echo($result->getBody());
-//            exit;
-
-            $body = $result->getBody();
+            $body = $response->getBody();
 
             try {
                 $result = json_decode($body);
@@ -137,50 +139,6 @@ class Janrain_Engage_Helper_RpxCall extends Mage_Core_Helper_Abstract {
             else {
                 throw Mage::exception('Mage_Core', "something went wrong");
             }
-
-        }
-        catch (Exception $e) {
-            throw Mage::exception('Mage_Core', $e);
-        }
-
-    }
-
-
-    // TODO let caller hand in params
-    private function rpxCallUrl($url) {
-
-        $result = "rpxCallUrl: no result yet";
-
-        try {
-
-            $client = new Varien_Http_Client("$url");
-            $response = $client->request('GET');
-
-            $body = $response->getBody();
-
-//            echo($body);
-////            var_dump($body);
-//            exit;
-
-            return $body;
-
-
-//            echo($result->getBody());
-//            exit;
-//
-//            try {
-//                $result = json_decode($body);
-//            }
-//            catch (Exception $e) {
-//                throw Mage::exception('Mage_Core', $e);
-//            }
-//
-//            if ($result) {
-//                return $result;
-//            }
-//            else {
-//                throw Mage::exception('Mage_Core', "something went wrong");
-//            }
 
         }
         catch (Exception $e) {

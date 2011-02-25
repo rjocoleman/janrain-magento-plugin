@@ -1,5 +1,5 @@
 <?php
-if (Mage::helper('engage/rpxcall')->isEngageEnabled()):
+if (Mage::helper('engage')->isEngageEnabled()):
 $source = ($_SERVER["HTTPS"] == "on") ? "https://" : "http://static.";
 $source .= "rpxnow.com/js/lib/rpx.js";
 ?>
