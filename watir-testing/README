@@ -1,0 +1,17 @@
+# The following environment vars must be set before the testing scripts
+# can be run.
+# (MGP == Magento Plugin)
+
+# OSX or Linux
+export MGP_OS=OSX
+
+# Where you will run the tests, i.e. # /var/www/mgp or ~/Sites/mgp
+export MGP_TEST_HOME=~/Sites/mgp
+
+#export MGP_
+#export MGP_
+#export MGP_
+#export MGP_
+#export MGP_
+
+

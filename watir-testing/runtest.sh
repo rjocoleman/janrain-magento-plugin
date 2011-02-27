@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# get our environment vars into 
-. ./setup_teardown/env_setup.sh
-env | grep MGP > output.txt
+## BE SURE TO EXPORT VARS (see README) before running this script
 
 
+# clear firefox cookies
 
 
 # [ -e /var/www/test.log ] && rm -f /var/www/test.log
