@@ -1,14 +1,42 @@
+##################################
+# 1 - basic setup
+
+# install RVM:   http://rvm.beginrescueend.com/
+# use RVM to install ruby 1.8.7
+# make an RVM gemset called watir
+# use that gemset:  rvm use 1.8.7@watir
+# gem install Firewatir
+# install the -jssh plugin for Firefox
+# shut down firefox, then run this script  (ruby test1.rb)
+# Firefox seems to prefer that at least one FF window is open, or that it is completely shut down, when
+#  you run this script.
+
+
+##################################
+# 2 - environment vars
+
 # The following environment vars must be set before the testing scripts
 # can be run.
-# (MGP == Magento Plugin)
 
-# OSX or Linux
-export MGP_OS=OSX
+# where the Magento 1.5 framework is installed and running
+export MAGENTO_1d5=~/Sites/magento
+
+# where the Janrain Magento plugin code lives
+export MAGENTO_1d5_PLUGIN=~/Documents/code/magento_all/janrain-magento-plugin
+
+# OSX or Linux?
+export MGP_OS="OSX"
+export MGP_OS="Linux"
+
+# Where this code lives
+export MGP_WATIR_HOME=$MAGENTO_1d5_PLUGIN/watir-testing
 
 # Where you will run the tests, i.e. # /var/www/mgp or ~/Sites/mgp
-export MGP_TEST_HOME=~/Sites/mgp
+export MGP_WEBPUSH_HOME=~/Sites/mgp
 
-#export MGP_
+# magento root, http style
+export MGP_ROOT="http://magento.dan.janrain.com/magento/"
+
 #export MGP_
 #export MGP_
 #export MGP_
