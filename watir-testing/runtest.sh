@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# get our environment vars into 
+. ./setup_teardown/env_setup.sh
+env | grep MGP > output.txt
+
+
+
+
 # [ -e /var/www/test.log ] && rm -f /var/www/test.log
 
 # /var/www/clearcookies.sh
@@ -8,7 +15,8 @@
 #on the first load after a reboot -- start firefox, then kill it, prior to
 #starting the watir script -- hopefully this will help get around the timing
 #issue during the first load of firefox after bootup
-firefox & sleep 5; killall -9 firefox-bin
+
+# firefox & sleep 5; killall -9 firefox-bin
 
 # /var/www/rpx_apitest.watir
 
