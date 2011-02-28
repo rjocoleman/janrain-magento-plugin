@@ -23,5 +23,4 @@ ln -f -s $MAGENTO_1d5_PLUGIN/app/code/local/Janrain $MAGENTO_1d5/app/code/local/
 ln -f -s $MAGENTO_1d5_PLUGIN/app/design/frontend/default/default/layout/* $MAGENTO_1d5/app/design/frontend/default/default/layout/
 ln -f -s $MAGENTO_1d5_PLUGIN/app/design/frontend/default/default/template/* $MAGENTO_1d5/app/design/frontend/default/default/template/
 ln -f -s $MAGENTO_1d5_PLUGIN/app/locale/en_US/* $MAGENTO_1d5/app/locale/en_US/
-
-
+ln -f -s $MAGENTO_1d5_PLUGIN/skin/frontend/janrain $MAGENTO_1d5/skin/frontend/
