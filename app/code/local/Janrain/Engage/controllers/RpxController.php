@@ -26,7 +26,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$engage_session = Mage::helper('engage/session');
 
 			// Store token in session under random key
-			$key = $this->rand_str(12);
+			$key = Mage::helper('engage')->rand_str(12);
 			$engage_session->setStore($key, $token);
 
 			// Redirect user to $this->authAction method passing $key as ses
@@ -73,21 +73,6 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$session->login($customer->getEmail(), 'REQUIRED_SECOND_PARAM');
 			$this->_loginPostRedirect();
 		}
-	}
-
-	private function rand_str($length = 32, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
-		$chars_length = (strlen($chars) - 1);
-
-		$string = $chars{rand(0, $chars_length)};
-
-		for ($i = 1; $i < $length; $i = strlen($string)) {
-			$r = $chars{rand(0, $chars_length)};
-
-			if ($r != $string{$i - 1})
-				$string .= $r;
-		}
-
-		return $string;
 	}
 
 }

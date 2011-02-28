@@ -137,6 +137,7 @@
             <options>
                 <apikey></apikey>
                 <enable>1</enable>
+				<path_skin>{{base_skin}}/frontend/janrain</path_skin>
             </options>
 
 			<!-- Set values of global config vars -->

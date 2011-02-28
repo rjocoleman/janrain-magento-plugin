@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<widgets>
+	<engage_auth type="engage/auth" translate="name description" module="engage">
+		<name>Engage Authentication</name>
+		<description type="desc">Adds a link to open the Engage authentication dialog</description>
+		<parameters>
+			<size>
+				<required>0</required>
+				<visible>1</visible>
+				<label>Icon Size</label>
+				<type>select</type>
+				<value>large</value>
+				<values>
+					<default translate="label">
+						<value>large</value>
+						<label>Large</label>
+					</default>
+					<link_inline translate="label">
+						<value>small</value>
+						<label>Small</label>
+					</link_inline>
+				</values>
+			</size>
+			<template>
+				<visible>0</visible>
+				<value>engage/auth.phtml</value>
+			</template>
+		</parameters>
+	</engage_auth>
+	<engage_share type="engage/share" translate="name description" module="engage">
+		<name>Engage Social Sharing</name>
+		<description type="desc">Adds a links to share content via Engage</description>
+	</engage_share>
+</widgets>

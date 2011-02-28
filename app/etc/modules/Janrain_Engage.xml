@@ -3,6 +3,9 @@
 		<Janrain_Engage>
 			<active>true</active>
 			<codePool>local</codePool>
+			<depends>
+                <Mage_Cms />
+            </depends>
 		</Janrain_Engage>
 	</modules>
 </config>
