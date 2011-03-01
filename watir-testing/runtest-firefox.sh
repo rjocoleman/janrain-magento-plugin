@@ -50,14 +50,12 @@ fi
 ###########################
 ##  and now the tests......
 
-# simple test that Magento is running
+# simple tests, that Magento is running, admin is available, and Janrain/Engage are in left nav
 ruby tests/sanity/sanity1.rb
-ruby tests/sanity/admin_login.rb
 
 
 
 
-# todo - add more tests here
 # try setting up the plugin, try placing the login widget, try placing the social publishing widget
 # ruby tests/plugin_setup/configure_plugin.rb
 
