@@ -26,7 +26,6 @@ export MAGENTO_1d5_PLUGIN=~/Documents/code/magento_all/janrain-magento-plugin
 
 # OSX or Linux?
 export MGP_OS="OSX"
-export MGP_OS="Linux"
 
 # Where this code lives
 export MGP_WATIR_HOME=$MAGENTO_1d5_PLUGIN/watir-testing
@@ -35,7 +34,7 @@ export MGP_WATIR_HOME=$MAGENTO_1d5_PLUGIN/watir-testing
 export MGP_WEBPUSH_HOME=~/Sites/mgp
 
 # magento root, http style
-export MGP_ROOT="http://magento.dan.janrain.com/magento/"
+export MGP_ROOT="http://plugins.janrain.com/staging/magento-1.5/"
 
 #export MGP_
 #export MGP_

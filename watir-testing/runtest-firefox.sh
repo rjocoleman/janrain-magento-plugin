@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 ######################################
 ## BE SURE TO EXPORT VARS (see README)
 ## before running this script
@@ -36,7 +38,7 @@ fi
 #starting the watir script -- hopefully this will help get around the timing
 #issue during the first load of firefox after bootup
 if [ "$MGP_OS" = "OSX" ] ; then
-    /Applications/Firefox.app/Contents/MacOS/firefox-bin & sleep 5; killall -9 firefox-bin
+    /Applications/Firefox.app/Contents/MacOS/firefox-bin & sleep 3; killall -9 firefox-bin
 else
     echo "MGP_OS only accepts OSX for the moment, exiting."
     exit 0
