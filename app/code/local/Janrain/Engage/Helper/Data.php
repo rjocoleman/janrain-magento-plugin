@@ -3,7 +3,10 @@
 class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	public function isEngageEnabled() {
-		return Mage::getStoreConfig('engage/options/enable');
+		if(Mage::getStoreConfig('engage/options/enable')=='1' && strlen(Mage::getStoreConfig('engage/options/apikey')) > 1)
+			return true;
+
+		return false;
 	}
 
 	public function rand_str($length = 32, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
@@ -23,6 +26,34 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	public function _baseSkin() {
 		return Mage::getBaseUrl('skin') . "frontend/janrain";
+	}
+
+	/**
+	 * Returns the full Auth URL for the Engage Sign In Widget
+	 *
+	 * @return string
+	 */
+	public function getRpxAuthUrl() {
+		$rpx_callback = urlencode(Mage::getUrl() . "/janrain-engage/rpx/token_url");
+		$link = (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http';
+		$link.= '://' . Mage::getStoreConfig('engage/vars/realm');
+		$link.= '/openid/v2/signin?token_url=' . $rpx_callback;
+
+		return $link;
+	}
+
+	/**
+	 * Returns an unserialized array of available providers
+	 * or Null if empty (Invalid or missing API Key)
+	 *
+	 * @return string
+	 */
+	public function getRpxProviders() {
+		$providers = Mage::getStoreConfig('engage/vars/enabled_providers');
+		if($providers)
+			return unserialize($providers);
+		else
+			return false;
 	}
 
 }

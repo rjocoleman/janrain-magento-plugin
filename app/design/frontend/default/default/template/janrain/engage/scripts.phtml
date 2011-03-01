@@ -7,7 +7,9 @@ $source .= "rpxnow.com/js/lib/rpx.js";
 <script type="text/javascript">
   RPXNOW.overlay = true;
   RPXNOW.language_preference = 'en';
-  RPXNOW.init({appId: 'kknlmbekkcenihlcfnld',
+  <?php if($appId = Mage::getStoreConfig('engage/vars/appid')): ?>
+  RPXNOW.init({appId: '<?php echo $appId; ?>',
     xdReceiver: '<?php echo Mage::helper('engage')->_baseSkin(); ?>/rpx_xdcomm.html'});
+  <?php endif; ?>
 </script>
 <?php endif; ?>

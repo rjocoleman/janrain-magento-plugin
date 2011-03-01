@@ -44,6 +44,15 @@
                         </apikey>
                     </fields>
                 </options>
+				<accountdata translate="label">
+                    <label>Account Info</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>engage/accountdata</frontend_model>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </accountdata>
                 <info translate="label">
                     <label>About</label>
                     <frontend_type>text</frontend_type>
