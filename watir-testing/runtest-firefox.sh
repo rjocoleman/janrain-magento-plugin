@@ -9,8 +9,11 @@ if [ ! -d "$MGP_WEBPUSH_HOME" ]; then
     exit 0
 fi
 
+#############
+# SKIPPING - this version just runs tests locally
 # copy files to our test directory
-./setup_teardown/webpush.sh
+# ./setup_teardown/webpush.sh
+
 
 # clear firefox cookies
 if [ "$MGP_OS" = "OSX" ] ; then
@@ -21,10 +24,11 @@ else
 fi
 
 
-cd $MGP_WEBPUSH_HOME
-
-
+#############
+# SKIPPING - this version just runs tests locally
+# cd $MGP_WEBPUSH_HOME
 # [ -e $MGP_WEBPUSH_HOME/test.log ] && rm -f $MGP_WEBPUSH_HOME/test.log
+
 
 
 #kludge to attempt to work around problem where watir can't attach to firefox
@@ -38,11 +42,6 @@ else
     exit 0
 fi
 
-ruby $MGP_WEBPUSH_HOME/tests/sanity/sanity1.rb
-
-# /var/www/rpx_apitest.watir
-# ./rpx_social_widget_test.watir staging | tee social_widget_test.output
-# /var/www/check_social_output.sh staging
-
+ruby tests/sanity/sanity1.rb
 
 
