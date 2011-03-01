@@ -51,14 +51,9 @@ fi
 ##  and now the tests......
 
 # simple test that Magento is running
-echo 
 ruby tests/sanity/sanity1.rb
-
-# todo - use watir to log in to the admin
 ruby tests/sanity/admin_login.rb
 
-# try some basic admin functions
-# ruby tests/sanity/sanity2.rb        # TODO: this one has a hardcoded index/key which is probably not stable
 
 
 
