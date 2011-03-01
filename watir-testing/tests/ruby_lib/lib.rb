@@ -20,3 +20,34 @@ def try_url url
   end
 
 end
+
+
+# browser = running Watir browser
+# login_if_out = do a login (only if not logged in)
+# returns true if admin is logged out
+def admin_logged_out? browser, login_if_out
+
+  result = true
+
+  # start of admin area
+  browser.goto("#{ENV['MGP_ROOT']}/index.php/admin")
+
+  # is admin login form showing?
+  loginForm = browser.form(:id, "loginForm")
+
+  if loginForm.exists?
+
+    if login_if_out
+      # do login
+      browser.text_field(:name => "login[username]").set "#{ENV['MGP_ADMIN_USER']}"
+      browser.text_field(:name => "login[password]").set "#{ENV['MGP_ADMIN_PASSWORD']}"
+      loginForm.submit
+    end
+
+  else
+    result = false
+  end
+
+  result
+
+end

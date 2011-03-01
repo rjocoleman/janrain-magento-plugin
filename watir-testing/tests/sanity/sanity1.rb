@@ -26,25 +26,13 @@ end
 
 $browser = Watir::Browser.new
 
-# start of admin area
-$browser.goto("#{ENV['MGP_ROOT']}/index.php/admin")
-
-# is admin login form showing?
-loginForm = $browser.form(:id, "loginForm")
-
-if loginForm.exists?
-
-  # do login
-  $browser.text_field(:name => "login[username]").set "#{ENV['MGP_ADMIN_USER']}"
-  $browser.text_field(:name => "login[password]").set "#{ENV['MGP_ADMIN_PASSWORD']}"
-  loginForm.submit
-
-else
-
-  # this should not happen - we are killing cookies on every test
-  raise "admin is logged in"
-
+# test that admin is logged out
+if !(admin_logged_out? $browser, false)
+  raise "admin already logged in, should not be"
 end
+
+# now log the admin in
+admin_logged_out? $browser, true
 
 
 
@@ -74,7 +62,5 @@ end
 
 
 
-
 puts "done with sanity1 tests."
-
 
