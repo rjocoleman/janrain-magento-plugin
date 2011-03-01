@@ -33,8 +33,22 @@ export MGP_WATIR_HOME=$MAGENTO_1d5_PLUGIN/watir-testing
 # Where you will run the tests, i.e. # /var/www/mgp or ~/Sites/mgp
 export MGP_WEBPUSH_HOME=~/Sites/mgp
 
+
 # magento root, http style
-export MGP_ROOT="http://plugins.janrain.com/staging/magento-1.5/"
+#export MGP_ROOT="http://plugins.janrain.com/staging/magento-1.5"
+export MGP_ROOT="http://magento.dan.janrain.com/magento"
+
+
+# magento admin user credentials
+
+#export MGP_ADMIN_USER="admin"
+#export MGP_ADMIN_PASSWORD="staging123"
+
+
+export MGP_ADMIN_USER="danstadler"
+export MGP_ADMIN_PASSWORD="asdfasdf0"
+
+
 
 #export MGP_
 #export MGP_

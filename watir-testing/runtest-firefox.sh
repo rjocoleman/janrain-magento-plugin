@@ -44,6 +44,40 @@ else
     exit 0
 fi
 
+
+
+
+###########################
+##  and now the tests......
+
+# simple test that Magento is running
+echo 
 ruby tests/sanity/sanity1.rb
+
+# todo - use watir to log in to the admin
+ruby tests/sanity/admin_login.rb
+
+# try some basic admin functions
+# ruby tests/sanity/sanity2.rb        # TODO: this one has a hardcoded index/key which is probably not stable
+
+
+
+# todo - add more tests here
+# try setting up the plugin, try placing the login widget, try placing the social publishing widget
+# ruby tests/plugin_setup/configure_plugin.rb
+
+
+# try creating a user from 3PP
+
+# try creating a user and then adding 3PP
+
+# try removing 3PP from user
+
+# try doing social publishing
+
+
+
+
+
 
 
