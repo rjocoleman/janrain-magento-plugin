@@ -1,6 +1,18 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
+	<default>
+		<reference name="before_body_end">
+		  <block type="core/template"
+            name="janrain_engage_scripts"
+            template="janrain/engage/scripts.phtml"/>
+		</reference>
+		<reference name="head">
+		  <block type="core/template"
+            name="janrain_engage_styles"
+            template="janrain/engage/styles.phtml"/>
+		</reference>
+	</default>
 
     <cms_page_view>
         <reference name="content">
@@ -44,11 +56,6 @@
             name="janrain_engage"
             after="customer_form_login"
             template="janrain/engage/links.phtml"/>
-		</reference>
-		<reference name="before_body_end">
-		  <block type="core/template"
-            name="janrain_engage_scripts"
-            template="janrain/engage/scripts.phtml"/>
 		</reference>
 	</customer_account_login>
 
