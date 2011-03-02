@@ -50,25 +50,7 @@ fi
 ###########################
 ##  and now the tests......
 
-# simple tests, that Magento is running, admin is available, and Janrain/Engage are in left nav
-ruby tests/sanity/sanity1.rb
-
-
-
-
-# try setting up the plugin, try placing the login widget, try placing the social publishing widget
-# ruby tests/plugin_setup/configure_plugin.rb
-
-
-# try creating a user from 3PP
-
-# try creating a user and then adding 3PP
-
-# try removing 3PP from user
-
-# try doing social publishing
-
-
+ruby tests/main.rb
 
 
 
