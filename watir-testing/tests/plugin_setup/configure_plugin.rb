@@ -16,6 +16,28 @@ def configure_plugin_tests browser
   # go to engage config page
   click_engage_configuration_link browser
 
+
+  # todo - set up plugin config for a completely new Magento install
+
+  
+  
+
   puts "done with configure_plugin tests."
+
+end
+
+
+def configure_engage_authentication_link browser
+
+
+  # cms / widgets /
+  # click add new widget instance
+  # type engage auth
+  # which design package?    have tried some  (maybe base/default)
+  # save - name the widget
+  # add new layout instance
+  # select which block 
+
+
 
 end

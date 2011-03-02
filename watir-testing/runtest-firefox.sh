@@ -17,6 +17,16 @@ fi
 # ./setup_teardown/webpush.sh
 
 
+
+##########################
+## rebuild entire database
+
+# todo - could be useful to add a script that rebuilds the entire database
+
+##########################
+
+
+
 # clear firefox cookies
 if [ "$MGP_OS" = "OSX" ] ; then
     ./setup_teardown/clear-cookies-OSX.sh
