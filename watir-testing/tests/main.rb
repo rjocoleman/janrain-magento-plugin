@@ -5,7 +5,7 @@ require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/ruby_lib/lib.rb"
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/sanity/sanity1.rb"
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/plugin_setup/configure_plugin.rb"
 
-puts "starting up browser for other tests to use..."
+puts "starting up browser..."
 
 $browser = Watir::Browser.new
 

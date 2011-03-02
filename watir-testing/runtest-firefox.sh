@@ -1,6 +1,33 @@
 #!/bin/bash
 
+# clear screen
 clear
+
+
+###################
+# opts parsing code taken from example at: http://www.linux.com/archive/feed/118031
+
+# whether to rebuild the db before running the tests
+rebuilddb=
+
+while getopts 'r' OPTION
+do
+  case $OPTION in
+  r)	rebuilddb=1
+        ;;
+  ?)	printf "Usage: %s: [-r] \n" $(basename $0) >&2
+        exit 2
+        ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [ "$rebuilddb" ]
+then
+  printf "Option -r specified; database will be rebuilt before tests are run.\n"
+fi
+
+
 
 ######################################
 ## BE SURE TO EXPORT VARS (see README)
