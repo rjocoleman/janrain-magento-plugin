@@ -19,7 +19,11 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 				->saveConfig('engage/vars/socialpub', $lookup_rp->socialPub)
 				->saveConfig('engage/vars/enabled_providers', $uiConfig ? serialize($uiConfig->enabled_providers) : '');
 			Mage::getConfig()->reinit();
+
+			return true;
 		}
+
+		return false;
 	}
 
     public function rpxLookupRpCall() {

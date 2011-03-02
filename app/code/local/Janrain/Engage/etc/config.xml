@@ -102,6 +102,19 @@
             </engage_read>
         </resources>
     </global>
+
+	<admin>
+        <routers>
+            <engage>
+                <use>admin</use>
+                <args>
+                    <module>Janrain_Engage</module>
+                    <frontName>janrain-engage</frontName>
+                </args>
+            </engage>
+        </routers>
+    </admin>
+
     <adminhtml>
         <translate>
             <modules>

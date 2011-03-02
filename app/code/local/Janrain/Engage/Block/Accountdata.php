@@ -26,7 +26,7 @@ class Janrain_Engage_Block_Accountdata extends Mage_Adminhtml_Block_System_Confi
 		if(Mage::helper('engage')->isEngageEnabled() === false)
 			return '<p>Module not enabled. Please set "Enabled" to "Yes" and enter your API key above.</p>';
 
-		$content = '<p>The following is the current account info being used. <a href="#">Click Here to refresh</a></p>';
+		$content = '<p>The following is the current account info being used. <a href="' . Mage::helper('adminhtml')->getUrl('engage/adminhtml_lookup/rp') . '">Click Here to refresh</a></p>';
 
 		$content .= '<table><tbody>';
 		foreach($vars as $key => $val){
