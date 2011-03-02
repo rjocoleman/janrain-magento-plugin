@@ -87,7 +87,12 @@ fi
 ###########################
 ##  and now the tests......
 
-ruby tests/main.rb
+if [ "$rebuilddb" ]
+then
+    ruby tests/main.rb rebuilddb
+else
+    ruby tests/main.rb
+fi
 
 
 
