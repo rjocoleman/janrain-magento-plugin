@@ -43,10 +43,17 @@ export MGP_ROOT="http://magento.dan.janrain.com/magento"
 
 #export MGP_ADMIN_USER="admin"
 #export MGP_ADMIN_PASSWORD="staging123"
-
-
 export MGP_ADMIN_USER="danstadler"
 export MGP_ADMIN_PASSWORD="asdfasdf0"
+
+
+# magento DB credentials (examples from Dan's dev machine)
+export MGP_DB_NAME="magento"
+export MGP_DB_USERNAME="magento"
+export MGP_DB_PASSWORD="magento"
+
+# path to mysql (helpful in Mac if you're using MAMP - just set this to "" if it's already on your path.)
+export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
 
 
 
