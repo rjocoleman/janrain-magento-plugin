@@ -33,7 +33,7 @@ end
 
 def insert_engage_api_key browser, apikey
   t = browser.text_field(:id, "engage_options_apikey")
-  t.set (apikey)
+  t.set(apikey)
 end
 
 
