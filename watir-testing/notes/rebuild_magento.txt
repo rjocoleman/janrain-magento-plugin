@@ -1,36 +1,44 @@
 
-  # just after submitting credentials:
+#to reload Magento completely:
 
-  # click close on incoming message dialog box
+drop the magento folder
+drop in a new one
+cd ~/Sites/magento
+chmod 777 app/etc/
+chmod 777 var/
+chmod 777 media/
 
-  # go to messages inbox
-  # view 100 msgs per page
-  # select all
-  # action - mark as read
-  # submit
 
-  # click on Index Management
-  # select all
-  # submit
+# then run through the installer:
+http://magento.dan.janrain.com/magento/
 
-  # System / Permissions / Users
-  # click on admin
-  # new password:
-  # new password confirmation:
-  # save user
+
+## most recent enc_key:  0abc0df3753a32302bcb8d2803c2df0e
 
 
 
-  # to reload Magento completely:
-  # drop the magento folder
-  # drop in a new one
-  # cd ~/Sites/magento
-  # chmod 777 app/etc/
-  # chmod 777 var/
-  # chmod 777 media/
+#just after submitting admin credentials:
 
-  # then run through the installer:
-  # http://magento.dan.janrain.com/magento/
+click close on incoming message dialog box
+
+click on Index Management
+select all
+submit
+
+go to messages inbox
+view 100 msgs per page
+select all
+action - mark as read
+submit
+
+System / Cache Management
+select all
+action: disable
+submit
+
+
+# dump out this as the latest fresh copy:
+/Applications/MAMP/Library/bin/mysqldump --user=magento --password=magento magento > fresh_install.sql
 
 
 
