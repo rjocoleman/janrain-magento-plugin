@@ -16,14 +16,24 @@ def configure_plugin_tests browser
   # go to engage config page
   click_engage_configuration_link browser
 
+  # insert API key
+  insert_engage_api_key browser, "#{ENV['MGP_ENGAGE_APIKEY']}"
 
-  # todo - set up plugin config for a completely new Magento install
+  # save the config
+  save_config browser
+
+
+  # todo - test that the right data is showing up in the About section below the API key
+
 
   
-  
-
   puts "done with configure_plugin tests."
 
+end
+
+def insert_engage_api_key browser, apikey
+  t = browser.text_field(:id, "engage_options_apikey")
+  t.set (apikey)
 end
 
 
@@ -33,10 +43,25 @@ def configure_engage_authentication_link browser
   # cms / widgets /
   # click add new widget instance
   # type engage auth
-  # which design package?    have tried some  (maybe base/default)
+
+  # which design package?  start with default/default   have tried some  (maybe base/default)
+
   # save - name the widget
   # add new layout instance
+  # display on Simple Product
+  # products all
+  # add to main content area
+
+
   # select which block 
+
+
+
+  # maybe try changing from small to large
+
+
+
+
 
 
 

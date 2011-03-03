@@ -65,8 +65,12 @@ export MGP_DB_PASSWORD="magento"
 # export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
 
 
+# test Engage apikey (example is bh-test01)
+export MGP_ENGAGE_APIKEY="1ea372282118fd1574f6fdd1e3961cec868b21f4"
 
-#export MGP_
+
+
+
 #export MGP_
 #export MGP_
 #export MGP_

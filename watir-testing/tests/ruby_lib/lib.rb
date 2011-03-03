@@ -58,12 +58,27 @@ def admin_logged_out? browser, login_if_out, admin_user="#{ENV['MGP_ADMIN_USER']
 end
 
 
+def click_engage_configuration_link browser
+  $engage = browser.link(:xpath, "//a[./span[contains(.,'Engage')]]")
+  $engage.click
+end
+
+def click_engage_config_options_link browser
+  l = browser.link(:id,"engage_options-head")
+  l.click
+end
+
 def navigate_to_system_configuration_page browser
   $l = browser.link(:xpath,"//a[contains(span, 'Configuration')]")
   $l.click
 end
 
-def click_engage_configuration_link browser
-  $engage = browser.link(:xpath, "//a[./span[contains(.,'Engage')]]")
-  $engage.click
+def save_config browser
+  b = browser.button(:xpath, "//button[./span[contains(.,'Save Config')]]")
+  b.click
 end
+
+
+
+
+
