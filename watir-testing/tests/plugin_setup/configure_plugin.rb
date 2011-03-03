@@ -3,14 +3,17 @@ require 'firewatir'
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/ruby_lib/lib.rb"
 
 
-# test Engage apikey (example is bh-test01)
+# test Engage apikey (example is bh-test01)...
 MGP_ENGAGE_APIKEY="1ea372282118fd1574f6fdd1e3961cec868b21f4"
+
+# ...should result in all of the following:
 MGP_ENGAGE_REALM="bh-test01.rpxnow.com"
 MGP_ENGAGE_REALM_SCHEME="https"
 MGP_ENGAGE_APP_ID="kknlmbekkcenihlcfnld"
 MGP_ENGAGE_ADMIN_URL="https://rpxnow.com/relying_parties/bh-test01"
 MGP_ENGAGE_SOCIAL_PUB="twitter"
 MGP_ENGAGE_ENABLED_PROVIDERS="aol, google, yahoo, openid, twitter"
+
 
 def configure_plugin_tests browser
 
