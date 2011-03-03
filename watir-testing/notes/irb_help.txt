@@ -4,6 +4,35 @@ require 'firewatir'
 browser = Watir::Browser.new
 browser.goto("#{ENV['MGP_ROOT']}/index.php/admin")
 
+
+l = browser.link(:xpath,"//a[contains(span, 'Widgets')]")
+l.click
+
+button = browser.button(:xpath, "//button[contains(@onclick, 'index.php/admin/widget_instance/new')")
+button = browser.button(:xpath, "//button[starts-with(@onclick, 'http:')]")
+button = browser.button(:xpath, "//button")
+
+button = browser.button(:xpath, "//button[.[starts-with(@onclick,'setLocation(\'http\')')]]")
+button = browser.button(:xpath, "//button[starts-with(@onclick,'setLocation(\'http\')')]")
+
+button = browser.button(:xpath, "//button[starts-with(@onclick, 'setLocation')]")
+
+button = browser.button(:xpath, "//button[contains(@onclick, 'admin/widget_instance/new/key')]")
+button.click
+
+
+[
+starts-with(
+@onclick, 'http:'
+)
+]
+
+button = browser.button(:xpath, "//button[@onclick='setLocation(\'http://magento.dan.janrain.com/magento/index.php/admin/widget_instance/new/key/2d8caf6e1cbb0c9680f2f2f1bcf0f9cc/\')']")
+
+button.click
+
+
+
 # sys config
 l = browser.link(:xpath,"//a[contains(span, 'Configuration')]")
 l.click

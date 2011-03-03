@@ -19,9 +19,22 @@ def configure_plugin_tests browser
 
   puts "configure_plugin tests..."
 
-  ##############
   # try logging in to admin
   admin_logged_out? browser, true
+
+  # insert the API key, submit, see that the correct Engage values are shown.
+#  configure_plugin browser
+
+  # try placing the auth widget
+  configure_engage_authentication_link browser
+
+
+  puts "done with configure_plugin tests."
+
+end
+
+
+def configure_plugin browser
 
   # go to system / configuration
   navigate_to_system_configuration_page browser
@@ -35,45 +48,11 @@ def configure_plugin_tests browser
   # save the config
   save_config browser
 
-  # show the account data - not really a test, just nice to show as test is running
+  # show the account data - not really a test, just nice to show while test is running
   show_account_info browser
 
   # test Account Info values
   test_account_info_values browser
-
-
-  puts "done with configure_plugin tests."
-
-end
-
-def insert_engage_api_key browser, apikey
-  t = browser.text_field(:id, "engage_options_apikey")
-  t.set(apikey)
-end
-
-def show_account_info browser
-  l = browser.link(:id,"engage_accountdata-head")
-  l.click
-end
-
-def test_account_info_values browser
-
-  [MGP_ENGAGE_REALM,
-   MGP_ENGAGE_REALM_SCHEME,
-   MGP_ENGAGE_APP_ID,
-   MGP_ENGAGE_ADMIN_URL,
-   MGP_ENGAGE_SOCIAL_PUB,
-   MGP_ENGAGE_ENABLED_PROVIDERS
-  ].each do |lookup|
-
-    result = browser.table(:xpath, "//table[./tbody/tr/td[contains(.,'#{lookup}')]]")
-    if !result.exists?
-      raise "unable to see [#{lookup}] for configured Engage account"
-    else
-      puts "for configured Engage account: can see [#{lookup}]"
-    end
-
-  end
 
 end
 
@@ -82,8 +61,43 @@ def configure_engage_authentication_link browser
 
 
   # cms / widgets /
+  navigate_to_cms_widgets browser
+
   # click add new widget instance
+  click_add_new_widget_instance browser
+
+
+  # first page:
+
   # type engage auth
+  pulldown_widget_type browser
+
+  # package theme
+  pulldown_package_theme browser
+
+  # click continue button
+  # submit_widget_form browser
+  widget_form_continue browser
+
+
+  # next page:
+
+  # set widget instance title
+  set_widget_instance_title browser
+
+  # assign to store views
+  pulldown_assign_to_store_views browser
+
+  #save and continue edit
+  click_save_and_continue_edit browser
+
+
+
+  # add layout update
+  click_add_layout_update browser
+
+  
+
 
   # which design package?  start with default/default   have tried some  (maybe base/default)
 
