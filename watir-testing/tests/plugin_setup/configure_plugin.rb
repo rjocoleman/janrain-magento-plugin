@@ -13,6 +13,8 @@ def configure_plugin_tests browser
   # go to system / configuration
   navigate_to_system_configuration_page browser
 
+  stop
+
   # go to engage config page
   click_engage_configuration_link browser
 

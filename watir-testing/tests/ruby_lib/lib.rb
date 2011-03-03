@@ -2,6 +2,11 @@ require 'net/http'
 require 'uri'
 
 
+def stop
+  raise "stop"
+end
+
+
 # http://groups.google.com/group/watir-general/browse_thread/thread/26486904e89340b7?pli=1
 def try_url url
   url = URI.parse(url)
@@ -41,10 +46,7 @@ def admin_logged_out? browser, login_if_out, admin_user="#{ENV['MGP_ADMIN_USER']
       # do login
       browser.text_field(:name => "login[username]").set admin_user
       browser.text_field(:name => "login[password]").set admin_password
-
-      raise "stop during admin_logged_out"
       loginForm.submit
-
     end
 
   else

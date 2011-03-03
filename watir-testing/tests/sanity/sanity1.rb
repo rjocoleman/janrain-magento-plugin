@@ -6,8 +6,13 @@ def sanity_1_tests browser
 
   puts "sanity1 tests..."
 
+
+  ####################################
+  # quick check whether the server is
+  # reachable.  Right now, just tests
+  # the Magento index page, but more
+  # tests can be added.
   [
-          # Magento index page
   "#{ENV['MGP_ROOT']}/",
 
   ].each do |url|
@@ -42,21 +47,21 @@ def sanity_1_tests browser
   ######################
   # check that after going to system / configuration, we can see the
   # Janrain config items in the left nav:
-  $janrain = browser.dt(:xpath, "//dt[@class='label' and contains(.,'Janrain')]")
+  $janrain = browser.dt(:xpath, "//dt[@class='label' and contains(.,'Janrain')]") rescue nil
 
-  if $janrain.blank?
-    raise "test failed: Janrain doesn't exist in left nav on Admin"
-  else
+  if $janrain.exists?()
     puts "able to see Janrain in the left nav"
-  end
-
-  $engage = browser.dd(:xpath, "//dd[./a/span[contains(.,'Engage')]]")
-  if $janrain.blank?
-    raise "test failed: Engage doesn't exist in left nav on Admin"
   else
-    puts "able to see Engage in the left nav"
+    raise "test failed: Janrain doesn't exist in left nav on Admin"
   end
 
+  $engage = browser.dd(:xpath, "//dd[./a/span[contains(.,'Engage')]]") rescue nil
+
+  if $engage.exists?()
+    puts "able to see Engage in the left nav"
+  else
+    raise "test failed: Engage doesn't exist in left nav on Admin"
+  end
 
   puts "done with sanity1 tests."
 

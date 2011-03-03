@@ -56,13 +56,8 @@ then
     ## delete var/ stuff
     rm -rf $MAGENTO_1d5/var/cache
     rm $MAGENTO_1d5/var/session/*
-    rm $MAGENTO_1d5/var/locks/*
-
 
 fi
-
-
-exit
 
 
 
