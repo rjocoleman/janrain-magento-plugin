@@ -23,26 +23,25 @@ def sanity_1_tests browser
   end
 
 
-##############
-# try logging in to admin
+  ##############
+  # try logging in to admin
 
-# test that admin is logged out
+  # test that admin is logged out
   if !(admin_logged_out? browser, false)
     raise "admin already logged in, should not be"
   end
 
-# now log the admin in
+  # now log the admin in
   admin_logged_out? browser, true
 
-
-######################
-# go to system / configuration
+  ######################
+  # go to system / configuration
   navigate_to_system_configuration_page browser
 
 
-######################
-# check that after going to system / configuration, we can see the
-# Janrain config items in the left nav:
+  ######################
+  # check that after going to system / configuration, we can see the
+  # Janrain config items in the left nav:
   $janrain = browser.dt(:xpath, "//dt[@class='label' and contains(.,'Janrain')]")
 
   if $janrain.blank?

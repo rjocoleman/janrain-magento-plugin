@@ -18,42 +18,51 @@
 # The following environment vars must be set before the testing scripts
 # can be run.
 
-# where the Magento 1.5 framework is installed and running
+
+## where the Magento 1.5 framework is installed and running
 export MAGENTO_1d5=~/Sites/magento
 
-# where the Janrain Magento plugin code lives
+## where the Janrain Magento plugin code lives
 export MAGENTO_1d5_PLUGIN=~/Documents/code/magento_all/janrain-magento-plugin
 
-# OSX or Linux?
+## OSX or Linux?
 export MGP_OS="OSX"
 
-# Where this code lives
+## Where this code lives
 export MGP_WATIR_HOME=$MAGENTO_1d5_PLUGIN/watir-testing
 
-# Where you will run the tests, i.e. # /var/www/mgp or ~/Sites/mgp
+## Where you will run the tests, i.e. # /var/www/mgp or ~/Sites/mgp
 export MGP_WEBPUSH_HOME=~/Sites/mgp
 
 
-# magento root, http style
+## magento root, http style
 #export MGP_ROOT="http://plugins.janrain.com/staging/magento-1.5"
 export MGP_ROOT="http://magento.dan.janrain.com/magento"
 
 
-# magento admin user credentials
+## magento admin user credentials
 
+(examples from Dan's dev machine)   ## most recent enc key: 512a631c39431286c4dcae62b368584c
+export MGP_ADMIN_USER="magento"
+export MGP_ADMIN_PASSWORD="magento123"
+
+
+
+(examples from staging on plugins.janrain.com)
 #export MGP_ADMIN_USER="admin"
 #export MGP_ADMIN_PASSWORD="staging123"
-export MGP_ADMIN_USER="danstadler"
-export MGP_ADMIN_PASSWORD="asdfasdf0"
 
 
-# magento DB credentials (examples from Dan's dev machine)
+## magento DB credentials
+# (examples from Dan's dev machine)
 export MGP_DB_NAME="magento"
 export MGP_DB_USERNAME="magento"
 export MGP_DB_PASSWORD="magento"
 
+# todo (examples from staging on plugins.janrain.com)
+
 # path to mysql (helpful in Mac if you're using MAMP - just set this to "" if it's already on your path.)
-export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
+# export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
 
 
 

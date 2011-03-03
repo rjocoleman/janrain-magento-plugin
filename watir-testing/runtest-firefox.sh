@@ -21,13 +21,13 @@ clear
 ###################
 # opts parsing code taken from example at: http://www.linux.com/archive/feed/118031
 
-# whether to rebuild the db before running the tests
-rebuilddb=
+# whether to completely reinstall Magento before running the tests
+reinstall_all=
 
 while getopts 'r' OPTION
 do
   case $OPTION in
-  r)	rebuilddb=1
+  r)	reinstall_all=1
         ;;
   ?)	printf "Usage: %s: [-r] \n" $(basename $0) >&2
         exit 2
@@ -36,33 +36,19 @@ do
 done
 shift $((OPTIND - 1))
 
-if [ "$rebuilddb" ]
+if [ "$reinstall_all" ]
 then
 
-    printf "Option -r specified; database will be rebuilt before tests are run.\n"
+    printf "Option -r specified; Magento and db will be completely reinstalled before tests are run.\n"
 
     ##########################
-    ## rebuild entire database
-
+    ## drop all database tables
     cd setup_teardown
     cd dba
-
     ./drop_magento_db.sh
-
-
     cd ../..
 
 fi
-
-
-
-# todo remove me
-exit
-
-
-
-
-
 
 
 #############
@@ -73,8 +59,6 @@ else
     echo "MGP_OS only accepts OSX for the moment, exiting."
     exit 0
 fi
-
-
 
 
 #############
@@ -95,9 +79,9 @@ fi
 ###########################
 ##  and now the tests......
 
-if [ "$rebuilddb" ]
+if [ "$reinstall_all" ]
 then
-    ruby tests/main.rb rebuilddb
+    ruby tests/main.rb reinstall_all
 else
     ruby tests/main.rb
 fi

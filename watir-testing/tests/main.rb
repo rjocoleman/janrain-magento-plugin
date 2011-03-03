@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'firewatir'
 
+require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/setup_teardown/rebuild_admin.rb"
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/ruby_lib/lib.rb"
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/sanity/sanity1.rb"
 require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/plugin_setup/configure_plugin.rb"
@@ -10,22 +11,31 @@ require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/plugin_setup/configure
 # parse arguments coming in from the command line.
 
 # whether to rebuild the database and reset the user admin settings
-rebuilddb = false
+reinstall_all = false
 
 ARGV.each do |a|
   case a
-    when "rebuilddb"
-      rebuilddb = true
+    when "reinstall_all"
+      reinstall_all = true
       puts "will reset Magento settings to baseline install state."
   end
 end
 
 
-if rebuilddb
+#####################################################
+# get things ready for the tests
 
-  # the calling script is responsible for dropping and recreating the tables.
-  # this script will call the admin interface to reset several things on Magento
-  # before the tests run.
+puts "starting up browser..."
+$browser = Watir::Browser.new
+
+
+
+#####################################################
+# rebuild the admin after the database is recreated.
+# the calling script is responsible for dropping and recreating the tables.
+if reinstall_all
+
+  rebuild_magento $browser
 
 end
 
@@ -34,11 +44,8 @@ end
 exit
 
 
-#####################################################
-# get things ready for the tests
 
-puts "starting up browser..."
-$browser = Watir::Browser.new
+
 
 
 #####################################################

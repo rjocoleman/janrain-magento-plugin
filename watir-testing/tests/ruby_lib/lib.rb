@@ -25,7 +25,7 @@ end
 # browser = running Watir browser
 # login_if_out = do a login (only if not logged in)
 # returns true if admin is logged out
-def admin_logged_out? browser, login_if_out
+def admin_logged_out? browser, login_if_out, admin_user="#{ENV['MGP_ADMIN_USER']}", admin_password="#{ENV['MGP_ADMIN_PASSWORD']}"
 
   result = true
 
@@ -39,9 +39,12 @@ def admin_logged_out? browser, login_if_out
 
     if login_if_out
       # do login
-      browser.text_field(:name => "login[username]").set "#{ENV['MGP_ADMIN_USER']}"
-      browser.text_field(:name => "login[password]").set "#{ENV['MGP_ADMIN_PASSWORD']}"
+      browser.text_field(:name => "login[username]").set admin_user
+      browser.text_field(:name => "login[password]").set admin_password
+
+      raise "stop during admin_logged_out"
       loginForm.submit
+
     end
 
   else
