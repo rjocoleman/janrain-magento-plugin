@@ -39,16 +39,31 @@ shift $((OPTIND - 1))
 if [ "$reinstall_all" ]
 then
 
-    printf "Option -r specified; Magento and db will be completely reinstalled before tests are run.\n"
+    printf "Option -r specified; Magento db will be restored from a fresh install snapshot before tests are run.\n"
 
     ##########################
     ## drop all database tables
     cd setup_teardown
     cd dba
     ./drop_magento_db.sh
+
+    ## import db from snapshot
+    ./load_fresh_install_db.sh
+
+    ## back to root dir
     cd ../..
 
+    ## delete var/ stuff
+    rm -rf $MAGENTO_1d5/var/cache
+    rm $MAGENTO_1d5/var/session/*
+    rm $MAGENTO_1d5/var/locks/*
+
+
 fi
+
+
+exit
+
 
 
 #############
@@ -79,13 +94,7 @@ fi
 ###########################
 ##  and now the tests......
 
-if [ "$reinstall_all" ]
-then
-    ruby tests/main.rb reinstall_all
-else
-    ruby tests/main.rb
-fi
-
+ruby tests/main.rb
 
 
 

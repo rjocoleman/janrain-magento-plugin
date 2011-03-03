@@ -42,7 +42,7 @@ export MGP_ROOT="http://magento.dan.janrain.com/magento"
 
 ## magento admin user credentials
 
-(examples from Dan's dev machine)   ## most recent enc key: 512a631c39431286c4dcae62b368584c
+(examples from Dan's dev machine)   ## most recent enc key: 34f69a77bb614fa8b9c9e8fad25de213
 export MGP_ADMIN_USER="magento"
 export MGP_ADMIN_PASSWORD="magento123"
 
