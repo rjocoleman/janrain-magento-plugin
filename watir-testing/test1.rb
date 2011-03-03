@@ -12,11 +12,5 @@ $browser.goto("#{ENV['MGP_ROOT']}/index.php/admin/system_config/index/key/7fef2e
 #$l = $browser.link(:xpath,"//a[contains(span, 'Configuration')]")
 #$l.click
 
-#$janrain = $browser.dt(:xpath, "//dt[@class='label' and contains(.,'Janrain')]")
-#puts $janrain.html
-#
-#$engage = $browser.dd(:xpath, "//dd[./a/span[contains(.,'Engage')]]")
-#puts $engage.html
-
 
 # http://magento.dan.janrain.com/magento/index.php/admin/system_config/index/key/7fef2ebca22c8956f80a2eb770e46644/

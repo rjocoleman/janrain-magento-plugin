@@ -4,7 +4,9 @@
 # install RVM:   http://rvm.beginrescueend.com/
 # use RVM to install ruby 1.8.7
 # make an RVM gemset called watir
-# use that gemset:  rvm use 1.8.7@watir
+# use that gemset:
+rvm use 1.8.7@watir
+
 # gem install Firewatir
 # install the -jssh plugin for Firefox
 # shut down firefox, then run this script  (ruby test1.rb)
@@ -42,13 +44,13 @@ export MGP_ROOT="http://magento.dan.janrain.com/magento"
 
 ## magento admin user credentials
 
-(examples from Dan's dev machine)
+#(examples from Dan's dev machine)
 export MGP_ADMIN_USER="magento"
 export MGP_ADMIN_PASSWORD="magento123"
 
 
 
-(examples from staging on plugins.janrain.com)
+#(examples from staging on plugins.janrain.com)
 #export MGP_ADMIN_USER="admin"
 #export MGP_ADMIN_PASSWORD="staging123"
 
@@ -61,12 +63,9 @@ export MGP_DB_PASSWORD="magento"
 
 # todo (examples from staging on plugins.janrain.com)
 
-# path to mysql (helpful in Mac if you're using MAMP - just set this to "" if it's already on your path.)
-# export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
+# path to mysql (helpful in Mac if you're using MAMP - just set this to an empty string if it's already on your path.)
+export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
 
-
-# test Engage apikey (example is bh-test01)
-export MGP_ENGAGE_APIKEY="1ea372282118fd1574f6fdd1e3961cec868b21f4"
 
 
 
