@@ -62,7 +62,19 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$this->loadLayout();
 			$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
 			$form_data = $block->getFormData();
-			$form_data->setEmail('this is a test');
+
+			$email = $auth_info->profile->verifiedEmail
+				? $auth_info->profile->verifiedEmail
+				: ($auth_info->profile->email
+						? $auth_info->profile->email : ''
+				);
+
+			$firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
+			$lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
+
+			$form_data->setEmail($email);
+			$form_data->setFirstname($firstName);
+			$form_data->setLastname($lastName);
 			$engage_session->setIdentifier($auth_info->profile->identifier);
 
 			$this->renderLayout();

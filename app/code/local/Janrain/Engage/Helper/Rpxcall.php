@@ -6,6 +6,26 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 		return Mage::getStoreConfig('engage/options/apikey');
 	}
 
+	public function rpxLookupSave() {
+		if($lookup_rp = $this->rpxLookupRpCall()){
+			if($lookup_rp->realm)
+				$uiConfig = $this->rpxUiConfigCall($lookup_rp->realm, $lookup_rp->realmScheme);
+
+			Mage::getModel('core/config')
+				->saveConfig('engage/vars/realm', $lookup_rp->realm)
+				->saveConfig('engage/vars/realmscheme', $lookup_rp->realmScheme)
+				->saveConfig('engage/vars/appid', $lookup_rp->appId)
+				->saveConfig('engage/vars/adminurl', $lookup_rp->adminUrl)
+				->saveConfig('engage/vars/socialpub', $lookup_rp->socialPub)
+				->saveConfig('engage/vars/enabled_providers', $uiConfig ? serialize($uiConfig->enabled_providers) : '');
+			Mage::getConfig()->reinit();
+
+			return true;
+		}
+
+		return false;
+	}
+
     public function rpxLookupRpCall() {
 
         $postParams = array();
@@ -146,5 +166,29 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
         }
 
     }
+
+	public function getFirstName($auth_info) {
+		if($auth_info->profile->name->givenName)
+			return $auth_info->profile->name->givenName;
+
+		$name = str_replace(",", "", $auth_info->profile->name->formatted);
+
+		$split = explode(" ", $name);
+
+		$fName = $split[0] ? $split[0] : '';
+		return $fName;
+	}
+
+	public function getLastName($auth_info) {
+		if($auth_info->profile->name->familyName)
+			return $auth_info->profile->name->familyName;
+
+		$name = str_replace(",", "", $auth_info->profile->name->formatted);
+		$split = explode(" ", $name);
+		$key = sizeof($split) - 1;
+
+		$lName = $split[$key] ? $split[$key] : '';
+		return $lName;
+	}
 
 }

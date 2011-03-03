@@ -21,10 +21,6 @@
 					</link_inline>
 				</values>
 			</size>
-			<template>
-				<visible>0</visible>
-				<value>engage/auth.phtml</value>
-			</template>
 		</parameters>
 	</engage_auth>
 	<engage_share type="engage/share" translate="name description" module="engage">
