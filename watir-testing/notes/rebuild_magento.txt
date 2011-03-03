@@ -1,15 +1,3 @@
-require 'rubygems'
-require 'firewatir'
-
-require "#{ENV['MAGENTO_1d5_PLUGIN']}/watir-testing/tests/ruby_lib/lib.rb"
-
-
-def rebuild_magento browser
-
-  # log the admin in - this time with default username/pwd after a db rebuild
-  admin_logged_out? browser, true, "admin", "admin123"
-
-  #raise "stop during rebuild_magento"
 
   # just after submitting credentials:
 
@@ -45,6 +33,4 @@ def rebuild_magento browser
   # http://magento.dan.janrain.com/magento/
 
 
-  
 
-end
