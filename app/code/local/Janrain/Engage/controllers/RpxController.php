@@ -71,7 +71,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
 
-		if (!$customer->getId()) {
+		if ($customer===false) {
 			$this->loadLayout();
 			$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
 			$form_data = $block->getFormData();

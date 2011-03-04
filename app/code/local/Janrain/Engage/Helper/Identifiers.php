@@ -49,7 +49,8 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
 						->addFieldToFilter('identifier', $identifier)
 						->getFirstItem();
 
-		if($customer_id = $customer_id->getCustomerId()) {
+		$customer_id = $customer_id->getCustomerId();
+		if((int) $customer_id > 0) {
 			$customer = Mage::getModel('customer/customer')
 						->getCollection()
 						->addFieldToFilter('entity_id', $customer_id)
