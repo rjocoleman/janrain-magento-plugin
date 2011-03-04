@@ -38,7 +38,7 @@ if $browser
   puts "browser ready: #{$browser}"
 
   # simple tests, that Magento is running, admin is available, and Janrain/Engage are in left nav
-#  sanity_1_tests $browser
+  sanity_1_tests $browser
 
   # try setting up the plugin, try placing the login widget, try placing the social publishing widget
   configure_plugin_tests $browser

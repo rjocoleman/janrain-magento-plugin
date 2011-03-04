@@ -23,7 +23,7 @@ def configure_plugin_tests browser
   admin_logged_out? browser, true
 
   # insert the API key, submit, see that the correct Engage values are shown.
-#  configure_plugin browser
+  configure_plugin browser
 
   # try placing the auth widget
   configure_engage_authentication_link browser
@@ -155,6 +155,8 @@ def configure_engage_authentication_link browser
 
   if !widget_link.exists?
     raise "unable to see widget link on ottoman page."
+  else
+    puts "able to see the widget on the ottoman page."
   end
 
 
