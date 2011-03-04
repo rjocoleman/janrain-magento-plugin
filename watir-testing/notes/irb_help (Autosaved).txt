@@ -1,3 +1,5 @@
+
+
 require 'rubygems'
 require 'firewatir'
 
@@ -5,7 +7,15 @@ browser = Watir::Browser.new
 browser.goto("#{ENV['MGP_ROOT']}/index.php/admin")
 
 
-
+def element_with_text_exists? element, text
+  xpath = "//#{element}[.[contains(.,'#{text}')]]"
+  case element
+    when "span"
+      return browser.span(:xpath, xpath).exists?
+    else
+      raise "element_with_text_exists: #{element} not implemented"
+  end
+end
 
 
 

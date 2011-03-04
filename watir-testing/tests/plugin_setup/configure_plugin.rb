@@ -57,6 +57,31 @@ def configure_plugin browser
 end
 
 
+
+def element_exists? browser, element, xpath
+  case element
+    when "span"
+      return browser.span(:xpath, xpath).exists?
+    when "p"
+      return browser.p(:xpath, xpath).exists?
+    else
+      raise "element_with_text_exists: #{element} not implemented"
+  end
+end
+
+def wait_until_loaded browser, element, xpath, timeout=20 # , sleep_for=0.1
+  start_time = Time.now
+  until (element_exists? browser, element, xpath) do
+    puts"waiting..."
+    sleep 0.2
+    if Time.now - start_time> timeout
+      raise RuntimeError, "wait_until_loaded: timed out after #{timeout} seconds"
+    end
+  end
+  puts "element found for xpath #{xpath}"
+end
+
+
 def configure_engage_authentication_link browser
 
 
@@ -64,20 +89,22 @@ def configure_engage_authentication_link browser
   navigate_to_cms_widgets browser
 
   # click add new widget instance
-  click_add_new_widget_instance browser
+  button_click_by_onclick_segment browser, 'admin/widget_instance/new/key'
 
 
   # first page:
 
   # type engage auth
-  pulldown_widget_type browser
+  pulldown_by_name browser, "type", "Engage Authentication"
 
   # package theme
-  pulldown_package_theme browser
+  pulldown_by_name browser, "package_theme", "default / default"
+
 
   # click continue button
   # submit_widget_form browser
-  widget_form_continue browser
+  button_click_by_onclick_segment browser, 'admin/widget_instance/edit/type'
+
 
 
   # next page:
@@ -85,39 +112,50 @@ def configure_engage_authentication_link browser
   # set widget instance title
   set_widget_instance_title browser
 
+
+
   # assign to store views
-  pulldown_assign_to_store_views browser
+  pulldown_by_name browser, "store_ids[]", "All Store Views"
+
 
   #save and continue edit
-  click_save_and_continue_edit browser
+  button_click_by_onclick_segment browser, 'saveAndContinueEdit()'
 
+  # wait for the javascript to finish
+  element = "span"
+  text = "The widget instance has been saved."
+  xpath = "//#{element}[.[contains(.,'#{text}')]]"
+  wait_until_loaded browser, element, xpath #, 0.3
 
 
   # add layout update
-  click_add_layout_update browser
+  button_click_by_onclick_segment browser, 'WidgetInstance.addPageGroup({})'
 
-  
+  # display on
+  pulldown_by_name browser, "widget_instance[0][page_group]", "Simple Product"
 
 
-  # which design package?  start with default/default   have tried some  (maybe base/default)
+  # wait for "Please Select Block Reference First"
+  element = "p"
+  text = "Please Select Block Reference First"
+  xpath = "//#{element}[@class='nm' and contains(./small,'#{text}')]"
+  wait_until_loaded browser, element, xpath  #, 0.3
 
-  # save - name the widget
-  # add new layout instance
-  # display on Simple Product
-  # products all
-  # add to main content area
+  # pause...not sure why this is needed after the above wait is done
+  sleep 2
+
+  # block reference
+  pulldown_by_name browser, "widget_instance[0][simple_products][block]", "Main Content Area"
+
+  #save and continue edit
+  button_click_by_onclick_segment browser, 'saveAndContinueEdit()'
+
 
 
   # select which block 
 
 
-
   # maybe try changing from small to large
-
-
-
-
-
 
 
 end

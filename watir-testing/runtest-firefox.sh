@@ -60,7 +60,6 @@ then
 fi
 
 
-
 #############
 # clear firefox cookies
 if [ "$MGP_OS" = "OSX" ] ; then
