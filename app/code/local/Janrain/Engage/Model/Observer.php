@@ -3,15 +3,15 @@
 class Janrain_Engage_Model_Observer {
 
 	public function addIdentifier($observer) {
-		$engage_session = Mage::helper('engage/session');
-
-		if($identifier = $engage_session->getIdentifier()) {
-			$observer->getCustomer()->setEngageIdentifier($identifier);
+		if($identifier = Mage::getSingleton('engage/session')->getIdentifier()) {
+			Mage::helper('engage/identifiers')
+				->save_identifier($observer->getCustomer()->getId(), $identifier);
+			Mage::getSingleton('engage/session')->setIdentifier(false);
 		}
 	}
 
 	public function onConfigSave($observer) {
-		if(strlen(Mage::getStoreConfig('engage/vars/appid'))<1){
+		if(Mage::getStoreConfig('engage/vars/apikey') != Mage::getStoreConfig('engage/options/apikey') || strlen(Mage::getStoreConfig('engage/vars/appid'))<1){
 			Mage::helper('engage/rpxcall')->rpxLookupSave();
 		}
 	}

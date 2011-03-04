@@ -2,6 +2,11 @@
 
 class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 
+	/**
+	 * Returns whether the Enabled config variable is set to true
+	 *
+	 * @return bool
+	 */
 	public function isEngageEnabled() {
 		if(Mage::getStoreConfig('engage/options/enable')=='1' && strlen(Mage::getStoreConfig('engage/options/apikey')) > 1)
 			return true;
@@ -9,6 +14,13 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 		return false;
 	}
 
+	/**
+	 * Returns random alphanumber string
+	 *
+	 * @param int $length
+	 * @param string $chars
+	 * @return string
+	 */
 	public function rand_str($length = 32, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
 		$chars_length = (strlen($chars) - 1);
 
@@ -24,6 +36,11 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 		return $string;
 	}
 
+	/**
+	 * Returns the url of skin directory containing scripts and styles
+	 *
+	 * @return string
+	 */
 	public function _baseSkin() {
 		return Mage::getBaseUrl('skin') . "frontend/janrain";
 	}
