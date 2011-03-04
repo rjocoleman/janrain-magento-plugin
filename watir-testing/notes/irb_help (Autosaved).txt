@@ -17,7 +17,7 @@ def element_with_text_exists? element, text
   end
 end
 
-
+http://magento.dan.janrain.com/magento/furniture/living-room/ottoman.html
 
 
 # sys config

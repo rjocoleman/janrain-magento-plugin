@@ -23,7 +23,7 @@ def configure_plugin_tests browser
   admin_logged_out? browser, true
 
   # insert the API key, submit, see that the correct Engage values are shown.
-  configure_plugin browser
+#  configure_plugin browser
 
   # try placing the auth widget
   configure_engage_authentication_link browser
@@ -117,15 +117,8 @@ def configure_engage_authentication_link browser
   # assign to store views
   pulldown_by_name browser, "store_ids[]", "All Store Views"
 
-
-  #save and continue edit
-  button_click_by_onclick_segment browser, 'saveAndContinueEdit()'
-
-  # wait for the javascript to finish
-  element = "span"
-  text = "The widget instance has been saved."
-  xpath = "//#{element}[.[contains(.,'#{text}')]]"
-  wait_until_loaded browser, element, xpath #, 0.3
+  # save widget, wait for success message
+  widget_save browser
 
 
   # add layout update
@@ -147,15 +140,43 @@ def configure_engage_authentication_link browser
   # block reference
   pulldown_by_name browser, "widget_instance[0][simple_products][block]", "Main Content Area"
 
+
+  # save widget, wait for success message
+  widget_save browser
+
+
+  # todo - maybe try changing from small to large
+
+
+  # test1: does the widget now show up on a product page?
+  browser.goto("#{ENV['MGP_ROOT']}/furniture/living-room/ottoman.html")
+
+  widget_link = browser.link(:xpath, "//a[./div[contains(.,'Or log in with')]]")
+
+  if !widget_link.exists?
+    raise "unable to see widget link on ottoman page."
+  end
+
+
+  # test2: does it work if it's clicked?
+  #  (maybe that should fall under a different test set)
+
+
+end
+
+
+def widget_save browser
+
   #save and continue edit
   button_click_by_onclick_segment browser, 'saveAndContinueEdit()'
 
+  # wait for the javascript to finish
+  element = "span"
+  text = "The widget instance has been saved."
+  xpath = "//#{element}[.[contains(.,'#{text}')]]"
+  wait_until_loaded browser, element, xpath #, 0.3
 
-
-  # select which block 
-
-
-  # maybe try changing from small to large
-
+  # todo - just to be sure, try taking out
+  sleep 1
 
 end
