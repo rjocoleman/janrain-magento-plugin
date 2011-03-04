@@ -1,6 +1,6 @@
 <?php
 if (Mage::helper('engage')->isEngageEnabled()):
-$source = ($_SERVER["HTTPS"] == "on") ? "https://" : "http://static.";
+$source = (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https://" : "http://static.";
 $source .= "rpxnow.com/js/lib/rpx.js";
 ?>
 <script type="text/javascript" src="<?php echo $source; ?>"></script>

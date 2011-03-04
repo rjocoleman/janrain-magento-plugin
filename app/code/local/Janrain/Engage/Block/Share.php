@@ -28,4 +28,28 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
 		return $link;
 	}
 
+	protected function _prepareLayout() {
+
+		/*
+		 * Doesn't work on inline widgets because layout isn't loaded until
+		 * after the head has been written to the page. Fix.
+		 *
+		if($this->getLayout()->getBlock('janrain_engage_styles')==false) {
+			$block = $this->getLayout()
+				->createBlock('core/template', 'janrain_engage_styles')
+				->setTemplate('janrain/engage/styles.phtml');
+			$this->getLayout()->getBlock('head')->insert($block);
+		}
+		*/
+
+		if($this->getLayout()->getBlock('janrain_engage_scripts')==false) {
+			$block = $this->getLayout()
+				->createBlock('core/template', 'janrain_engage_scripts')
+				->setTemplate('janrain/engage/scripts.phtml');
+			$this->getLayout()->getBlock('before_body_end')->insert($block);
+		}
+
+		parent::_prepareLayout();
+	}
+
 }

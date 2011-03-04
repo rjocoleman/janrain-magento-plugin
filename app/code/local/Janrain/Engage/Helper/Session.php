@@ -19,13 +19,11 @@ class Janrain_Engage_Helper_Session extends Mage_Core_Helper_Abstract {
 	}
 
 	public function getStore($key) {
-		return $_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER][$key];
+		return $_SESSION[self::SESSION_NAMESPACE][$key];
 	}
 
 	public function setStore($key, $string) {
-		$_SESSION[self::SESSION_NAMESPACE][self::ENGAGE_IDENTIFIER][$key] = $string;
+		$_SESSION[self::SESSION_NAMESPACE][$key] = $string;
 	}
 
 }
-
-?>

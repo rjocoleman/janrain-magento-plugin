@@ -5,16 +5,6 @@
  *
  * @see Mage_Customer_Block_Form_Register
  */
-
-$setup = new Mage_Eav_Model_Entity_Setup('core_setup');
-$setup->addAttribute('customer', 'flavour', array(
-	'label'		=> 'Ice Cream Flavour',
-	'type'		=> 'varchar',
-	'input'		=> 'text',
-	'visible'	=> true,
-	'required'	=> true,
-	'position'	=> 1,
-	));
 ?>
 <div class="account-create">
     <div class="page-title">
@@ -22,7 +12,7 @@ $setup->addAttribute('customer', 'flavour', array(
     </div>
     <?php echo $this->getChildHtml('form_fields_before')?>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+    <form action="<?php echo Mage::getUrl('engage/rpx/createpost'); ?>" method="post" id="form-validate">
         <div class="fieldset">
             <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
@@ -137,7 +127,6 @@ $setup->addAttribute('customer', 'flavour', array(
 		?>
 		<input type="hidden" name="password" value="<?php echo $password; ?>" />
 		<input type="hidden" name="confirmation" value="<?php echo $password; ?>" />
-		<input type="hidden" name="engage_identifier" value="<?php echo $this->htmlEscape($this->getFormData()->getEngageIdentifier()) ?>" />
 		
         <div class="buttons-set">
             <p class="required"><?php echo $this->__('* Required Fields') ?></p>

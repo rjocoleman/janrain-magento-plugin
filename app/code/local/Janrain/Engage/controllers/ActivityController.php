@@ -29,4 +29,29 @@ class Janrain_Engage_ActivityController extends Mage_Core_Controller_Front_Actio
 
     }
 
+	public function getidentifierAction() {
+		Mage::getModel('engage/identifiers')->setIdentifier('test')->save();
+		$col = Mage::getModel('engage/identifiers')->getCollection()
+				->addFieldToFilter('indentifiers',$identifier)->getFirstItem();
+		var_dump($col);
+//		$customer = Mage::getSingleton('customer/session')->getCustomer();
+//		var_dump($customer->getData());
+//
+//		foreach(Mage::getModel('customer/customer')->getCollection()
+//				->addAttributeToSelect('*') as $customer)
+//		{
+//			var_dump($customer->getData());
+//			echo "<hr/>";
+//		}
+	}
+
+	public function testAction() {
+		$customer = Mage::getModel('customer/customer')
+			->getCollection()
+			->addFieldToFilter('entity_id',3)
+			->getFirstItem();
+
+		var_dump($customer->getData());
+	}
+
 }
