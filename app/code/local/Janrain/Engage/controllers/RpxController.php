@@ -52,12 +52,9 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		if ($this->getRequest()->isPost()) {
 			$token = $this->getRequest()->getPost('token');
 
-			// Init engage_session
-			$engage_session = Mage::helper('engage/session');
-
 			// Store token in session under random key
 			$key = Mage::helper('engage')->rand_str(12);
-			$engage_session->setStore($key, $token);
+			Mage::getSingleton('engage/session')->__set($key, $token);
 
 			// Redirect user to $this->authAction method passing $key as ses
 			// $_GET variable (Magento style)
@@ -68,11 +65,8 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	public function authenticateAction() {
 		$session = $this->_getSession();
 
-		// Init engage_session
-		$engage_session = Mage::helper('engage/session');
-
 		$key = $this->getRequest()->getParam('ses');
-		$token = $engage_session->getStore($key);
+		$token = Mage::getSingleton('engage/session')->__get($key);
 		$auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
 
 		$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
@@ -91,13 +85,13 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$form_data->setEmail($email);
 			$form_data->setFirstname($firstName);
 			$form_data->setLastname($lastName);
-			$engage_session->setIdentifier($auth_info->profile->identifier);
+			Mage::getSingleton('engage/session')->setIdentifier($auth_info->profile->identifier);
 
 			$this->renderLayout();
 			return;
 		} else {
 			// TODO Make a more secure method of bypassing password
-			$engage_session->setStore('bypass_password', true);
+			Mage::getSingleton('engage/session')->setLoginRequest(true);
 			$session->login($customer->getEmail(), 'REQUIRED_SECOND_PARAM');
 			$this->_loginPostRedirect();
 		}
