@@ -11,7 +11,7 @@ class Janrain_Engage_Model_Observer {
 	}
 
 	public function onConfigSave($observer) {
-		if(strlen(Mage::getStoreConfig('engage/vars/appid'))<1){
+		if(Mage::getStoreConfig('engage/vars/apikey') != Mage::getStoreConfig('engage/options/apikey') || strlen(Mage::getStoreConfig('engage/vars/appid'))<1){
 			Mage::helper('engage/rpxcall')->rpxLookupSave();
 		}
 	}

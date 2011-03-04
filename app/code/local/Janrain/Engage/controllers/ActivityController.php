@@ -46,12 +46,8 @@ class Janrain_Engage_ActivityController extends Mage_Core_Controller_Front_Actio
 	}
 
 	public function testAction() {
-		$customer = Mage::getModel('customer/customer')
-			->getCollection()
-			->addFieldToFilter('entity_id',3)
-			->getFirstItem();
-
-		var_dump($customer->getData());
+		Mage::getSingleton('engage/session')->setLoginRequest('test');
+		var_dump(Mage::getSingleton('engage/session')->getLoginRequest());
 	}
 
 }

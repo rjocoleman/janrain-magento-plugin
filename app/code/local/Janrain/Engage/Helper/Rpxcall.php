@@ -17,7 +17,8 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 				->saveConfig('engage/vars/appid', $lookup_rp->appId)
 				->saveConfig('engage/vars/adminurl', $lookup_rp->adminUrl)
 				->saveConfig('engage/vars/socialpub', $lookup_rp->socialPub)
-				->saveConfig('engage/vars/enabled_providers', $uiConfig ? serialize($uiConfig->enabled_providers) : '');
+				->saveConfig('engage/vars/enabled_providers', $uiConfig ? serialize($uiConfig->enabled_providers) : '')
+				->saveConfig('engage/vars/apikey', Mage::getStoreConfig('engage/options/apikey'));
 			Mage::getConfig()->reinit();
 
 			return true;

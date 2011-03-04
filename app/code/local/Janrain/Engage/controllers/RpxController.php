@@ -54,7 +54,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 			// Store token in session under random key
 			$key = Mage::helper('engage')->rand_str(12);
-			Mage::getSingleton('engage/session')->__set($key, $token);
+			Mage::getSingleton('engage/session')->setData($key, $token);
 
 			// Redirect user to $this->authAction method passing $key as ses
 			// $_GET variable (Magento style)
@@ -66,7 +66,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		$session = $this->_getSession();
 
 		$key = $this->getRequest()->getParam('ses');
-		$token = Mage::getSingleton('engage/session')->__get($key);
+		$token = Mage::getSingleton('engage/session')->getData($key);
 		$auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
 
 		$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
@@ -90,7 +90,6 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$this->renderLayout();
 			return;
 		} else {
-			// TODO Make a more secure method of bypassing password
 			Mage::getSingleton('engage/session')->setLoginRequest(true);
 			$session->login($customer->getEmail(), 'REQUIRED_SECOND_PARAM');
 			$this->_loginPostRedirect();
@@ -111,7 +110,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		if ($isError) {
 			$email = $this->getRequest()->getPost('email');
-			Mage::helper('engage/session')->setStore('email', $email);
+			Mage::getSingleton('engage/session')->setEmail($email);
 			$this->_redirect('engage/rpx/duplicate');
 		}
 	}
@@ -121,7 +120,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		$this->loadLayout();
 		$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
-		$block->setUsername(Mage::helper('engage/session')->getStore('email'));
+		$block->setUsername(Mage::getSingleton('engage/session')->getEmail());
 		$this->renderLayout();
 	}
 
@@ -132,11 +131,11 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	protected function _loginPostRedirect() {
 		$session = $this->_getSession();
 		if ($session->isLoggedIn()) {
-			if ($identifier = Mage::helper('engage/session')->getIdentifier()) {
+			if ($identifier = Mage::getSingleton('engage/session')->getIdentifier()) {
 				$customer = $session->getCustomer();
 				Mage::helper('engage/identifiers')
 						->save_identifier($customer->getId(), $identifier);
-				Mage::helper('engage/session')->setIdentifier('');
+				Mage::getSingleton('engage/session')->setIdentifier(false);
 			}
 		}
 
