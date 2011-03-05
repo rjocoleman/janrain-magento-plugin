@@ -1,28 +1,21 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
+	<!-- Load script/style on every page. This will be fixed later. -->
 	<default>
 		<!-- <reference name="before_body_end">
 			<block type="core/template"
-            name="janrain_engage_scripts"
-            template="janrain/engage/scripts.phtml"/>
+				name="janrain_engage_scripts"
+				template="janrain/engage/scripts.phtml"/>
 		</reference> -->
 		<reference name="head">
 			<block type="core/template"
-            name="janrain_engage_styles"
-            template="janrain/engage/styles.phtml"/>
+				name="janrain_engage_styles"
+				template="janrain/engage/styles.phtml"/>
 		</reference>
 	</default>
 
-	<cms_page_view>
-		<reference name="content">
-			<block type="core/template"
-            name="janrain_engage"
-            after="-"
-            template="janrain/engage/activity.phtml"/>
-		</reference>
-	</cms_page_view>
-
+	<!-- Use our own register.phtml with no password fields and custom action -->
 	<engage_rpx_authenticate>
 		<label>Customer Account Registration Form</label>
         <!-- Mage_Customer -->
@@ -43,6 +36,7 @@
 		</reference>
 	</engage_rpx_authenticate>
 
+	<!-- Ask users what they want to do when they enter an existing customer email address -->
 	<engage_rpx_duplicate>
 		<label>Customer Account Registration Form</label>
 		 <!-- Mage_Customer -->
@@ -63,6 +57,7 @@
 		</reference>
 	</engage_rpx_duplicate>
 
+	<!-- Display auth widget on the login page -->
 	<customer_account_login>
 		<reference name="content">
 			<block type="engage/auth" name="some_random_name">
@@ -70,4 +65,26 @@
 			</block>
 		</reference>
 	</customer_account_login>
+
+	<!-- Customer Dashboard block -->
+	<customer_account_index>
+		<!-- Scripts/Styles -->
+		<reference name="before_body_end">
+			<block type="core/template"
+				name="janrain_engage_scripts"
+				template="janrain/engage/scripts.phtml"/>
+		</reference>
+		<reference name="head">
+			<block type="core/template"
+				name="janrain_engage_styles"
+				template="janrain/engage/styles.phtml"/>
+		</reference>
+
+		<reference name="content">
+			<block type="core/template"
+            name="janrain_engage_dashboard"
+			after="-"
+            template="janrain/engage/dashboard.phtml"/>
+		</reference>
+	</customer_account_index>
 </layout>

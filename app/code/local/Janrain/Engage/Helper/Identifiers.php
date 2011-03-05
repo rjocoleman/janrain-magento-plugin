@@ -61,6 +61,16 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
 		return false;
 	}
 
-	
+	public function get_identifiers($customer_id) {
+		if((int) $customer_id > 0){
+			$identifiers = Mage::getModel('engage/identifiers')
+							->getCollection()
+							->addFieldToFilter('customer_id', $customer_id);
+
+			return $identifiers;
+		}
+
+		return false;
+	}
 
 }

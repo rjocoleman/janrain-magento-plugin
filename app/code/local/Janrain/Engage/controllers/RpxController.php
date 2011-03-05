@@ -28,7 +28,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         }
 
         $action = $this->getRequest()->getActionName();
-        if (!preg_match('/^(token_url|authenticate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
+        if (!preg_match('/^(token_url|authenticate|duplicate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
             if (!$this->_getSession()->authenticate($this)) {
                 $this->setFlag('', 'no-dispatch', true);
             }
@@ -76,8 +76,12 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
 			$form_data = $block->getFormData();
 
-			$email = $auth_info->profile->verifiedEmail ? $auth_info->profile->verifiedEmail : ($auth_info->profile->email ? $auth_info->profile->email : ''
-					);
+			if(isset($auth_info->profile) && isset($auth_info->profile->verifiedEmail))
+				$email = $auth_info->profile->verifiedEmail;
+			else if(isset($auth_info->profile) && isset($auth_info->profile->email))
+				$email = $auth_info->profile->email;
+			else
+				$email = '';
 
 			$firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
 			$lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
@@ -104,23 +108,41 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		$isError = false;
 
 		foreach ($messages->getItems() as $message) {
-			if ($message->getType() == 'error')
+			if ($message->getType() == 'error') {
 				$isError = true;
+			}
 		}
 
 		if ($isError) {
 			$email = $this->getRequest()->getPost('email');
-			Mage::getSingleton('engage/session')->setEmail($email);
+			$firstname = $this->getRequest()->getPost('firstname');
+			$lastname = $this->getRequest()->getPost('lastname');
+			Mage::getSingleton('engage/session')
+				->setEmail($email)
+				->setFirstname($firstname)
+				->setLastname($lastname);
 			$this->_redirect('engage/rpx/duplicate');
 		}
+
+		return;
 	}
 
 	public function duplicateAction() {
 		$session = $this->_getSession();
 
+		// Redirect if user is already authenticated
+		if ($session->isLoggedIn()) {
+			$this->_redirect('customer/account');
+			return;
+		}
+
 		$this->loadLayout();
+		$this->_initLayoutMessages('customer/session');
 		$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
 		$block->setUsername(Mage::getSingleton('engage/session')->getEmail());
+		$block->getFormData()->setEmail(Mage::getSingleton('engage/session')->getEmail());
+		$block->getFormData()->setFirstname(Mage::getSingleton('engage/session')->getFirstname());
+		$block->getFormData()->setLastname(Mage::getSingleton('engage/session')->getLastname());
 		$this->renderLayout();
 	}
 

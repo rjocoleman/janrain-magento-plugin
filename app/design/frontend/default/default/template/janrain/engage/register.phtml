@@ -14,7 +14,6 @@
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <form action="<?php echo Mage::getUrl('engage/rpx/createpost'); ?>" method="post" id="form-validate">
         <div class="fieldset">
-            <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
             <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
             <ul class="form-list">
@@ -127,6 +126,7 @@
 		?>
 		<input type="hidden" name="password" value="<?php echo $password; ?>" />
 		<input type="hidden" name="confirmation" value="<?php echo $password; ?>" />
+		<input type="hidden" name="success_url" value="<?php echo Mage::helper('customer')->getDashboardUrl(); ?>" />
 		
         <div class="buttons-set">
             <p class="required"><?php echo $this->__('* Required Fields') ?></p>
