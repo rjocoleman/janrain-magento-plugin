@@ -71,11 +71,11 @@
 			</customer_save_after>
 			<admin_system_config_changed_section_engage>
 				<observers>
-					<add_engage_identifier>
+					<engage_config_save>
 						<type>singleton</type>
 						<class>Janrain_Engage_Model_Observer</class>
 						<method>onConfigSave</method>
-					</add_engage_identifier>
+					</engage_config_save>
 				</observers>
 			</admin_system_config_changed_section_engage>
 		</events>

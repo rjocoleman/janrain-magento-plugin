@@ -7,7 +7,7 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
 	 * @param int $customer_id
 	 * @param string $identifier
 	 */
-	public function save_identifier($customer_id, $identifier) {
+	public function save_identifier($customer_id, $profile) {
 
 		/**
 		 * Make sure we have a valid customer_id
@@ -24,10 +24,11 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
 		 * Make the save
 		 *
 		 */
-
 		try {
 			Mage::getModel('engage/identifiers')
-					->setIdentifier($identifier)
+					->setIdentifier($profile['identifier'])
+					->setProvider($profile['provider'])
+					->setProfileName($profile['profile_name'])
 					->setCustomerId($customer_id)
 					->save();
 		}
@@ -71,6 +72,25 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
 		}
 
 		return false;
+	}
+
+	public function delete_identifier($id) {
+		$customer_id = Mage::getSingleton('customer/session')
+				->getCustomer()
+				->getId();
+
+		$identifier = Mage::getModel('engage/identifiers')
+							->getCollection()
+							->addFieldToFilter('engage_identifier_id', $id)
+							->getFirstItem();
+		if($identifier->getCustomerId() == $customer_id) {
+			try {
+				$identifier->delete();
+			} catch (Exception $e) {
+				echo "Could not delete: $e";
+			}
+		}
+		
 	}
 
 }

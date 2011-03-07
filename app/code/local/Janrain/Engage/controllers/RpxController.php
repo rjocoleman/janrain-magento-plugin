@@ -28,7 +28,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         }
 
         $action = $this->getRequest()->getActionName();
-        if (!preg_match('/^(token_url|authenticate|duplicate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
+        if (!preg_match('/^(addIdentifier|token_url_add|token_url|authenticate|duplicate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
             if (!$this->_getSession()->authenticate($this)) {
                 $this->setFlag('', 'no-dispatch', true);
             }
@@ -36,6 +36,10 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
             $this->_getSession()->setNoReferer(true);
         }
     }
+
+	public function indexAction() {
+		$this->_redirect('customer/account/index');
+	}
 
 	/**
 	 * RPX Callback
@@ -59,6 +63,31 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			// Redirect user to $this->authAction method passing $key as ses
 			// $_GET variable (Magento style)
 			$this->_redirect("janrain-engage/rpx/authenticate", array("ses" => $key));
+		}
+	}
+
+	/**
+	 * RPX Callback for Additional Identifiers
+	 */
+	public function token_url_addAction(){
+		$session = $this->_getSession();
+
+		// Redirect if user isn't already authenticated
+		if (!$session->isLoggedIn()) {
+			$this->_redirect('customer/account/login');
+			return;
+		}
+
+		if ($this->getRequest()->isPost()) {
+			$token = $this->getRequest()->getPost('token');
+
+			// Store token in session under random key
+			$key = Mage::helper('engage')->rand_str(12);
+			Mage::getSingleton('engage/session')->setData($key, $token);
+
+			// Redirect user to $this->authAction method passing $key as ses
+			// $_GET variable (Magento style)
+			$this->_redirect("janrain-engage/rpx/addidentifier", array("ses" => $key));
 		}
 	}
 
@@ -89,7 +118,8 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$form_data->setEmail($email);
 			$form_data->setFirstname($firstName);
 			$form_data->setLastname($lastName);
-			Mage::getSingleton('engage/session')->setIdentifier($auth_info->profile->identifier);
+			$profile = Mage::helper('engage')->buildProfile($auth_info);
+			Mage::getSingleton('engage/session')->setIdentifier($profile);
 
 			$this->renderLayout();
 			return;
@@ -98,6 +128,31 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 			$session->login($customer->getEmail(), 'REQUIRED_SECOND_PARAM');
 			$this->_loginPostRedirect();
 		}
+	}
+
+	public function addIdentifierAction() {
+		$session = $this->_getSession();
+
+		$key = $this->getRequest()->getParam('ses');
+		$token = Mage::getSingleton('engage/session')->getData($key);
+		$auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
+
+		$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
+
+		if ($customer===false) {
+			$customer_id = $session->getCustomer()->getId();
+			$profile = Mage::helper('engage')->buildProfile($auth_info);
+
+			Mage::helper('engage/identifiers')
+					->save_identifier($customer_id, $profile);
+
+			$session->addSuccess('New provider successfully added.');
+
+		} else {
+			$session->addWarning('Could not add Provider. This account is already associated with a user.');
+		}
+
+		$this->_redirect('customer/account');
 	}
 
 	public function createPostAction() {
@@ -153,15 +208,25 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 	protected function _loginPostRedirect() {
 		$session = $this->_getSession();
 		if ($session->isLoggedIn()) {
-			if ($identifier = Mage::getSingleton('engage/session')->getIdentifier()) {
+			if ($profile = Mage::getSingleton('engage/session')->getIdentifier()) {
 				$customer = $session->getCustomer();
 				Mage::helper('engage/identifiers')
-						->save_identifier($customer->getId(), $identifier);
+						->save_identifier($customer->getId(), $profile);
 				Mage::getSingleton('engage/session')->setIdentifier(false);
 			}
 		}
 
 		parent::_loginPostRedirect();
+	}
+
+	public function removeIdAction() {
+		$session = $this->_getSession();
+		$id = $this->getRequest()->getParam('identifier');
+
+		Mage::helper('engage/identifiers')
+				->delete_identifier($id);
+		$session->addSuccess('Provider removed');
+		$this->_redirect('customer/account');
 	}
 
 }

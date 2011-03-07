@@ -17,7 +17,13 @@
 							);
 
 							foreach($identifiers as &$identifier) {
-								echo '<li>' . $identifier->getIdentifier() . '</li>';
+								echo '<li><div class="rpx_icon_small rpx_'
+									. $identifier->getProvider()
+									. '_small"></div><span class="rpx_profile_label">'
+									. $identifier->getProfileName()
+									. ' (<a href="'
+									. Mage::getUrl('engage/rpx/removeid', array('identifier' => $identifier->getId()))
+									. '">remove</a>)</span></li>';
 							}
 
 						?>
@@ -36,7 +42,7 @@
 							if (is_array($providers)) {
 								$size = "large";
 								$wrap_open = '<a class="rpxnow rpx_link_wrap" onclick="return false;" href="'
-										. Mage::helper('engage')->getRpxAuthUrl()
+										. Mage::helper('engage')->getRpxAuthUrl(true)
 										. '">';
 								$wrap_close = '</a>';
 
