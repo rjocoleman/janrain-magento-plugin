@@ -1,13 +1,8 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
-	<!-- Load script/style on every page. This will be fixed later. -->
+	<!-- Load style on every page. This will be fixed later. -->
 	<default>
-		<!-- <reference name="before_body_end">
-			<block type="core/template"
-				name="janrain_engage_scripts"
-				template="janrain/engage/scripts.phtml"/>
-		</reference> -->
 		<reference name="head">
 			<block type="core/template"
 				name="janrain_engage_styles"
@@ -56,15 +51,6 @@
 			</block>
 		</reference>
 	</engage_rpx_duplicate>
-
-	<!-- Display auth widget on the login page -->
-	<customer_account_login>
-		<reference name="content">
-			<block type="engage/auth" name="some_random_name">
-					<action method="setSize"><size>large</size></action>
-			</block>
-		</reference>
-	</customer_account_login>
 
 	<!-- Customer Dashboard block -->
 	<customer_account_index>
