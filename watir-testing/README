@@ -63,7 +63,7 @@ export MGP_DB_PASSWORD="magento"
 
 # todo (examples from staging on plugins.janrain.com)
 
-# path to mysql (helpful in Mac if you're using MAMP - just set this to an empty string if it's already on your path.)
+# path to mysql
 export MGP_MYSQL_PATH="/Applications/MAMP/Library/bin/"
 
 

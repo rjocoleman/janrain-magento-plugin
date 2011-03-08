@@ -5,13 +5,6 @@
 ## BE SURE TO EXPORT VARS (see README)
 ## before running this script
 
-#if [ ! -d "$MGP_WEBPUSH_HOME" ]; then
-#    echo "MGP_WEBPUSH_HOME does not exist, exiting."
-#    exit 0
-#fi
-# todo add tests for required env vars
-
-
 
 ###################
 # clear screen
@@ -22,12 +15,18 @@ clear
 # opts parsing code taken from example at: http://www.linux.com/archive/feed/118031
 
 # whether to completely reinstall Magento before running the tests
-reinstall_all=
+reload_db=
 
-while getopts 'r' OPTION
+# same, but quit right after reload
+reload_db_and_quit=
+
+while getopts 'rR' OPTION
 do
   case $OPTION in
-  r)	reinstall_all=1
+  r)	reload_db=1
+        ;;
+  R)	reload_db=1
+        reload_db_and_quit=1
         ;;
   ?)	printf "Usage: %s: [-r] \n" $(basename $0) >&2
         exit 2
@@ -36,10 +35,16 @@ do
 done
 shift $((OPTIND - 1))
 
-if [ "$reinstall_all" ]
+
+###################
+# database reload
+# -r will reload, then run tests.
+# -R will reload, then quit.
+
+if [ "$reload_db" ]
 then
 
-    printf "Option -r specified; Magento db will be restored from a fresh install snapshot before tests are run.\n"
+    printf "Magento db being reloaded from snapshot...\n"
 
     ##########################
     ## drop all database tables
@@ -57,7 +62,16 @@ then
     rm -rf $MAGENTO_1d5/var/cache
     rm $MAGENTO_1d5/var/session/*
 
+    printf "Magento db reloaded.\n"
+
+    if [ "$reload_db_and_quit" ]
+    then
+        printf "Quitting script after db reload.\n"
+        exit 0
+    fi
+
 fi
+
 
 
 #############
