@@ -22,7 +22,7 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
 	 * @return string
 	 */
 	protected function _toHtml() {
-		$link = '<div class="rpxsocial rpx_tooltip" onclick="RPXNOW.loadAndRun([\'Social\'], function () { var activity = new RPXNOW.Social.Activity(\'Share:\', \'' . Mage::getSingleton('cms/page')->getTitle() . '\', \'' . Mage::helper('core/url')->getCurrentUrl() . '\'); activity.setUserGeneratedContent(\'' . Mage::getSingleton('cms/page')->getTitle() . '\'); activity.setDescription(\'' . Mage::getSingleton('cms/page')->getTitle() . '\'); RPXNOW.Social.publishActivity(activity); });">';
+		$link = '<div class="rpxsocial rpx_tooltip" onclick="RPXNOW.loadAndRun([\'Social\'], function () { var activity = new RPXNOW.Social.Activity(\'Share:\', \'' . Mage::getSingleton('cms/page')->getTitle() . '\', \'' . Mage::helper('core/url')->getCurrentUrl() . '\'); activity.setUserGeneratedContent(\'' . $this->getShareText() . '\'); activity.setDescription(\'' . Mage::getSingleton('cms/page')->getTitle() . '\'); RPXNOW.Social.publishActivity(activity); });">';
 		$link .= '<span class="rpxsharebutton">share</span><div class="rpx_share_tip">Share this on:<br />' . $this->rpx_social_icons() . '</div></div>';
 
 		return $link;
