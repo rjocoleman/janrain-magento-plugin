@@ -2,6 +2,27 @@
 
 class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 
+	private $providers = array(
+		'Facebook'		=> 'facebook',
+		'Google'		=> 'google',
+		'LinkedIn'		=> 'linkedin',
+		'MySpace'		=> 'myspace',
+		'Twitter'		=> 'twitter',
+		'Windows Live'	=> 'windowslive',
+		'Yahoo!'		=> 'yahoo',
+		'Aol'			=> 'aol',
+		'Blogger'		=> 'blogger',
+		'Flickr'		=> 'flickr',
+		'Hyves'			=> 'hyves',
+		'Livejournal'	=> 'livejournal',
+		'MyOpenID'		=> 'myopenid',
+		'Netlog'		=> 'netlog',
+		'OpenID'		=> 'openid',
+		'Verisign'		=> 'verisign',
+		'Wordpress'		=> 'wordpress',
+		'PayPal'		=> 'paypal'
+	);
+
 	/**
 	 * Returns whether the Enabled config variable is set to true
 	 *
@@ -50,8 +71,9 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 	 *
 	 * @return string
 	 */
-	public function getRpxAuthUrl() {
-		$rpx_callback = urlencode(Mage::getUrl() . "/janrain-engage/rpx/token_url");
+	public function getRpxAuthUrl($add=false) {
+		$action = $add ? 'engage/rpx/token_url_add' : 'engage/rpx/token_url';
+		$rpx_callback = urlencode(Mage::getUrl($action));
 		$link = (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http';
 		$link.= '://' . Mage::getStoreConfig('engage/vars/realm');
 		$link.= '/openid/v2/signin?token_url=' . $rpx_callback;
@@ -71,6 +93,27 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 			return unserialize($providers);
 		else
 			return false;
+	}
+
+	public function buildProfile($auth_info) {
+		$profile_name = false;
+
+		if(isset($auth_info->profile->preferredUsername))
+			$profile_name = $auth_info->profile->preferredUsername;
+
+		else if(isset($auth_info->profile->email))
+			$profile_name = $auth_info->profile->email;
+		
+		else if(isset($auth_info->profile->displayName))
+			$profile_name = $auth_info->profile->displayName;
+		
+		else if(isset($auth_info->profile->name->formatted))
+			$profile_name = $auth_info->profile->name->formatted;
+		
+		else
+			$profile_name = $auth_info->profile->providerName;
+
+		return array('provider' => $this->providers[$auth_info->profile->providerName], 'identifier' => $auth_info->profile->identifier, 'profile_name' => $profile_name);
 	}
 
 }

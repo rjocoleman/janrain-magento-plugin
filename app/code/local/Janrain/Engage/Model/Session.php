@@ -28,6 +28,8 @@ class Janrain_Engage_Model_Session extends Mage_Core_Model_Session_Abstract {
 			$this->setData("login_request", $value);
 		else
 			Mage::throwException('Method request not allowed');
+
+		return $this;
 	}
 
 }

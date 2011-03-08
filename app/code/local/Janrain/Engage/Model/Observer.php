@@ -3,9 +3,9 @@
 class Janrain_Engage_Model_Observer {
 
 	public function addIdentifier($observer) {
-		if($identifier = Mage::getSingleton('engage/session')->getIdentifier()) {
+		if($profile = Mage::getSingleton('engage/session')->getIdentifier()) {
 			Mage::helper('engage/identifiers')
-				->save_identifier($observer->getCustomer()->getId(), $identifier);
+				->save_identifier($observer->getCustomer()->getId(), $profile);
 			Mage::getSingleton('engage/session')->setIdentifier(false);
 		}
 	}

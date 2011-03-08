@@ -2,24 +2,20 @@
 
 class Janrain_Engage_Block_Auth extends Mage_Core_Block_Template implements Mage_Widget_Block_Interface {
 
-	/**
-	 * Returns the size the user has selected for the given widget
-	 *
-	 * @return string
-	 */
-	public function getRpxSize() {
-		return $this->getData("size");
-	}
-
 	function rpx_small_buttons() {
 		$providers = Mage::helper('engage')->getRpxProviders();
 		if (is_array($providers)) {
-			$size = $this->getData("size") ? $this->getData("size") : "large";
+			$size = $this->getSize() ? $this->getSize() : "large";
 			$wrap_open = '<a class="rpxnow rpx_link_wrap" onclick="return false;" href="'
 					. Mage::helper('engage')->getRpxAuthUrl()
 					. '">';
 			$wrap_close = '</a>';
-			$label = '<div class="rpx_label">Or log in with</div>';
+
+			$labelText = $this->getLabelText();
+			if(empty($labelText))
+				$labelText = 'Or log in with';
+
+			$label = '<div class="rpx_label">' . $labelText . '</div>';
 			$rpx_buttons = '';
 			foreach ($providers as $val) {
 				$rpx_buttons .= '<div class="rpx_icon_' . $size . ' rpx_' . $val . '_' . $size . '" title="' . htmlentities($val) . '"></div>';

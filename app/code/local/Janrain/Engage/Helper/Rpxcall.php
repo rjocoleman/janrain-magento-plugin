@@ -169,7 +169,7 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
     }
 
 	public function getFirstName($auth_info) {
-		if($auth_info->profile->name->givenName)
+		if(isset($auth_info->profile->name->givenName))
 			return $auth_info->profile->name->givenName;
 
 		$name = str_replace(",", "", $auth_info->profile->name->formatted);
@@ -181,7 +181,7 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 	}
 
 	public function getLastName($auth_info) {
-		if($auth_info->profile->name->familyName)
+		if(isset($auth_info->profile->name->familyName))
 			return $auth_info->profile->name->familyName;
 
 		$name = str_replace(",", "", $auth_info->profile->name->formatted);
