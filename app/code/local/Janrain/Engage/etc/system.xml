@@ -36,7 +36,7 @@
                         <apikey translate="label">
                             <label>Engage API key</label>
                             <frontend_type>text</frontend_type>
-                            <comment>Please enter your Engage API key</comment>
+                            <comment><![CDATA[Please enter your Engage API key.<br />Don't have one? <a href="http://www.janrain.com/products/engage/get-janrain-engage" target="_blank">Sign up here.</a>]]></comment>
                             <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

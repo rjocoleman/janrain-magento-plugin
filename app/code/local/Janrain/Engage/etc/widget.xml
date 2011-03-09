@@ -38,7 +38,7 @@
 				<required>0</required>
 				<visible>1</visible>
 				<label>Share Text</label>
-				<description>The default text to share in the Social Sharing widget</description>
+				<description>The default text to share in the Social Sharing widget (i.e. Check this out!)</description>
 				<type>text</type>
 			</share_text>
 		</parameters>
