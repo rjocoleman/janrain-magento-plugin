@@ -126,7 +126,7 @@
 		?>
 		<input type="hidden" name="password" value="<?php echo $password; ?>" />
 		<input type="hidden" name="confirmation" value="<?php echo $password; ?>" />
-		<input type="hidden" name="success_url" value="<?php echo Mage::helper('customer')->getDashboardUrl(); ?>" />
+		<input type="hidden" name="success_url" value="<?php echo Mage::helper('customer')->getBeforeAuthUrl(); ?>" />
 		
         <div class="buttons-set">
             <p class="required"><?php echo $this->__('* Required Fields') ?></p>
