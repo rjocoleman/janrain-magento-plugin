@@ -100,24 +100,26 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 
 		$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
 
-		if ($customer===false) {
+		if ($customer === false) {
 			$this->loadLayout();
 			$block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
-			$form_data = $block->getFormData();
+			if($block !== false) {
+				$form_data = $block->getFormData();
 
-			if(isset($auth_info->profile) && isset($auth_info->profile->verifiedEmail))
-				$email = $auth_info->profile->verifiedEmail;
-			else if(isset($auth_info->profile) && isset($auth_info->profile->email))
-				$email = $auth_info->profile->email;
-			else
-				$email = '';
+				if(isset($auth_info->profile) && isset($auth_info->profile->verifiedEmail))
+					$email = $auth_info->profile->verifiedEmail;
+				else if(isset($auth_info->profile) && isset($auth_info->profile->email))
+					$email = $auth_info->profile->email;
+				else
+					$email = '';
 
-			$firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
-			$lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
+				$firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
+				$lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
 
-			$form_data->setEmail($email);
-			$form_data->setFirstname($firstName);
-			$form_data->setLastname($lastName);
+				$form_data->setEmail($email);
+				$form_data->setFirstname($firstName);
+				$form_data->setLastname($lastName);
+			}
 			$profile = Mage::helper('engage')->buildProfile($auth_info);
 			Mage::getSingleton('engage/session')->setIdentifier($profile);
 
