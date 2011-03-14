@@ -7,7 +7,8 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 	}
 
 	public function rpxLookupSave() {
-		if($lookup_rp = $this->rpxLookupRpCall()){
+		try {
+			$lookup_rp = $this->rpxLookupRpCall();
 			if($lookup_rp->realm)
 				$uiConfig = $this->rpxUiConfigCall($lookup_rp->realm, $lookup_rp->realmScheme);
 
@@ -22,8 +23,11 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 			Mage::getConfig()->reinit();
 
 			return true;
-		}
 
+		} catch (Exception $e) {
+			Mage::getSingleton('adminhtml/session')->addWarning('Could not retrieve account info. Please try again');
+		}
+		
 		return false;
 	}
 

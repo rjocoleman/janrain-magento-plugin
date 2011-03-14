@@ -27,7 +27,10 @@ class Janrain_Engage_Block_Auth extends Mage_Core_Block_Template implements Mage
 	}
 
 	protected function _toHtml() {
-		return $this->rpx_small_buttons();
+		$content = '';
+		if (Mage::getSingleton('customer/session')->isLoggedIn() == false)
+			$content = $this->rpx_small_buttons();
+		return $content;
 	}
 
 	protected function _prepareLayout() {

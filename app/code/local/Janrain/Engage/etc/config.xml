@@ -3,14 +3,14 @@
 <config>
     <modules>
         <Janrain_Engage>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </Janrain_Engage>
     </modules>
     <frontend>
         <layout>
             <updates>
                 <engage>
-                    <file>janrain_engage.xml</file>
+                    <file>Janrain_Engage.xml</file>
                 </engage>
             </updates>
         </layout>
