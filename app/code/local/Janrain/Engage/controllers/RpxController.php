@@ -97,7 +97,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		$key = $this->getRequest()->getParam('ses');
 		$token = Mage::getSingleton('engage/session')->getData($key);
 		$auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
-		if(isset($auth_info['stat']) && $auth_info['stat']=='ok') {
+		if(isset($auth_info->stat) && $auth_info->stat=='ok') {
 			$customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
 
 			if ($customer === false) {
