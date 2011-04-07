@@ -56,14 +56,21 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
 		if ($this->getRequest()->isPost()) {
 			$token = $this->getRequest()->getPost('token');
 
-			// Store token in session under random key
-			$key = Mage::helper('engage')->rand_str(12);
-			Mage::getSingleton('engage/session')->setData($key, $token);
+			if($token){
+				// Store token in session under random key
+				$key = Mage::helper('engage')->rand_str(12);
+				Mage::getSingleton('engage/session')->setData($key, $token);
 
-			// Redirect user to $this->authAction method passing $key as ses
-			// $_GET variable (Magento style)
-			$this->_redirect("janrain-engage/rpx/authenticate", array("ses" => $key));
+				// Redirect user to $this->authAction method passing $key as ses
+				// $_GET variable (Magento style)
+				$this->_redirect("janrain-engage/rpx/authenticate", array("ses" => $key));
+				return;
+			} else {
+				$session->addError('Authentication token not received. Please try again.');
+			}
 		}
+
+		$this->_redirect('customer/account/login');
 	}
 
 	/**
