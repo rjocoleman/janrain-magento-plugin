@@ -145,6 +145,7 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
         try {
 
             $http = new Varien_Http_Client($url);
+            $http->setHeaders( array( "Accept-encoding" => "identity"  ) );
 			if($method=='POST')
 				$http->setParameterPost($postParams);
             $response = $http->request($method);

@@ -8,7 +8,7 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 		'LinkedIn'		=> 'linkedin',
 		'MySpace'		=> 'myspace',
 		'Twitter'		=> 'twitter',
-		'Windows Live'	=> 'windowslive',
+		'Windows Live'	=> 'live_id',
 		'Yahoo!'		=> 'yahoo',
 		'Aol'			=> 'aol',
 		'Blogger'		=> 'blogger',
