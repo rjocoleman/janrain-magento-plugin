@@ -10,7 +10,7 @@
         <layout>
             <updates>
                 <engage>
-                    <file>Janrain_Engage.xml</file>
+                    <file>engage.xml</file>
                 </engage>
             </updates>
         </layout>
