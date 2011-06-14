@@ -9,8 +9,6 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 	public function rpxLookupSave() {
 		try {
 			$lookup_rp = $this->rpxLookupRpCall();
-			if($lookup_rp->realm)
-				$uiConfig = $this->rpxUiConfigCall($lookup_rp->realm, $lookup_rp->realmScheme);
 
 			Mage::getModel('core/config')
 				->saveConfig('engage/vars/realm', $lookup_rp->realm)
@@ -18,7 +16,7 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 				->saveConfig('engage/vars/appid', $lookup_rp->appId)
 				->saveConfig('engage/vars/adminurl', $lookup_rp->adminUrl)
 				->saveConfig('engage/vars/socialpub', $lookup_rp->socialPub)
-				->saveConfig('engage/vars/enabled_providers', $uiConfig ? serialize($uiConfig->enabled_providers) : '')
+				->saveConfig('engage/vars/enabled_providers', $lookup_rp->signinProviders)
 				->saveConfig('engage/vars/apikey', Mage::getStoreConfig('engage/options/apikey'));
 			Mage::getConfig()->reinit();
 
@@ -32,10 +30,12 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 	}
 
     public function rpxLookupRpCall() {
+        $version = Mage::getConfig()->getModuleConfig("Janrain_Engage")->version;
 
         $postParams = array();
-
         $postParams["apiKey"] = $this->getEngageApiKey();
+        $postParams["pluginName"] = "magento";
+        $postParams["pluginVersion"] = $version;
 
         $result = "rpxLookupRpCall: no result";
         try {
@@ -46,23 +46,6 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
         }
 
         return $result;
-
-    }
-
-    public function rpxUiConfigCall($realm=null, $realmScheme=null) {
-
-		if(!$realm)
-			$realm = Mage::getStoreConfig('engage/vars/realm');
-		if(!$realmScheme)
-			$realmScheme = (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http';
-		$apiKey = Mage::getStoreConfig('engage/options/apikey');
-
-		if($realm && $apiKey) {
-			$url = "$realmScheme://$realm/openid/ui_config?apiKey=$apiKey";
-			return $this->rpxCall($url);
-		} else {
-			throw Mage::exception('Mage_Core', 'Could not make API call: Missing Url Component');
-		}
 
     }
     

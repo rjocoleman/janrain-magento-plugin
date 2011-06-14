@@ -40,7 +40,7 @@
 						<?php
 							$providers = Mage::helper('engage')->getRpxProviders();
 							if (is_array($providers)) {
-								$size = "large";
+								$size = "30";
 								$wrap_open = '<a class="rpxnow rpx_link_wrap" onclick="return false;" href="'
 										. Mage::helper('engage')->getRpxAuthUrl(true)
 										. '">';
@@ -48,9 +48,9 @@
 
 								$rpx_buttons = '';
 								foreach ($providers as $val) {
-									$rpx_buttons .= '<div class="rpx_icon_' . $size . ' rpx_' . $val . '_' . $size . '" title="' . htmlentities($val) . '"></div>';
+									$rpx_buttons .= '<div class="jn-icon jn-size' . $size . ' jn-' . $val . '" title="' . htmlentities($val) . '"></div>';
 								}
-								$buttons = '<div class="rpx_button"><div class="rpx_' . $size . '_icons">' . $rpx_buttons . '</div></div><div class="rpx_clear"></div>';
+								$buttons = '<div class="rpx_button">' . $rpx_buttons . '</div><div class="rpx_clear"></div>';
 
 								echo $wrap_open . $buttons . $wrap_close;
 							}

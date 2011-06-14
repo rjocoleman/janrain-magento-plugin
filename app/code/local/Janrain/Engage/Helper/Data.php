@@ -90,7 +90,7 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function getRpxProviders() {
 		$providers = Mage::getStoreConfig('engage/vars/enabled_providers');
 		if($providers)
-			return unserialize($providers);
+			return explode(",", $providers);
 		else
 			return false;
 	}

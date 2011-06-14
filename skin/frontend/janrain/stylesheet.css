@@ -8,100 +8,6 @@
 text-decoration:none;
 }
 
-.rpxbox {
-  z-index: 1000;
-  display: none;
-  position: fixed;
-  vertical-align: middle;
-  top: 0px; left: 0px;
-  width: 100%; height: 100%;
-}
-
-.rpxhoriz {
-  z-index:-10;
-  position:fixed;
-  display:block;
-  top:0px; left:0px;
-  width:100%; height:100%;
-  background-color:#111;
-  opacity: .5;
-  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-
-.rpxvert {width:100%; height:100%;}
-
-.rpxvert .rpxvrow .rpxvcol {vertical-align:middle;}
-
-.rpxborder {
-  display:block;
-  width:370px; height:240px;
-  margin-right:auto; margin-left:auto;
-  position:relative; 
-  padding: 5px;
-  background-color: #666;
-  background-color: rgba(0,0,0,.5);
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-}
-
-.rpxclose {
-  cursor: pointer;
-  position: absolute;
-  z-index: 1001;
-  top: -4px; right: -4px;
-  width: 34px; height: 34px;
-}
-
-.rpxiframe,
-.rpxmsg,
-.rpxregister {
-  display:block;
-  width:370px; height:240px;
-  background-color:#FFF;
-  border:0;
-  overflow:hidden;
-  position:relative;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.rpxmessage {
-  color: #333;
-}
-
-.rpxmsg .rpxmessage {
-  font-size:14px;
-  font-family:sans-serif;
-  padding:76px 16px 2px 16px;
-  text-align:center;
-}
-
-.rpxregister .rpxmessage {
-  font-size:14px;
-  font-family:sans-serif;
-  padding:76px 10px 2px 10px;
-  text-align:center;
-}
-
-.rpxregform {
-  font-size:16px;
-  font-family:sans-serif;
-  padding:2px 10px 0px 10px;
-  text-align:center;
-}
-
-.rpxemail {
-  width:200px; height:20px;
-}
-
-.rpxsubmit {
-  background-color:#D0D0D0;
-  border:1px solid #666;
-}
-
 .rpxsocial { /* has dynamic items in head */
   display:inline;
   font-size:14px;
@@ -117,20 +23,6 @@ text-decoration:none;
 }
 .rpxsocial:hover {cursor:pointer;}
 
-.rpxsocial_small {
-  display:block;
-  font-size:13px;
-  font-family:sans-serif;
-  color:#074764;
-  background-color:transparent;
-  padding:0px;
-  padding-right:5px;
-  margin:0px;
-  float:left;
-}
-.rpxsocial_small:hover {cursor:pointer;}
-.rpxsocial_small .rpxsharebutton {text-decoration:underline;}
-
 .rpx_social_icons {
   display:block;
   position:relative;
@@ -142,12 +34,6 @@ text-decoration:none;
   font-size:small; font-style:serif;
   color:#666;
   margin:3px;
-  padding:0px;
-}
-input#rpx_share_comment {
-  display:inline;
-  width:15px;
-  margin:0px;
   padding:0px;
 }
 
@@ -177,7 +63,7 @@ input#rpx_share_comment {
   color:#666;
 }
 
-.rpx_clear{
+.rpx_clear {
   clear:both;
 }
 
@@ -186,198 +72,71 @@ input#rpx_share_comment {
   padding:0px 5px 5px 0px;
 }
 
-.rpx_icon_small,
-.rpx_social_icons .rpx_icon_small { /* has dynamic items in head */
+.jn-icon {
   display:block;
-  width:16px; 
-  height:16px;
-  margin:1px;
+  background-repeat:no-repeat;
+  background-position:fixed;
+  border:0;
+  margin:0;
   float:left;
 }
-.rpx_icon_small:hover {cursor:pointer;}
 
-.rpx_facebook_small {
-  background-position:0px 0px;
-}
+.jn-icon:hover { cursor:pointer; }
 
-.rpx_twitter_small {
-  background-position:0px -16px;
-}
-
-.rpx_myspace_small {
-  background-position:0px -32px;
-}
-
-.rpx_live_id_small {
-  background-position:0px -48px;
-}
-
-.rpx_yahoo_small {
-  background-position:0px -64px;
-}
-
-.rpx_google_small {
-  background-position:0px -80px;
-}
-
-.rpx_openid_small {
-  background-position:0px -96px;
-}
-
-.rpx_aol_small {
-  background-position:0px -112px;
-}
-
-.rpx_livejournal_small {
-  background-position:0px -128px;
-}
-
-.rpx_myopenid_small {
-  background-position:0px -144px;
-}
-
-.rpx_netlog_small {
-  background-position:0px -160px;
-}
-
-.rpx_flickr_small {
-  background-position:0px -176px;
-}
-
-.rpx_blogger_small {
-  background-position:0px -192px;
-}
-
-.rpx_verisign_small {
-  background-position:0px -208px;
-}
-
-.rpx_wordpress_small {
-  background-position:0px -224px;
-}
-
-.rpx_hyves_small {
-  background-position:0px -240px;
-}
-
-.rpx_linkedin_small {
-  background-position:0px -256px;
-}
-
-.rpx_paypal_small {
-  background-position:0px -272px;
-}
-
-.rpx_large_icons {
-  display:block;
-  height:32px;
-  clear:both;
-}
-
-.rpx_icon_large,
-.rpx_large_icons .rpx_icon_large { /* has dynamic items in head */
-  display:block;
-  width:30px; 
+.jn-size30 {
+  width:30px;
   height:30px;
-  margin:0px;
-  margin-left:1px;
-  padding:0px;
-  padding-top:1px;
-  padding-bottom:1px;
-  float:left;
-}
-.rpx_icon_large:hover {cursor:pointer;}
-
-.rpx_facebook_large {
-  background-position:0px 0px;
+  background-image:url('jn-icons32.png');
 }
 
-.rpx_google_large {
-  background-position:0px -32px;
-}
-
-.rpx_linkedin_large {
-  background-position:0px -64px;
-}
-
-.rpx_myspace_large {
-  background-position:0px -96px;
-}
-
-.rpx_twitter_large {
-  background-position:0px -128px;
-}
-
-.rpx_live_id_large {
-  background-position:0px -160px;
-}
-
-.rpx_yahoo_large {
-  background-position:0px -192px;
-}
-
-.rpx_aol_large {
-  background-position:0px -224px;
-}
-
-.rpx_blogger_large {
-  background-position:0px -256px;
-}
-
-.rpx_flickr_large {
-  background-position:0px -288px;
-}
-
-.rpx_hyves_large {
-  background-position:0px -320px;
-}
-
-.rpx_livejournal_large {
-  background-position:0px -352px;
-}
-
-.rpx_myopenid_large {
-  background-position:0px -384px;
-}
-
-.rpx_netlog_large {
-  background-position:0px -416px;
-}
-
-.rpx_openid_large {
-  background-position:0px -448px;
-}
-
-.rpx_verisign_large {
-  background-position:0px -480px;
-}
-
-.rpx_wordpress_large {
-  background-position:0px -512px;
-}
-
-.rpx_paypal_large {
-  background-position:0px -544px;
-}
-
-.rpxauthor {
-  display:block;
-  position:relative;
+.jn-size16 {
   width:16px;
-  margin:0px;
-  margin-left:3px;
-  padding:0px;
-  float:left;
-  bottom:-3px;
-  left:-3px;
-  vertical-align:middle;
+  height:16px;
+  background-image:url('jn-icons16.png');
 }
 
-.rpx_profile_label {
-  display:inline-block;
-  padding-left:4px;
-}
+.jn-size16.jn-facebook    { background-position:0px 0px; }
+.jn-size16.jn-google      { background-position:0px -16px; }
+.jn-size16.jn-linkedin    { background-position:0px -32px; }
+.jn-size16.jn-myspace     { background-position:0px -48px; }
+.jn-size16.jn-twitter     { background-position:0px -64px; }
+.jn-size16.jn-live_id     { background-position:0px -80px; }
+.jn-size16.jn-yahoo       { background-position:0px -96px; }
+.jn-size16.jn-aol         { background-position:0px -112px; }
+.jn-size16.jn-blogger     { background-position:0px -128px; }
+.jn-size16.jn-flickr      { background-position:0px -144px; }
+.jn-size16.jn-hyves       { background-position:0px -160px; }
+.jn-size16.jn-livejournal { background-position:0px -176px; }
+.jn-size16.jn-myopenid    { background-position:0px -192px; }
+.jn-size16.jn-netlog      { background-position:0px -208px; }
+.jn-size16.jn-openid      { background-position:0px -224px; }
+.jn-size16.jn-verisign    { background-position:0px -240px; }
+.jn-size16.jn-wordpress   { background-position:0px -256px; }
+.jn-size16.jn-paypal      { background-position:0px -272px; }
+.jn-size16.jn-orkut       { background-position:0px -288px; }
+.jn-size16.jn-vzn         { background-position:0px -304px; }
+.jn-size16.jn-salesforce  { background-position:0px -320px; }
+.jn-size16.jn-foursquare  { background-position:0px -336px; }
 
-.rpx_profile_label small {
-  font-size:0.8em;
-}
+.jn-size30.jn-facebook    { background-position:0px 0px; }
+.jn-size30.jn-google      { background-position:0px -30px; }
+.jn-size30.jn-linkedin    { background-position:0px -60px; }
+.jn-size30.jn-myspace     { background-position:0px -90px; }
+.jn-size30.jn-twitter     { background-position:0px -120px; }
+.jn-size30.jn-live_id     { background-position:0px -150px; }
+.jn-size30.jn-yahoo       { background-position:0px -180px; }
+.jn-size30.jn-aol         { background-position:0px -210px; }
+.jn-size30.jn-blogger     { background-position:0px -240px; }
+.jn-size30.jn-flickr      { background-position:0px -270px; }
+.jn-size30.jn-hyves       { background-position:0px -300px; }
+.jn-size30.jn-livejournal { background-position:0px -330px; }
+.jn-size30.jn-myopenid    { background-position:0px -360px; }
+.jn-size30.jn-netlog      { background-position:0px -390px; }
+.jn-size30.jn-openid      { background-position:0px -420px; }
+.jn-size30.jn-verisign    { background-position:0px -450px; }
+.jn-size30.jn-wordpress   { background-position:0px -480px; }
+.jn-size30.jn-paypal      { background-position:0px -510px; }
+.jn-size30.jn-orkut       { background-position:0px -540px; }
+.jn-size30.jn-vzn         { background-position:0px -570px; }
+.jn-size30.jn-salesforce  { background-position:0px -600px; }
+.jn-size30.jn-foursquare  { background-position:0px -630px; }

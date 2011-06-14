@@ -14,18 +14,22 @@
 			<size>
 				<required>0</required>
 				<visible>1</visible>
-				<label>Icon Size</label>
+				<label>Widget Style</label>
 				<type>select</type>
 				<value>large</value>
 				<values>
 					<default translate="label">
 						<value>large</value>
-						<label>Large</label>
+						<label>Large Icons</label>
 					</default>
-					<link_inline translate="label">
+					<small translate="label">
 						<value>small</value>
-						<label>Small</label>
-					</link_inline>
+						<label>Small Icons</label>
+					</small>
+                    <inline translate="label">
+						<value>inline</value>
+						<label>Inline</label>
+					</inline>
 				</values>
 			</size>
 		</parameters>

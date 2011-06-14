@@ -14,7 +14,8 @@ class Janrain_Engage_Block_Info extends Mage_Adminhtml_Block_System_Config_Form_
     }
 
     protected function _getFieldHtml($fieldset) {
-        $content = '<p>This extension is developed by <a href="http://janrain.com/" target="_blank">Janrain</a>. Please refer to our <a href="http://documentation.janrain.com/engage/plugins-modules/magento" target="_blank">Documentation</a> on how to install and configure this extension.</p>';
+        $content = '<p>Janrain Engage for Magento ' . Mage::getConfig()->getModuleConfig("Janrain_Engage")->version . '</p>';
+        $content.= '<p>This extension is developed by <a href="http://janrain.com/" target="_blank">Janrain</a>. Please refer to our <a href="http://documentation.janrain.com/engage/plugins-modules/magento" target="_blank">Documentation</a> on how to install and configure this extension.</p>';
         $content.= '<p>Copyright &copy ' . date("Y") . ' <a href="http://janrain.com/" target="_blank">Janrain, Inc.</a></p>';
 		
         return $content;
