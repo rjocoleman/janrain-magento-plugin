@@ -157,26 +157,39 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
     }
 
 	public function getFirstName($auth_info) {
-		if(isset($auth_info->profile->name->givenName))
+		if (isset($auth_info->profile->name->givenName))
 			return $auth_info->profile->name->givenName;
+        
+        if (!isset($auth_info->profile->name->formatted))
+            return '';
 
 		$name = str_replace(",", "", $auth_info->profile->name->formatted);
 
-		$split = explode(" ", $name);
+        if (!$name)
+            return '';
+        
+        $split = explode(" ", $name);
 
-		$fName = $split[0] ? $split[0] : '';
+		$fName = isset($split[0]) ? $split[0] : '';
 		return $fName;
 	}
 
 	public function getLastName($auth_info) {
-		if(isset($auth_info->profile->name->familyName))
+		if (isset($auth_info->profile->name->familyName))
 			return $auth_info->profile->name->familyName;
+        
+        if (!isset($auth_info->profile->name->formatted))
+            return '';
 
 		$name = str_replace(",", "", $auth_info->profile->name->formatted);
+        
+        if (!$name)
+            return '';
+        
 		$split = explode(" ", $name);
 		$key = sizeof($split) - 1;
 
-		$lName = $split[$key] ? $split[$key] : '';
+		$lName = isset($split[$key]) ? $split[$key] : '';
 		return $lName;
 	}
 
