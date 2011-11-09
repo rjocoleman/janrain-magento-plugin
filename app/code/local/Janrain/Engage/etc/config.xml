@@ -45,11 +45,6 @@
                 <class>Janrain_Engage_Model</class>
                 <resourceModel>engage_mysql4</resourceModel>
             </engage>
-            <customer>
-                <rewrite>
-                    <customer>Janrain_Engage_Model_Customer</customer>
-                </rewrite>
-            </customer>
             <engage_mysql4>
                 <class>Janrain_Engage_Model_Mysql4</class>
                 <entities>

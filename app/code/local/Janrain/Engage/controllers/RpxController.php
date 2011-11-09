@@ -134,8 +134,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
                 $this->renderLayout();
                 return;
             } else {
-                Mage::getSingleton('engage/session')->setLoginRequest(true);
-                $session->login($customer->getEmail(), 'REQUIRED_SECOND_PARAM');
+                Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
                 $this->_loginPostRedirect();
             }
         }
