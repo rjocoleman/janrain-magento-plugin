@@ -1,98 +1,98 @@
 .rpx_link_wrap {
-  display:inline-block;
-  text-decoration:none;
-  outline:none;
+    display:inline-block;
+    text-decoration:none;
+    outline:none;
 }
 
 .rpx_link_wrap:hover {
-text-decoration:none;
+    text-decoration:none;
 }
 
 .rpxsocial { /* has dynamic items in head */
-  display:inline;
-  font-size:14px;
-  font-family:sans-serif;
-  color:#FFF;
-  background-color:#074764;
-  background-repeat:no-repeat;
-  background-position:2px center;
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:3px;
-  padding:4px 4px 2px 6px;
+    display:inline;
+    font-size:14px;
+    font-family:sans-serif;
+    color:#FFF;
+    background-color:#074764;
+    background-repeat:no-repeat;
+    background-position:2px center;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    padding:4px 4px 2px 6px;
 }
 .rpxsocial:hover {cursor:pointer;}
 
 .rpx_social_icons {
-  display:block;
-  position:relative;
-  width:78px; height:17px;
-  margin-left:auto; margin-right:auto;
+    display:block;
+    position:relative;
+    width:78px; height:17px;
+    margin-left:auto; margin-right:auto;
 }
 
 .rpx_label {
-  font-size:small; font-style:serif;
-  color:#666;
-  margin:3px;
-  padding:0px;
+    font-size:small; font-style:serif;
+    color:#666;
+    margin:3px;
+    padding:0px;
 }
 
 .rpx_tooltip {
-  position:relative;
+    position:relative;
 }
 
 .rpx_tooltip .rpx_share_tip {
-  margin:0px;
-  margin-left:-999em;
-  position:absolute;
-  padding:3px;
+    margin:0px;
+    margin-left:-999em;
+    position:absolute;
+    padding:3px;
 }
 
 .rpx_tooltip:hover .rpx_share_tip {
-  border-radius:5px 5px; -moz-border-radius:5px; -webkit-border-radius:5px; 
-  font-family:sans-serif;
-  position: absolute;left:12px; top:-50px; z-index:99;
-  width:90px;
-  margin-left:0px;
-  border:1px solid #666;
+    border-radius:5px 5px; -moz-border-radius:5px; -webkit-border-radius:5px; 
+    font-family:sans-serif;
+    position: absolute;left:12px; top:-50px; z-index:99;
+    width:90px;
+    margin-left:0px;
+    border:1px solid #666;
 }
 
 .rpx_share_tip {
-  padding:7px;
-  background: #F0F0F0;
-  color:#666;
+    padding:7px;
+    background: #F0F0F0;
+    color:#666;
 }
 
 .rpx_clear {
-  clear:both;
+    clear:both;
 }
 
 .rpx_button {
-  margin:4px 6px 16px 0px; 
-  padding:0px 5px 5px 0px;
+    margin:4px 6px 16px 0px; 
+    padding:0px 5px 5px 0px;
 }
 
 .jn-icon {
-  display:block;
-  background-repeat:no-repeat;
-  background-position:fixed;
-  border:0;
-  margin:0;
-  float:left;
+    display:block;
+    background-repeat:no-repeat;
+    background-position:fixed;
+    border:0;
+    margin:0;
+    float:left;
 }
 
 .jn-icon:hover { cursor:pointer; }
 
 .jn-size30 {
-  width:30px;
-  height:30px;
-  background-image:url('jn-icons32.png');
+    width:30px;
+    height:30px;
+    background-image:url('jn-icons32.png');
 }
 
 .jn-size16 {
-  width:16px;
-  height:16px;
-  background-image:url('jn-icons16.png');
+    width:16px;
+    height:16px;
+    background-image:url('jn-icons16.png');
 }
 
 .jn-size16.jn-facebook    { background-position:0px 0px; }

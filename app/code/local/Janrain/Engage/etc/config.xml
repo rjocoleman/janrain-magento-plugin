@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Janrain_Engage>
-            <version>1.1.0</version>
+            <version>1.1.1</version>
         </Janrain_Engage>
     </modules>
     <frontend>
@@ -23,15 +23,15 @@
                 </Janrain_Engage>
             </modules>
         </translate>
-		<routers>
-			<engage>
-				<use>standard</use>
-				<args>
-					<module>Janrain_Engage</module>
-					<frontName>janrain-engage</frontName>
-				</args>
-			</engage>
-		</routers>
+        <routers>
+            <engage>
+                <use>standard</use>
+                <args>
+                    <module>Janrain_Engage</module>
+                    <frontName>janrain-engage</frontName>
+                </args>
+            </engage>
+        </routers>
     </frontend>
 
     <global>
@@ -43,42 +43,42 @@
         <models>
             <engage>
                 <class>Janrain_Engage_Model</class>
-				<resourceModel>engage_mysql4</resourceModel>
+                <resourceModel>engage_mysql4</resourceModel>
             </engage>
-			<customer>
-				<rewrite>
-					<customer>Janrain_Engage_Model_Customer</customer>
-				</rewrite>
-			</customer>
-			<engage_mysql4>
-				<class>Janrain_Engage_Model_Mysql4</class>
-				<entities>
-					<identifiers>
-						<table>engage_identifiers</table>
-					</identifiers>
-				</entities>
-			</engage_mysql4>
+            <customer>
+                <rewrite>
+                    <customer>Janrain_Engage_Model_Customer</customer>
+                </rewrite>
+            </customer>
+            <engage_mysql4>
+                <class>Janrain_Engage_Model_Mysql4</class>
+                <entities>
+                    <identifiers>
+                        <table>engage_identifiers</table>
+                    </identifiers>
+                </entities>
+            </engage_mysql4>
         </models>
-		<events>
-			<customer_save_after>
-				<observers>
-					<add_engage_identifier>
-						<type>singleton</type>
-						<class>Janrain_Engage_Model_Observer</class>
-						<method>addIdentifier</method>
-					</add_engage_identifier>
-				</observers>
-			</customer_save_after>
-			<admin_system_config_changed_section_engage>
-				<observers>
-					<engage_config_save>
-						<type>singleton</type>
-						<class>Janrain_Engage_Model_Observer</class>
-						<method>onConfigSave</method>
-					</engage_config_save>
-				</observers>
-			</admin_system_config_changed_section_engage>
-		</events>
+        <events>
+            <customer_save_after>
+                <observers>
+                    <add_engage_identifier>
+                        <type>singleton</type>
+                        <class>Janrain_Engage_Model_Observer</class>
+                        <method>addIdentifier</method>
+                    </add_engage_identifier>
+                </observers>
+            </customer_save_after>
+            <admin_system_config_changed_section_engage>
+                <observers>
+                    <engage_config_save>
+                        <type>singleton</type>
+                        <class>Janrain_Engage_Model_Observer</class>
+                        <method>onConfigSave</method>
+                    </engage_config_save>
+                </observers>
+            </admin_system_config_changed_section_engage>
+        </events>
         <helpers>
             <engage>
                 <class>Janrain_Engage_Helper</class>
@@ -88,7 +88,7 @@
             <engage_setup>
                 <setup>
                     <module>Janrain_Engage</module>
-					<class>Janrain_Engage_Model_Resource_Eav_Mysql4_Setup</class>
+                    <class>Janrain_Engage_Model_Resource_Eav_Mysql4_Setup</class>
                 </setup>
                 <connection>
                     <use>core_setup</use>
@@ -107,7 +107,7 @@
         </resources>
     </global>
 
-	<admin>
+    <admin>
         <routers>
             <engage>
                 <use>admin</use>
@@ -154,18 +154,18 @@
             <options>
                 <apikey></apikey>
                 <enable>1</enable>
-				<path_skin>{{base_skin}}/frontend/janrain</path_skin>
+                <path_skin>{{base_skin}}/frontend/janrain</path_skin>
             </options>
 
 			<!-- Set values of global config vars -->
-			<vars>
-				<realm></realm>
-				<realmscheme></realmscheme>
-				<appid></appid>
-				<adminurl></adminurl>
-				<socialpub></socialpub>
-				<enabled_providers></enabled_providers>
-			</vars>
+            <vars>
+                <realm></realm>
+                <realmscheme></realmscheme>
+                <appid></appid>
+                <adminurl></adminurl>
+                <socialpub></socialpub>
+                <enabled_providers></enabled_providers>
+            </vars>
         </engage>
     </default>
 
