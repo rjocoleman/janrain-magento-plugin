@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Janrain_Engage>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </Janrain_Engage>
     </modules>
     <frontend>
