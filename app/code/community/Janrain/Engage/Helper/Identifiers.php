@@ -91,4 +91,18 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
         }
     }
 
+    public function delete_all_identifiers($customer) {
+        $customer_id = $customer->getId();
+        if ((int) $customer_id > 0) {
+            $identifiers = $this->get_identifiers($customer_id);
+            foreach ($identifiers as &$identifier) {
+                try {
+                    $identifier->delete();
+                } catch (Exception $e) {
+                    echo "Could not delete: $e";
+                }
+            }
+        }
+    }
+
 }
