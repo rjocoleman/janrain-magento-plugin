@@ -11,17 +11,6 @@ class Janrain_Engage_Helper_Identifiers extends Mage_Core_Helper_Abstract {
     public function save_identifier($customer_id, $profile) {
 
         /**
-         * Make sure we have a valid customer_id
-         *
-         */
-        $customer = Mage::getModel('customer/customer')
-            ->getCollection()
-            ->addFieldToFilter('entity_id', $customer_id)
-            ->getFirstItem();
-        if (!$customer->getId())
-            Mage::throwException('Invalid Customer ID');
-
-        /**
          * Make the save
          *
          */

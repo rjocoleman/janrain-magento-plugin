@@ -154,7 +154,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         $customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
 
         if ($customer === false) {
-            $customer_id = $session->getCustomer()->getId();
+            $customer_id = $session->getCustomerId();
             $profile = Mage::helper('engage')->buildProfile($auth_info);
 
             Mage::helper('engage/identifiers')->save_identifier($customer_id, $profile);
@@ -235,10 +235,6 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         Mage::helper('engage/identifiers')->delete_identifier($id);
         $session->addSuccess('Provider removed');
         $this->_redirect('customer/account');
-    }
-
-    public function xdcommAction() {
-        $this->getResponse()->setBody($this->getLayout()->createBlock('engage/xdcomm')->toHtml());
     }
 
 }

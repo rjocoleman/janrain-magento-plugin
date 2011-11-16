@@ -7,9 +7,12 @@ if (Mage::helper('engage')->isEngageEnabled()):
     <script type="text/javascript">
         RPXNOW.overlay = true;
         RPXNOW.language_preference = 'en';
-    <?php if ($appId = Mage::getStoreConfig('engage/vars/appid')): ?>
+    <?php
+        if ($appId = Mage::getStoreConfig('engage/vars/appid')):
+            $secure = Mage::app()->getStore()->isCurrentlySecure();
+    ?>
               RPXNOW.init({appId: '<?php echo $appId; ?>',
-                  xdReceiver: '<?php echo Mage::getUrl('engage/rpx/xdcomm', array('_nosid' => true)); ?>'});
+                  xdReceiver: '<?php echo Mage::getUrl('engage/xdcomm', array('_nosid' => true, '_secure' => $secure)); ?>'});
     <?php endif; ?>
     </script>
 <?php endif; ?>

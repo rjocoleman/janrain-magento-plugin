@@ -7,6 +7,9 @@
         </Janrain_Engage>
     </modules>
     <frontend>
+        <secure_url>
+            <engage>/janrain-engage/rpx/</engage>
+        </secure_url>
         <layout>
             <updates>
                 <engage>
@@ -113,13 +116,13 @@
 
     <admin>
         <routers>
-            <engage>
+            <engageadmin>
                 <use>admin</use>
                 <args>
                     <module>Janrain_Engage</module>
-                    <frontName>janrain-engage</frontName>
+                    <frontName>janrain-engage-admin</frontName>
                 </args>
-            </engage>
+            </engageadmin>
         </routers>
     </admin>
 
