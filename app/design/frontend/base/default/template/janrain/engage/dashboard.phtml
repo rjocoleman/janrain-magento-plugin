@@ -17,9 +17,9 @@
                             );
 
                             foreach ($identifiers as &$identifier) {
-                                echo '<li style="clear:both;"><div class="rpx_icon_small rpx_'
+                                echo '<li style="clear:both;"><div class="jn-icon jn-size16 jn-'
                                 . $identifier->getProvider()
-                                . '_small"></div><span class="rpx_profile_label">'
+                                . '"></div> <span class="rpx_profile_label">'
                                 . $identifier->getProfileName()
                                 . ' <small>(<a href="'
                                 . Mage::getUrl('engage/rpx/removeid', array('identifier' => $identifier->getId()))
@@ -40,7 +40,7 @@
                         $providers = Mage::helper('engage')->getRpxProviders();
                         if (is_array($providers)) {
                             $size = "30";
-                            $wrap_open = '<a class="rpxnow rpx_link_wrap" onclick="return false;" href="'
+                            $wrap_open = '<a class="janrainEngage rpxnow rpx_link_wrap" onclick="return false;" href="'
                                 . Mage::helper('engage')->getRpxAuthUrl(true)
                                 . '">';
                             $wrap_close = '</a>';

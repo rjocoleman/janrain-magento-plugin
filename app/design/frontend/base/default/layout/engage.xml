@@ -58,7 +58,7 @@
         <reference name="before_body_end">
             <block type="core/template"
 				name="janrain_engage_scripts"
-				template="janrain/engage/scripts.phtml"/>
+				template="janrain/engage/scripts_dashboard.phtml"/>
         </reference>
         <reference name="head">
             <block type="core/template"

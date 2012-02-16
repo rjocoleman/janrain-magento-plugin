@@ -30,11 +30,13 @@
     margin-left:auto; margin-right:auto;
 }
 
+
 .rpx_label {
-    font-size:small; font-style:serif;
+    font-size:small; 
     color:#666;
     margin:3px;
     padding:0px;
+    display:block;
 }
 
 .rpx_tooltip {
@@ -73,12 +75,11 @@
 }
 
 .jn-icon {
-    display:block;
+    display:inline-block;
     background-repeat:no-repeat;
-    background-position:fixed;
     border:0;
     margin:0;
-    float:left;
+    float: none;
 }
 
 .jn-icon:hover { cursor:pointer; }

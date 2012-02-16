@@ -115,5 +115,14 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
 
         return array('provider' => $this->providers[$auth_info->profile->providerName], 'identifier' => $auth_info->profile->identifier, 'profile_name' => $profile_name);
     }
+	
+	public function rpxRealmName()
+	{
+		$realm = Mage::getStoreConfig('engage/vars/realm');
+		$realm = str_replace(".rpxnow.com", "", $realm);
+		//var_dump($realm); exit; 
+		return $realm;
+		
+	}
 
 }

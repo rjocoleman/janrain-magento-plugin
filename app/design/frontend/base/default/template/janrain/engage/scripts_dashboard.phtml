@@ -7,9 +7,10 @@ if (Mage::helper('engage')->isEngageEnabled()):
 			window.janrain = {};
 		window.janrain.settings = {};
 
-		janrain.settings.tokenUrl = "<?php echo Mage::getUrl('engage/rpx/token_url') ?>";
+		janrain.settings.tokenUrl = "<?php echo Mage::getUrl('engage/rpx/token_url_add') ?>";  
 		janrain.settings.appId = "<?php echo Mage::getStoreConfig('engage/vars/appid') ?>";
 		janrain.settings.appUrl = "https://<?php echo Mage::getStoreConfig('engage/vars/realm') ?>";
+		janrain.settings.type = 'modal';
 
 		function isReady() {
 			janrain.ready = true;

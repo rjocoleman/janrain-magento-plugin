@@ -5,18 +5,24 @@ class Janrain_Engage_Block_Auth extends Mage_Core_Block_Template implements Mage
     function rpx_small_buttons() {
         $size = $this->getSize();
         if ($size == 'inline') {
+          /*	
             $iframe = '<iframe src="'
                 . ((Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http')
                 . '://' . Mage::getStoreConfig('engage/vars/realm')
                 . '/openid/embed?token_url=' . urlencode(Mage::getUrl('engage/rpx/token_url'))
                 . '" scrolling="no" frameBorder="no" allowtransparency="true" style="width:400px;height:240px"></iframe>';
             return $iframe;
+			*/
+			 return "<div id=\"janrainEngageEmbed\"></div>"; 
         }
         else {
+        	//return "hello";
+        	// return "<a class=\"janrainEngage\" href=\"#\">" . $this->getLabelText() . "</a>";
+            
             $providers = Mage::helper('engage')->getRpxProviders();
             if (is_array($providers)) {
                 $size = ($size == 'small') ? "16" : "30";
-                $wrap_open = '<a class="rpxnow rpx_link_wrap" onclick="return false;" href="'
+                $wrap_open = '<a class="janrainEngage rpxnow rpx_link_wrap" onclick="return false;" href="'
                     . Mage::helper('engage')->getRpxAuthUrl()
                     . '">';
                 $wrap_close = '</a>';
@@ -25,15 +31,17 @@ class Janrain_Engage_Block_Auth extends Mage_Core_Block_Template implements Mage
                 if (empty($labelText))
                     $labelText = 'Or log in with';
 
-                $label = '<div class="rpx_label">' . $labelText . '</div>';
+                $label = '<span class="rpx_label">' . $labelText . '</span>';
                 $rpx_buttons = '';
                 foreach ($providers as $val) {
-                    $rpx_buttons .= '<div class="jn-icon jn-size' . $size . ' jn-' . $val . '" title="' . htmlentities($val) . '"></div>';
+                    $rpx_buttons .= '<span class="jn-icon jn-size' . $size . ' jn-' . $val . '" title="' . htmlentities($val) . '"></span>';
                 }
-                $buttons = '<div class="rpx_button">' . $rpx_buttons . '</div><div class="rpx_clear"></div>';
+                $buttons = '<span class="rpx_button">' . $rpx_buttons . '</span><span class="rpx_clear"></span>';
 
                 return $wrap_open . $label . $buttons . $wrap_close;
+			 
             }
+			 
         }
     }
 
