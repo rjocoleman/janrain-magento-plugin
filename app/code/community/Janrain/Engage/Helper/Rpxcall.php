@@ -39,8 +39,6 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
         $result = "rpxLookupRpCall: no result";
         try {
             $result = $this->rpxPost("lookup_rp", $postParams);
-			// var_dump($result);
-			// exit;
         } catch (Exception $e) {
             throw Mage::exception('Mage_Core', $e);
         }
