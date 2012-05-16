@@ -25,7 +25,7 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
         $link = '';
 
         if ($icons = $this->rpx_social_icons()) {
-            $link .= '<div class="rpxsocial rpx_tooltip" onclick="RPXNOW.loadAndRun([\'Social\'], function () { var activity = new RPXNOW.Social.Activity(\'Share:\', \'' . Mage::getSingleton('cms/page')->getTitle() . '\', \'' . Mage::helper('core/url')->getCurrentUrl() . '\'); activity.setUserGeneratedContent(\'' . $this->getShareText() . '\'); RPXNOW.Social.publishActivity(activity); });">';
+            $link .= '<div class="rpxsocial rpx_tooltip" id="janrainEngageShare">';
             $link .= '<span class="rpxsharebutton">share</span><div class="rpx_share_tip">Share this on:<br />' . $icons . '</div></div>';
         }
 
@@ -33,23 +33,11 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
     }
 
     protected function _prepareLayout() {
-
-        /*
-         * Doesn't work on inline widgets because layout isn't loaded until
-         * after the head has been written to the page. Fix.
-         *
-          if($this->getLayout()->getBlock('janrain_engage_styles')==false) {
-          $block = $this->getLayout()
-          ->createBlock('core/template', 'janrain_engage_styles')
-          ->setTemplate('janrain/engage/styles.phtml');
-          $this->getLayout()->getBlock('head')->insert($block);
-          }
-         */
-
-        if ($this->getLayout()->getBlock('janrain_engage_scripts') == false) {
+        if ($this->getLayout()->getBlock('janrain_engage_share') == false) {
             $block = $this->getLayout()
-                ->createBlock('core/template', 'janrain_engage_scripts')
-                ->setTemplate('janrain/engage/scripts.phtml');
+                ->createBlock('core/template', 'janrain_engage_share')
+                ->setData('message', $this->getShareText())
+                ->setTemplate('janrain/engage/share.phtml');
             $this->getLayout()->getBlock('before_body_end')->insert($block);
         }
 

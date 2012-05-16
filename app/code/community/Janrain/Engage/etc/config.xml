@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Janrain_Engage>
-            <version>1.1.5</version>
+            <version>1.2.0</version>
         </Janrain_Engage>
     </modules>
     <frontend>
@@ -161,6 +161,7 @@
             <options>
                 <apikey></apikey>
                 <enable>1</enable>
+                <seamless>0</seamless>
                 <path_skin>{{base_skin}}/frontend/janrain</path_skin>
             </options>
 

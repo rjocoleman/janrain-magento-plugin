@@ -27,7 +27,7 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         }
 
         $action = $this->getRequest()->getActionName();
-        if (!preg_match('/^(xdcomm|addIdentifier|token_url_add|token_url|authenticate|duplicate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
+        if (!preg_match('/^(xdcomm|token_url_add|token_url|duplicate|create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
             if (!$this->_getSession()->authenticate($this)) {
                 $this->setFlag('', 'no-dispatch', true);
             }
@@ -46,92 +46,64 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
      */
     public function token_urlAction() {
         $session = $this->_getSession();
-
         // Redirect if user is already authenticated
         if ($session->isLoggedIn()) {
             $this->_redirect('customer/account');
             return;
         }
 
-        if ($this->getRequest()->isPost()) {
-            $token = $this->getRequest()->getPost('token');
-
-            if ($token) {
-                // Store token in session under random key
-                $key = Mage::helper('engage')->rand_str(12);
-                Mage::getSingleton('engage/session')->setData($key, $token);
-
-                // Redirect user to $this->authAction method passing $key as ses
-                // $_GET variable (Magento style)
-                $this->_redirect("janrain-engage/rpx/authenticate", array("ses" => $key));
-                return;
-            }
-            else {
-                $session->addError('Authentication token not received. Please try again.');
-            }
-        }
-
-        $this->_redirect('customer/account/login');
-    }
-
-    /**
-     * RPX Callback for Additional Identifiers
-     */
-    public function token_url_addAction() {
-        $session = $this->_getSession();
-
-        // Redirect if user isn't already authenticated
-        if (!$session->isLoggedIn()) {
-            $this->_redirect('customer/account/login');
-            return;
-        }
-
-        if ($this->getRequest()->isPost()) {
-            $token = $this->getRequest()->getPost('token');
-
-            // Store token in session under random key
-            $key = Mage::helper('engage')->rand_str(12);
-            Mage::getSingleton('engage/session')->setData($key, $token);
-
-            // Redirect user to $this->authAction method passing $key as ses
-            // $_GET variable (Magento style)
-            $this->_redirect("janrain-engage/rpx/addidentifier", array("ses" => $key));
-        }
-    }
-
-    public function authenticateAction() {
-        $session = $this->_getSession();
-
-        $key = $this->getRequest()->getParam('ses');
-        $token = Mage::getSingleton('engage/session')->getData($key);
+        $token = $this->getRequest()->getPost('token');
         $auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
         if (isset($auth_info->stat) && $auth_info->stat == 'ok') {
             $customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);
 
             if ($customer === false) {
-                $this->loadLayout();
-                $block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
-                if ($block !== false) {
-                    $form_data = $block->getFormData();
+                if (isset($auth_info->profile) && isset($auth_info->profile->verifiedEmail))
+                    $email = $auth_info->profile->verifiedEmail;
+                else if (isset($auth_info->profile) && isset($auth_info->profile->email))
+                    $email = $auth_info->profile->email;
+                else
+                    $email = '';
 
-                    if (isset($auth_info->profile) && isset($auth_info->profile->verifiedEmail))
-                        $email = $auth_info->profile->verifiedEmail;
-                    else if (isset($auth_info->profile) && isset($auth_info->profile->email))
-                        $email = $auth_info->profile->email;
-                    else
-                        $email = '';
-
-                    $firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
-                    $lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
-
-                    $form_data->setEmail($email);
-                    $form_data->setFirstname($firstName);
-                    $form_data->setLastname($lastName);
-                }
+                $firstName = Mage::helper('engage/rpxcall')->getFirstName($auth_info);
+                $lastName = Mage::helper('engage/rpxcall')->getLastName($auth_info);
                 $profile = Mage::helper('engage')->buildProfile($auth_info);
                 Mage::getSingleton('engage/session')->setIdentifier($profile);
 
-                $this->renderLayout();
+                // TODO: Create an account merging process
+                //$existing = Mage::getModel('customer/customer')
+                //    ->getCollection()
+                //    ->addFieldToFilter('email', $email)
+                //    ->getFirstItem();
+
+                if (Mage::getStoreConfig('engage/options/seamless') == '1'
+                    && $email && $firstName && $lastName) {
+                    $customer = Mage::getModel('customer/customer')->setId(null);
+                    $customer->getGroupId();
+                    $customer->setFirstname($firstName);
+                    $customer->setLastname($lastName);
+                    $customer->setEmail($email);
+
+                    $password = md5('Janrain_Engage_' . Mage::helper('engage')->rand_str(12));
+                    $_POST['password'] = $password;
+                    $_POST['confirmation'] = $password;
+                    Mage::register('current_customer', $customer);
+
+                    $this->_forward('createPost');
+                }
+                else {
+                    $this->loadLayout();
+                    $block = Mage::getSingleton('core/layout')->getBlock('customer_form_register');
+                    if ($block !== false) {
+                        $form_data = $block->getFormData();
+
+                        $form_data->setEmail($email);
+                        $form_data->setFirstname($firstName);
+                        $form_data->setLastname($lastName);
+                    }
+
+                    $this->renderLayout();
+                }
                 return;
             } else {
                 Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
@@ -144,11 +116,18 @@ class Janrain_Engage_RpxController extends Mage_Customer_AccountController {
         }
     }
 
-    public function addIdentifierAction() {
+    /**
+     * RPX Callback for Additional Identifiers
+     */
+    public function token_url_addAction() {
         $session = $this->_getSession();
+        // Redirect if user isn't already authenticated
+        if (!$session->isLoggedIn()) {
+            $this->_redirect('customer/account/login');
+            return;
+        }
 
-        $key = $this->getRequest()->getParam('ses');
-        $token = Mage::getSingleton('engage/session')->getData($key);
+        $token = $this->getRequest()->getPost('token');
         $auth_info = Mage::helper('engage/rpxcall')->rpxAuthInfoCall($token);
 
         $customer = Mage::helper('engage/identifiers')->get_customer($auth_info->profile->identifier);

@@ -11,7 +11,7 @@
     </default>
 
 	<!-- Use our own register.phtml with no password fields and custom action -->
-    <engage_rpx_authenticate>
+    <engage_rpx_token_url>
         <label>Customer Account Registration Form</label>
         <!-- Mage_Customer -->
         <remove name="right"/>
@@ -29,7 +29,7 @@
                 </block>
             </block>
         </reference>
-    </engage_rpx_authenticate>
+    </engage_rpx_token_url>
 
 	<!-- Ask users what they want to do when they enter an existing customer email address -->
     <engage_rpx_duplicate>
