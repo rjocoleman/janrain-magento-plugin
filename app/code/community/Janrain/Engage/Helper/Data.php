@@ -65,56 +65,6 @@ class Janrain_Engage_Helper_Data extends Mage_Core_Helper_Abstract {
     public function _baseSkin() {
         return Mage::getBaseUrl('skin') . "frontend/janrain";
     }
-
-    /**
-     * Returns the full Auth URL for the Engage Sign In Widget
-     *
-     * @return string
-     */
-    public function getRpxAuthUrl($add=false) {
-        $action = $add ? 'engage/rpx/token_url_add' : 'engage/rpx/token_url';
-        $rpx_callback = urlencode(Mage::getUrl($action));
-        $link = (Mage::getStoreConfig('engage/vars/realmscheme') == 'https') ? 'https' : 'http';
-        $link.= '://' . Mage::getStoreConfig('engage/vars/realm');
-        $link.= '/openid/v2/signin?token_url=' . $rpx_callback;
-
-        return $link;
-    }
-
-    /**
-     * Returns an unserialized array of available providers
-     * or Null if empty (Invalid or missing API Key)
-     *
-     * @return string
-     */
-    public function getRpxProviders() {
-        $providers = Mage::getStoreConfig('engage/vars/enabled_providers');
-        if ($providers)
-            return explode(",", $providers);
-        else
-            return false;
-    }
-
-    public function buildProfile($auth_info) {
-        $profile_name = false;
-
-        if (isset($auth_info->profile->preferredUsername))
-            $profile_name = $auth_info->profile->preferredUsername;
-
-        else if (isset($auth_info->profile->email))
-            $profile_name = $auth_info->profile->email;
-
-        else if (isset($auth_info->profile->displayName))
-            $profile_name = $auth_info->profile->displayName;
-
-        else if (isset($auth_info->profile->name->formatted))
-            $profile_name = $auth_info->profile->name->formatted;
-
-        else
-            $profile_name = $auth_info->profile->providerName;
-
-        return array('provider' => $this->providers[$auth_info->profile->providerName], 'identifier' => $auth_info->profile->identifier, 'profile_name' => $profile_name);
-    }
 	
     public function rpxRealmName() {
         $realm = Mage::getStoreConfig('engage/vars/realm');

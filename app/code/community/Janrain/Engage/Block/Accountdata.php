@@ -19,8 +19,7 @@ class Janrain_Engage_Block_Accountdata extends Mage_Adminhtml_Block_System_Confi
             'realmscheme' => 'Realm Scheme',
             'appid' => 'App Id',
             'adminurl' => 'Admin URL',
-            'socialpub' => 'Social Pub',
-            'enabled_providers' => 'Enabled Providers'
+            'socialpub' => 'Social Pub'
         );
 
         if (Mage::helper('engage')->isEngageEnabled() === false)
@@ -33,7 +32,7 @@ class Janrain_Engage_Block_Accountdata extends Mage_Adminhtml_Block_System_Confi
         foreach ($vars as $key => $val) {
             $value = Mage::getStoreConfig('engage/vars/' . $key);
 
-            if ($value && ($key == 'socialpub' || $key == 'enabled_providers')) {
+            if ($value && ($key == 'socialpub')) {
                 $providers = explode(",", $value);
                 $value = '<a class="rpx-icons" href="' . Mage::getStoreConfig('engage/vars/adminurl') . '" target="_blank">';
                 foreach ($providers as $p) {
