@@ -45,4 +45,59 @@ class Janrain_Engage_Helper_Rpxcall extends Mage_Core_Helper_Abstract {
 
         return $result;
     }
+    
+    private function rpxPost($method, $postParams) {
+        
+        $rpxbase = "https://rpxnow.com";
+        
+        if ($method == "auth_info") {
+            $method_fragment = "api/v2/auth_info";
+        }
+        elseif ($method == "activity") {
+            $method_fragment = "api/v2/activity";
+        }
+        elseif ($method == "lookup_rp") {
+            $method_fragment = "plugin/lookup_rp";
+        }
+        else {
+            throw Mage::exception('Mage_Core', "method [$method] not understood");
+        }
+        
+        $url = "$rpxbase/$method_fragment";
+        $method = 'POST';
+        $postParams["format"] = 'json';
+        
+        return $this->rpxCall($url, $method, $postParams);
+    }
+    
+    private function rpxCall($url, $method = 'GET', $postParams = null) {
+        
+        $result = "rpxCallUrl: no result yet";
+        
+        try {
+            
+            $http = new Varien_Http_Client($url);
+            $http->setHeaders(array("Accept-encoding" => "identity"));
+            if ($method == 'POST')
+                $http->setParameterPost($postParams);
+            $response = $http->request($method);
+            
+            $body = $response->getBody();
+            
+            try {
+                $result = json_decode($body);
+            } catch (Exception $e) {
+                throw Mage::exception('Mage_Core', $e);
+            }
+            
+            if ($result) {
+                return $result;
+            }
+            else {
+                throw Mage::exception('Mage_Core', "something went wrong");
+            }
+        } catch (Exception $e) {
+            throw Mage::exception('Mage_Core', $e);
+        }
+    }
 }
