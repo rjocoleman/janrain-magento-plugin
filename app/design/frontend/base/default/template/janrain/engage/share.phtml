@@ -28,11 +28,12 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(e, s);
 })();
-function setShare(url, title, desc)
+function setShare(url, title, desc, img)
 {
 	janrain.engage.share.setUrl(url);
 	janrain.engage.share.setTitle(title);
 	janrain.engage.share.setDescription(desc);
+	janrain.engage.share.setImage(img);
 	janrain.engage.share.show();
 }
 </script>

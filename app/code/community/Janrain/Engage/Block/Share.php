@@ -1,22 +1,6 @@
 <?php
 
 class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mage_Widget_Block_Interface {
-    protected $url;
-    protected $title;
-    protected $desc;
-
-    public function setShareUrl($var)         {
-        $this->url = $var;
-        return $this;
-    }
-    public function setShareTitle($var)       {
-        $this->title = $var;
-        return $this;
-    }
-    public function setShareDescription($var) {
-        $this->desc = $var;
-        return $this;
-    }
 
     public function rpx_social_icons() {
         $social_pub = Mage::getStoreConfig('engage/vars/socialpub');
@@ -39,15 +23,11 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
      */
     protected function _toHtml() {
         $link = '';
-        //var_dump($this->url);
-        if(!isset($this->url)) { $url =  "document.location.href"; }
-        else { $url =  "'{$this->url}'"; }
-        if(!isset($this->title)) { $title = "document.title"; }
-        else {$title = "'{$this->title}'"; }
-        if(!isset($this->desc)) { $desc = "document.getElementsByName('description')[0].getAttribute('content')"; }
-        else { $desc = "'{$this->desc}'"; }
-        
-        $onclick = "setShare($url, $title, $desc)";
+        $share_url   = $this->getShareUrl()   ? "'{$this->getShareUrl()}'"   : 'document.location.href';
+        $share_title = $this->getShareTitle() ? "'{$this->getShareTitle()}'" : 'document.title';
+        $share_desc  = $this->getShareDesc()  ? "'{$this->getShareDesc()}'"  : "document.getElementsByName('description')[0].getAttribute('content')";
+        $share_img  = $this->getShareImg()  ? "'{$this->getShareImg()}'"  : 'null';
+        $onclick = "setShare($share_url, $share_title, $share_desc, $share_img)";
 
         if ($icons = $this->rpx_social_icons()) {
             $link .= '<div class="rpxsocial rpx_tooltip">';
