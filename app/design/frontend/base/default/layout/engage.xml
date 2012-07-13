@@ -7,6 +7,9 @@
             <block type="core/template"
 				name="janrain_engage_styles"
 				template="janrain/engage/styles.phtml"/>
+            <block type="core/template"
+        name="janrain_engage_share"
+        template="janrain/engage/share.phtml"/>
         </reference>
     </default>
 </layout>
