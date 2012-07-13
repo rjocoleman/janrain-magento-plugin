@@ -1,38 +1,22 @@
 <?php
 
 class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mage_Widget_Block_Interface {
-    protected $url   = 'this';
-    protected $title = 'this';
-    protected $desc  = 'this';
+    protected $url;
+    protected $title;
+    protected $desc;
 
-    protected function _setUrl($var)         {
+    public function setShareUrl($var)         {
         $this->url = $var;
+        return $this;
     }
-    protected function _setTitle($var)       {
+    public function setShareTitle($var)       {
         $this->title = $var;
+        return $this;
     }
-    protected function _setDescription($var) {
+    public function setShareDescription($var) {
         $this->desc = $var;
+        return $this;
     }
-    protected function _getUrl() {
-        if($this->url == 'this') {
-            return "document.location.href";
-        }
-        return "'$this->url'";
-    }
-    protected function _getTitle() {
-        if($this->title == 'this') {
-            return "document.title";
-        }
-        return "'$this->title'";
-    }
-    protected function _getDescription() {
-        if($this->desc == 'this') {
-            return "document.getElementsByName('description')[0].getAttribute('content')";
-        }
-        return "'$this->desc'";
-    }
-
 
     public function rpx_social_icons() {
         $social_pub = Mage::getStoreConfig('engage/vars/socialpub');
@@ -55,8 +39,15 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
      */
     protected function _toHtml() {
         $link = '';
-
-        $onclick = "setShare({$this->_getUrl()}, {$this->_getTitle()}, {$this->_getDescription()});";
+        //var_dump($this->url);
+        if(!isset($this->url)) { $url =  "document.location.href"; }
+        else { $url =  "'{$this->url}'"; }
+        if(!isset($this->title)) { $title = "document.title"; }
+        else {$title = "'{$this->title}'"; }
+        if(!isset($this->desc)) { $desc = "document.getElementsByName('description')[0].getAttribute('content')"; }
+        else { $desc = "'{$this->desc}'"; }
+        
+        $onclick = "setShare($url, $title, $desc)";
 
         if ($icons = $this->rpx_social_icons()) {
             $link .= '<div class="rpxsocial rpx_tooltip">';
