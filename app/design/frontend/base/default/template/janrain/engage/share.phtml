@@ -7,9 +7,6 @@
   else janrain.settings.packages.push('share');
 
   janrain.settings.share.message = "<?php echo $this->message; ?>";
-  janrain.settings.share.title = "<?php echo Mage::getSingleton('cms/page')->getTitle(); ?>";
-  janrain.settings.share.url = "<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>";
-  janrain.settings.share.description = "";
 
   function isReady() { janrain.ready = true; };
   if (document.addEventListener) {
@@ -31,4 +28,11 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(e, s);
 })();
+function setShare(url, title, desc)
+{
+	janrain.engage.share.setUrl(url);
+	janrain.engage.share.setTitle(title);
+	janrain.engage.share.setDescription(desc);
+	janrain.engage.share.show();
+}
 </script>
