@@ -2,15 +2,15 @@
 
 class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mage_Widget_Block_Interface {
 
-    public function rpx_social_icons() {
+    public function rpx_social_icons($onclick) {
         $social_pub = Mage::getStoreConfig('engage/vars/socialpub');
         $social_providers = array_filter(explode(',', $social_pub));
         if (is_array($social_providers)) {
             $rpx_social_icons = '';
             foreach ($social_providers as $val) {
-                $rpx_social_icons .= '<div class="jn-icon jn-size16 jn-' . $val . '"></div>';
+                $rpx_social_icons .= '<span class="janrain-provider-icon-16 janrain-provider-icon-'.$val.'" rel="'.$val.'" onclick="'.$onclick.'"></span>';
             }
-            $buttons = '<div class="rpx_social_icons">' . $rpx_social_icons . '</div>';
+            $buttons = '<span class="rpx_social_icons">' . $rpx_social_icons . '</span>';
             return $buttons;
         }
         return false;
@@ -27,11 +27,10 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
         $share_title = $this->getShareTitle() ? "'{$this->getShareTitle()}'" : 'document.title';
         $share_desc  = $this->getShareDesc()  ? "'{$this->getShareDesc()}'"  : "document.getElementsByName('description')[0].getAttribute('content')";
         $share_img  = $this->getShareImg()  ? "'{$this->getShareImg()}'"  : 'null';
-        $onclick = "setShare($share_url, $share_title, $share_desc, $share_img)";
+        $onclick = "setShare($share_url, $share_title, $share_desc, $share_img, this.getAttribute('rel'))";
 
-        if ($icons = $this->rpx_social_icons()) {
-            $link .= '<div class="rpxsocial rpx_tooltip">';
-            $link .= '<span class="rpxsharebutton" onClick="'.$onclick.'">share</span><div class="rpx_share_tip">Share this on:<br />' . $icons . '</div></div>';
+        if ($icons = $this->rpx_social_icons($onclick)) {
+            $link .= '<div class="janrain-share-container"><span class="janrain-share-text">Share on</span>'.$icons.'</div>';
         }
 
         return $link;

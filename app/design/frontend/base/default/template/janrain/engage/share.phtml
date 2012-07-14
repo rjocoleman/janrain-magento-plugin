@@ -20,20 +20,21 @@
   e.id = 'janrainWidgets';
 
   if (document.location.protocol === 'https:') {
-    e.src = 'https://rpxnow.com/js/lib/<?php echo Mage::helper('engage')->rpxRealmName() ?>/share_beta.js';
+    e.src = 'https://rpxnow.com/js/lib/<?php echo Mage::helper('engage')->rpxRealmName() ?>/widget.js';
   } else {
-    e.src = 'http://widget-cdn.rpxnow.com/js/lib/<?php echo Mage::helper('engage')->rpxRealmName() ?>/share_beta.js';
+    e.src = 'http://widget-cdn.rpxnow.com/js/lib/<?php echo Mage::helper('engage')->rpxRealmName() ?>/widget.js';
   }
 
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(e, s);
 })();
-function setShare(url, title, desc, img)
+function setShare(url, title, desc, img, provider)
 {
 	janrain.engage.share.setUrl(url);
 	janrain.engage.share.setTitle(title);
 	janrain.engage.share.setDescription(desc);
 	janrain.engage.share.setImage(img);
+	janrain.engage.share.showProvider(provider);
 	janrain.engage.share.show();
 }
 </script>
