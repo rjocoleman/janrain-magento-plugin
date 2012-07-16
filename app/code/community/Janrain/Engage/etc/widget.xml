@@ -45,6 +45,13 @@
                 <description>The default text to share in the Social Sharing widget (i.e. Check this out!)</description>
                 <type>text</type>
             </share_text>
+            <button_text>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Button Text</label>
+                <description>The text to appear in the share button. Defaults to 'Share on'</description>
+                <type>text</type>
+            </button_text>
         </parameters>
     </engage_share>
 </widgets>

@@ -27,10 +27,11 @@ class Janrain_Engage_Block_Share extends Mage_Core_Block_Abstract implements Mag
         $share_title = $this->getShareTitle() ? "'{$this->getShareTitle()}'" : 'document.title';
         $share_desc  = $this->getShareDesc()  ? "'{$this->getShareDesc()}'"  : "document.getElementsByName('description')[0].getAttribute('content')";
         $share_img  = $this->getShareImg()  ? "'{$this->getShareImg()}'"  : 'null';
+        $button_text = $this->getButtonText() ? $this->getButtonText() : 'Share on';
         $onclick = "setShare($share_url, $share_title, $share_desc, $share_img, this.getAttribute('rel'))";
 
         if ($icons = $this->rpx_social_icons($onclick)) {
-            $link .= '<div class="janrain-share-container"><span class="janrain-share-text">Share on</span>'.$icons.'</div>';
+            $link .= '<div class="janrain-share-container"><span class="janrain-share-text">' . $button_text . '</span>'.$icons.'</div>';
         }
 
         return $link;
