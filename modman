@@ -1,0 +1,7 @@
+# Janrain_Engage
+app/etc/modules/Janrain_Engage.xml						app/etc/modules/Janrain_Engage.xml
+app/code/community/Janrain/Engage						app/code/community/Janrain/Engage
+app/design/frontend/base/default/layout					app/design/frontend/base/default/layout
+app/design/frontend/base/default/template/janrain		app/design/frontend/base/default/template/janrain
+app/locale/en_US/Janrain_Engage.csv						app/locale/en_US/Janrain_Engage.csv
+skin/frontend/janrain									skin/frontend/janrain
