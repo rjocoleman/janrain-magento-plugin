@@ -1,0 +1,14 @@
+{
+    "name": "janrain/engage",
+    "type": "magento-module",
+    "description":"Social Login and Social Sharing. Speed login and registration, drive referrals and engagement.",
+    "license": "Apache-2.0",
+    "authors":[
+        {
+            "name":"Janrain"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
